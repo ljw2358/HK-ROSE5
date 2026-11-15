@@ -3,392 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WorldBank - 글로벌 웹3 디지털 뱅킹 & 사회환원 통합 플랫폼</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>HK WorldBank - Global Digital Banking Platform (hkwb.world)</title>
     <style>
-        body { font-family: 'Pretendard', sans-serif; background-color: #030712; color: #f3f4f6; }
-        .cyber-card { background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(30, 27, 75, 0.95)); border: 1px solid rgba(139, 92, 246, 0.4); box-shadow: 0 0 40px rgba(139, 92, 246, 0.3); }
-        .neon-text { text-shadow: 0 0 20px rgba(168, 85, 247, 0.8); }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0, 1, 0, 1), padding 0.3s ease; }
-        .accordion-content.active { max-height: 50000px; transition: max-height 1.5s ease-in, padding 0.3s ease; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #030712; }
-        ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
+        :root {
+            --bg-dark: #030508;
+            --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #1a1a2e 40%, #05070b 100%);
+            --panel-bg: rgba(26, 26, 46, 0.92);
+            --panel-border: rgba(74, 74, 226, 0.4);
+            --neon-cyan: #00ffcc;
+            --neon-blue: #4a4ae2;
+            --text-main: #ffffff;
+            --text-sub: #a0aec0;
+            --accent-purple: #9f7aea;
+            --success-green: #38ef7d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(11, 15, 25, 0.98);
+            border-bottom: 1px solid rgba(74, 74, 226, 0.3);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            box-shadow: 0 0 15px rgba(255, 65, 108, 0.4);
+        }
+
+        .platform-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            font-size: 0.95rem;
+            color: var(--text-sub);
+        }
+
+        .nav-links span {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links span:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0,255,204,0.5);
+        }
+
+        .lang-select {
+            background: #1a1a2e;
+            color: var(--neon-cyan);
+            padding: 8px 16px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .lang-select:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px rgba(0,255,204,0.3);
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 40px;
+            width: 100%;
+        }
+
+        /* Section Header Banner */
+        .section-header {
+            background: linear-gradient(90deg, rgba(74, 74, 226, 0.25), transparent);
+            border-left: 5px solid var(--neon-cyan);
+            padding: 16px 24px;
+            margin-bottom: 30px;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .section-header p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-top: 6px;
+        }
+
+        /* 10 Core Modules Grid */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .module-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: transparent;
+            transition: background 0.3s;
+        }
+
+        .module-card:hover, .module-card.active {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.25);
+            transform: translateY(-4px);
+            background: rgba(30, 30, 55, 0.95);
+        }
+
+        .module-card:hover::before, .module-card.active::before {
+            background: var(--neon-cyan);
+        }
+
+        .module-card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .module-card h3 {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .module-card span {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+        }
+
+        /* Simulation Control Panel */
+        .sim-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--neon-blue);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            margin-bottom: 35px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sim-panel h3 {
+            margin-bottom: 25px;
+            color: var(--neon-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .sim-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .control-group input, .control-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: #0f172a;
+            border: 1px solid rgba(74, 74, 226, 0.5);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .control-group input:focus, .control-group select:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 12px rgba(0,255,204,0.25);
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #00ffcc, #00b09b);
+            color: #0b0f19;
+            font-weight: bold;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0,255,204,0.3);
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .action-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0,255,204,0.5);
+        }
+
+        /* Terminal Logs */
+        .terminal-container {
+            background: #030508;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 8px;
+        }
+
+        .terminal-box {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            height: 220px;
+            overflow-y: auto;
+            color: var(--success-green);
+            line-height: 1.5;
+        }
+
+        .terminal-box div {
+            margin-bottom: 8px;
+            border-left: 2px solid var(--neon-cyan);
+            padding-left: 10px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #04060a;
+            border-top: 1px solid rgba(74, 74, 226, 0.2);
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
 
-    <!-- 상단 네비게이션 -->
-    <header class="border-b border-purple-900/60 bg-gray-950/95 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-bold text-2xl shadow-lg shadow-purple-500/40">🏦</div>
-                <div>
-                    <h1 class="font-bold text-lg tracking-tight text-white flex items-center gap-2">
-                        HK WorldBank <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-900/80 text-purple-300 border border-purple-600/60">hkwb.world</span>
-                    </h1>
-                    <p class="text-xs text-purple-400">총괄회장: 이재완 (혜공) | 추천인 ID: ljw2358</p>
-                </div>
-            </div>
-            
-            <!-- 60개국 언어 선택 드롭다운 -->
-            <div class="flex items-center space-x-3">
-                <div class="flex items-center bg-gray-900 border border-purple-700 rounded-lg px-3 py-1.5 text-xs">
-                    <span class="mr-2 text-purple-400">🌐</span>
-                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-transparent text-gray-200 outline-none cursor-pointer font-medium">
-                        <option value="ko">한국어 (Korean)</option>
-                        <option value="en">English (US)</option>
-                        <option value="zh">中文 (Chinese)</option>
-                        <option value="ja">日本語 (Japanese)</option>
-                        <option value="es">Español (Spanish)</option>
-                        <option value="fr">Français (French)</option>
-                        <option value="de">Deutsch (German)</option>
-                        <option value="ru">Русский (Russian)</option>
-                        <option value="ar">العربية (Arabic)</option>
-                        <option value="vi">Tiếng Việt (Vietnamese)</option>
-                        <option value="global">외 글로벌 50개국어 실시간 동기화</option>
-                    </select>
-                </div>
-                <div class="hidden md:flex items-center bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs px-3 py-1.5 rounded-lg">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2"></span>
-                    AGI 삐니 & 60개국어 실시간 가동 중
-                </div>
-            </div>
+    <!-- Header & Navbar -->
+    <header>
+        <div class="logo-area">
+            <span class="logo-badge">hkwb.world</span>
+            <span class="platform-title">HK WorldBank Platform</span>
+        </div>
+        <div class="nav-links">
+            <span onclick="triggerNavAction('agi')">AGI 삐니</span>
+            <span onclick="triggerNavAction('modules')">10대 핵심 모듈</span>
+            <span onclick="triggerNavAction('ubi')">사회참여 & UBI</span>
+            <span onclick="triggerNavAction('whitepaper')">백서 100선</span>
+            <span onclick="triggerNavAction('faq')">FAQ 20선</span>
+        </div>
+        <div>
+            <select id="globalLangSelect" class="lang-select" onchange="switchLanguage(this.value)">
+                <option value="ko" selected>🇰🇷 한국어 (Korean)</option>
+                <option value="en">🇺🇸 English</option>
+                <option value="zh">🇨🇳 中文 (Chinese)</option>
+                <option value="ja">🇯🇵 日本語 (Japanese)</option>
+                <option value="vi">🇻🇳 Tiếng Việt (Vietnamese)</option>
+                <option value="th">🇹🇭 ไทย (Thai)</option>
+                <option value="es">🇪🇸 Español (Spanish)</option>
+                <option value="fr">🇫🇷 Français (French)</option>
+                <option value="de">🇩🇪 Deutsch (German)</option>
+                <option value="ru">🇷🇺 Русский (Russian)</option>
+                <option value="ar">🇸🇦 العربية (Arabic)</option>
+                <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
+                <option value="pt">🇵🇹 Português (Portuguese)</option>
+                <option value="it">🇮🇹 Italiano (Italian)</option>
+                <option value="id">🇮🇩 Bahasa Indonesia</option>
+                <option value="tr">🇹🇷 Türkçe (Turkish)</option>
+            </select>
         </div>
     </header>
 
-    <!-- 메인 컨텐츠 영역 -->
-    <main class="flex-1 max-w-7xl mx-auto px-4 py-8 w-full space-y-8">
-
-        <!-- 히어로 섹션 -->
-        <section class="cyber-card rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="max-w-4xl mx-auto space-y-5">
-                <span class="text-xs font-semibold px-4 py-1.5 rounded-full bg-purple-500/25 text-purple-300 border border-purple-500/40">글로벌 웹3 디지털 뱅킹 & 사회환원 통합 플랫폼 (`hkwb.world`)</span>
-                <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight neon-text">인류와 기술이 공존하는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-pink-400">차세대 디지털 금융 혁신</span></h2>
-                <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-                    순이익 최대 60% 투명한 사회환원(UBI), 60개국어 실시간 AGI 고객센터 '삐니', KYC/AML 및 VASP 자동 연동, 그리고 10대 분산 연동망이 당신의 자산을 안전하고 지혜롭게 관리합니다.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 pt-4">
-                    <button onclick="runCoreModules()" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold text-white shadow-lg shadow-purple-600/40 transition-all flex items-center gap-2">
-                        <span>🎛️</span> 10대 핵심 모듈 실행
-                    </button>
-                    <button onclick="openBiniChat()" class="px-6 py-3.5 rounded-xl bg-gray-900 border border-purple-500/50 hover:bg-purple-950/60 font-semibold text-purple-300 transition-all flex items-center gap-2">
-                        <span>🤖</span> AGI 삐니와 대화하기
-                    </button>
-                    <button onclick="runKycAml()" class="px-6 py-3.5 rounded-xl bg-emerald-950/90 border border-emerald-500/60 hover:bg-emerald-900/70 font-semibold text-emerald-300 transition-all flex items-center gap-2">
-                        <span>🛡️</span> KYC자동화 / AML / VASP 연동 구동
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 양파 껍질 구조: 아코디언 통합 내비게이션 (초대형 전체 전문 수납) -->
-        <div class="space-y-5">
-            <h3 class="text-xl font-bold text-white flex items-center gap-2 border-l-4 border-purple-500 pl-3">
-                📂 백서 100선·FAQ 20선·순이익·3대 정책·21개국 법안·10대 분산연동 완전 상세 아카이브
-            </h3>
-
-            <!-- 1. 백서 100선 전문 아코디언 -->
-            <div class="cyber-card rounded-xl overflow-hidden">
-                <button onclick="toggleAccordion('acc-whitepaper')" class="w-full p-6 text-left font-bold text-lg text-purple-200 flex justify-between items-center hover:bg-purple-900/30 transition-all">
-                    <span class="flex items-center gap-2">📑 1모듈~100모듈 백서 총서 전문 (전체 항목 상세 수록)</span>
-                    <span id="icon-acc-whitepaper" class="transform transition-transform text-purple-400">▼</span>
-                </button>
-                <div id="acc-whitepaper" class="accordion-content px-6 pb-6 border-t border-purple-900/40 text-gray-300 text-sm space-y-6">
-                    <p class="text-purple-300 text-xs mt-3 bg-purple-950/40 p-4 rounded-xl border border-purple-500/30">※ WP-01부터 WP-100까지의 모든 아키텍처 규격이 축약 없이 상세히 수록되어 있습니다.</p>
-                    
-                    <div class="space-y-6">
-                        <!-- 파트 1 -->
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base border-b border-purple-900/60 pb-2">🔹 파트 I: 코어 인프라 및 탈중앙화 뱅킹 (WP-01 ~ WP-25)</h4>
-                            <div class="text-xs text-gray-300 space-y-2 leading-relaxed">
-                                <p><strong>WP-01: HK WorldBank 메인 플랫폼 아키텍처 설계</strong> - 전 세계 사용자를 위한 고가용성 마이크로서비스 및 웹3 통합 뱅킹 코어 엔진 구축.</p>
-                                <p><strong>WP-02: 파이 네트워크(Pi Network) 메인넷 실시간 브릿지</strong> - 파이 생태계와의 완벽한 자산 호환 및 실시간 메인넷 트랜잭션 검증 모듈.</p>
-                                <p><strong>WP-03: 탈중앙화 디지털 뱅킹 보안 프로토콜</strong> - 엔드투엔드 암호화 및 제로 트러스트 기반의 금융 데이터 보호 아키텍처.</p>
-                                <p><strong>WP-04: 분산 클라우드 노드 인프라 구축</strong> - 글로벌 분산 노드를 통한 무중단 24/7 뱅킹 서비스 보장 체계.</p>
-                                <p><strong>WP-05 ~ WP-15: 멀티체인 지갑 연동 및 자산 관리</strong> - 이더리움, 솔라나, 파이 및 주요 메인넷 간 자산 통합 관리 표준 규격.</p>
-                                <p><strong>WP-16 ~ WP-25: 생체 인증 및 시드 구문 암호화</strong> - 바이오메트릭 지문/안면 인식 연동 및 24단어 복구 구문 분산 보관 검증 시스템.</p>
-                            </div>
-                        </div>
-
-                        <!-- 파트 2 -->
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base border-b border-purple-900/60 pb-2">🔹 파트 II: 금융 거래, UBI 및 사회환원 스마트 컨트랙트 (WP-26 ~ WP-50)</h4>
-                            <div class="text-xs text-gray-300 space-y-2 leading-relaxed">
-                                <p><strong>WP-26: 크로스보더 안전 송금 스마트 컨트랙트</strong> - 국가 간 환전 및 송금 시 수수료 최소화 및 즉시 정산 처리 엔진.</p>
-                                <p><strong>WP-27: 글로벌 페이먼트 및 가맹점 정산 시스템</strong> - 온·오프라인 실시간 결제 및 가맹점 자동 정산 프로토콜.</p>
-                                <p><strong>WP-28: 스마트 예치 및 동적 이율 산정 모델</strong> - 사용자 자산 예치 시 실시간 시장 금리 및 기여도 반영 이율 자동 계산.</p>
-                                <p><strong>WP-29: 플랫폼 기여도 기반 리워드 보상 분배</strong> - 생태계 활성화 기여도에 따른 투명한 토큰 및 리워드 자동 지급 시스템.</p>
-                                <p><strong>WP-30: 순이익 30% UBI 기본소득 자동 지급</strong> - 플랫폼 순이익의 30%를 전 세계 소외계층 기본소득 지갑으로 자동 분배하는 컨트랙트.</p>
-                                <p><strong>WP-31: HK 사회재단 출연금 자동 적립 모듈</strong> - 순이익 30%를 HK 사회재단으로 투명하게 이관하여 공익 사업에 집행하는 체계.</p>
-                                <p><strong>WP-32 ~ WP-50: DEX 스왑, 유동성 풀 및 담보 대출 엔진</strong> - 슬리피지 최소화 라우팅, LP 스테이킹 및 신용평가 기반 안전 대출 모듈.</p>
-                            </div>
-                        </div>
-
-                        <!-- 파트 3 -->
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base border-b border-purple-900/60 pb-2">🔹 파트 III: AGI 삐니 및 옴니채널 AR 연동 (WP-51 ~ WP-75)</h4>
-                            <div class="text-xs text-gray-300 space-y-2 leading-relaxed">
-                                <p><strong>WP-51: 60개국어 실시간 컨텍스트 유지 AGI 상담 삐니</strong> - LLM 기반 AI 에이전트가 60개국 언어로 금융 상담 및 문맥 유지 응대.</p>
-                                <p><strong>WP-52: 24시간 자율 학습형 고객 상담 챗봇 엔진</strong> - 사용자 문의 패턴을 학습하여 진화하는 지능형 고객 지원 아키텍처.</p>
-                                <p><strong>WP-53 ~ WP-56: 다국어 전환 및 보안 필터링</strong> - 언어 전환 시 세션 유지, 개인정보 마스킹 및 이상 거래 감지 시 긴급 보안 에이전트 전환.</p>
-                                <p><strong>WP-57: 옴니채널(모바일/PC/스마트글래스 로키드 연동) 세션 유지</strong> - AR 스마트글래스와 모바일 기기 간 완벽한 세션 동기화 및 핸드오프 기술.</p>
-                                <p><strong>WP-58 ~ WP-75: AR 인터페이스 및 음성 제어</strong> - 스마트글래스 환경에 최적화된 홀로그램 UI 렌더링 및 음성 명령어 금융 제어 규격.</p>
-                            </div>
-                        </div>
-
-                        <!-- 파트 4 -->
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base border-b border-purple-900/60 pb-2">🔹 파트 IV: 글로벌 21개국 법안 컴플라이언스 및 자율 적응 엔진 (WP-76 ~ WP-100)</h4>
-                            <div class="text-xs text-gray-300 space-y-2 leading-relaxed">
-                                <p><strong>WP-76: 한국 디지털 자산 기본법 입법 기준 자동 대조 모듈</strong> - 국내 특금법 및 디지털자산법 규격 실시간 컴플라이언스 체크.</p>
-                                <p><strong>WP-77: 미국 SEC 및 미 증권법 준수 컴플라이언스 플랫폼</strong> - 연방 증권법 및 규제 요건에 맞춘 자산 발행 및 거래 필터링.</p>
-                                <p><strong>WP-78: 싱가포르 MAS 페이먼트 서비스 규제 정합성 엔진</strong> - 싱가포르 통화청(MAS) 라이선스 기준 송금 및 결제 한도 자동 통제.</p>
-                                <p><strong>WP-79 ~ WP-80: 일본 FSA 및 EU MiCA 통합 적용 엔진</strong> - 일본 금융청 가이드라인 및 유럽연합 MiCA 법안 규격 자동 수용.</p>
-                                <p><strong>WP-81 ~ WP-100: 글로벌 자율 적응형 법안 플러그인 및 감사 체계</strong> - 21개국 법안 개정 시 실시간 자동 반영, 자금세탁방지(AML) 및 VASP 연동 최종 규격.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. FAQ 20선 전체 전문 아코디언 -->
-            <div class="cyber-card rounded-xl overflow-hidden">
-                <button onclick="toggleAccordion('acc-faq')" class="w-full p-6 text-left font-bold text-lg text-purple-200 flex justify-between items-center hover:bg-purple-900/30 transition-all">
-                    <span class="flex items-center gap-2">❓ 자주 묻는 질문 FAQ 20선 전문 (Q1 ~ Q20 완벽 수록)</span>
-                    <span id="icon-acc-faq" class="transform transition-transform text-purple-400">▼</span>
-                </button>
-                <div id="acc-faq" class="accordion-content px-6 pb-6 border-t border-purple-900/40 text-gray-300 text-sm space-y-4">
-                    <div class="space-y-3 pt-3">
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q1. HK WorldBank는 어떤 플랫폼인가요?</p>
-                            <p class="text-xs text-gray-400 mt-1">인류와 기술이 공존하는 차세대 웹3 디지털 뱅킹 플랫폼으로, 파이 네트워크 생태계 및 글로벌 21개국 법안 준수를 지원합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q2. 순이익 사회환원(UBI)은 어떻게 운영되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">플랫폼 순이익의 최대 60%를 투명하게 전 세계 소외계층 기본소득(UBI)과 HK 사회재단에 환원하여 상생 경제를 실현합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q3. KYC 및 AML 인증은 자동으로 처리되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">네, VASP 연동 규격 및 글로벌 디지털 자산 기본법 기준에 맞춰 실시간 자동 대조 및 검증이 스마트 컨트랙트로 구동됩니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q4. AGI 상담사 '삐니'는 어떤 언어를 지원하나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">한국어, 영어, 중국어, 일본어 등을 포함한 60개국 글로벌 언어를 실시간 컨텍스트 유지하며 완벽하게 지원합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q5. 로키드(Rokid) 스마트글래스와 어떻게 연동되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">옴니채널 세션 유지 기술을 통해 모바일, PC, 스마트글래스 간 끊김 없는 실시간 증강현실 뱅킹 환경을 제공합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q6. 파이 네트워크 메인넷 연동은 어떻게 이루어지나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">안전한 브릿지 프로토콜과 24단어 복구 구문 검증을 통해 메인넷과 서브넷 간 자산 이동을 안전하게 처리합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q7. 21개국 디지털 법안 준수는 어떻게 보장되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">각국 규제 기관(SEC, MAS, FSA 등)의 최신 가이드라인을 실시간 반영하는 자가 적응형 플러그인 엔진이 탑재되어 있습니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q8. 플랫폼 자산 보안은 얼마나 안전한가요?</p>
-                            <p class="text-xs text-gray-400 mt-1">바이오메트릭 지문/안면 인증과 다중 분산 암호화 기술을 결합하여 철저한 무결성과 보안을 유지합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q9. 토큰 스왑 시 슬리피지는 어떻게 방지되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">최적 유동성 경로 탐색 스마트 라우팅 알고리즘을 통해 슬리피지를 최소화하고 유리한 교환 비율을 제공합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q10. HK 사회재단은 어떤 사업을 지원하나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">미래 기술 인재 육성, 글로벌 공익 사업 및 소외계층 지원 프로젝트를 전액 투명하게 지원합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q11. 크로스보더 송금 시 법적 안정성은 어떻게 확보되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">국가별 외환 규제 및 원천징수 자동 계산 시스템이 작동하여 법적 리스크를 원천 차단합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q12. LP 스테이킹 참여 방법과 보상 구조는 어떻게 되나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">유동성 풀에 자산을 예치하고 실시간으로 발생한 거래 수수료와 리워드를 투명하게 수령할 수 있습니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q13. 계정 복구 및 24단어 시드 구문 분실 시 대처법은?</p>
-                            <p class="text-xs text-gray-400 mt-1">탈중앙화 보안 원칙에 따라 시드 구문은 서버에 저장되지 않으며, 분실 시 생체 인증 백업 복구 시스템을 통해 안전하게 복원할 수 있습니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q14. 이상 거래 감지 시 어떤 보안 조치가 취해지나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">AGI 긴급 보안 에이전트가 즉시 개입하여 트랜잭션을 일시 동결하고 사용자에게 긴급 알림을 전송합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q15. 모바일 앱과 웹 플랫폼의 데이터 동기화 방식은?</p>
-                            <p class="text-xs text-gray-400 mt-1">실시간 WebSocket 통신을 통해 모바일, PC, 스마트글래스 간 자산 현황과 거래 내역이 0.1초 이내에 동기화됩니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q16. 플랫폼 이용 수수료 구조는 어떻게 설계되어 있나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">업계 최저 수준의 가스비 및 송금 수수료를 적용하며, 수수료 수익의 상당 부분은 생태계 보상과 UBI 재원으로 환원됩니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q17. 글로벌 라이선스 획득 및 규제 대응 현황은?</p>
-                            <p class="text-xs text-gray-400 mt-1">미국, 싱가포르, 유럽 등 주요 금융 허브의 가상자산 사업자(VASP) 라이선스 획득 로드맵에 따라 단계별로 진행 중입니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q18. 파이 네트워크 수량 집계 및 자산 표시는 실시간인가요?</p>
-                            <p class="text-xs text-gray-400 mt-1">네, 메인넷 노드와 직접 연동되어 본인의 파이 자산 수량과 가치 변동을 실시간으로 정확하게 확인할 수 있습니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q19. 기업 고객 및 기관 투자자를 위한 전용 계좌 기능이 있나요?</p>
-                            <p class="text-xs text-gray-400 mt-1">다중 서명(Multi-sig) 보안과 법인 맞춤형 자산 관리 대시보드를 제공하여 기관 투자자의 안전한 자금 운용을 지원합니다.</p>
-                        </div>
-                        <div class="p-4 bg-gray-900/80 rounded-xl border border-purple-900/40">
-                            <p class="font-semibold text-purple-300">Q20. HK WorldBank의 최종 비전과 향후 발전 계획은?</p>
-                            <p class="text-xs text-gray-400 mt-1">전 인류가 기술과 금융의 혜택을 공평하게 누리는 글로벌 웹3 디지털 금융의 표준으로 자리 잡는 것입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 순이익 및 사회 환원 (UBI 구조 상세) -->
-            <div class="cyber-card rounded-xl overflow-hidden">
-                <button onclick="toggleAccordion('acc-profit')" class="w-full p-6 text-left font-bold text-lg text-purple-200 flex justify-between items-center hover:bg-purple-900/30 transition-all">
-                    <span class="flex items-center gap-2">💰 순이익 및 투명한 사회 환원 (UBI 구조 전문)</span>
-                    <span id="icon-acc-profit" class="transform transition-transform text-purple-400">▼</span>
-                </button>
-                <div id="acc-profit" class="accordion-content px-6 pb-6 border-t border-purple-900/40 text-gray-300 text-sm space-y-4">
-                    <div class="grid md:grid-cols-3 gap-5 pt-3">
-                        <div class="bg-purple-950/50 p-6 rounded-2xl border border-purple-500/40 text-center space-y-2">
-                            <h4 class="text-3xl font-extrabold text-purple-300">30%</h4>
-                            <p class="text-sm font-semibold text-white">글로벌 UBI 기본소득</p>
-                            <p class="text-xs text-gray-400 leading-relaxed">전 세계 빈곤층 및 취약계층 대상 기본소득 실시간 자동 지급 재원 투명 배분</p>
-                        </div>
-                        <div class="bg-indigo-950/50 p-6 rounded-2xl border border-indigo-500/40 text-center space-y-2">
-                            <h4 class="text-3xl font-extrabold text-indigo-300">30%</h4>
-                            <p class="text-sm font-semibold text-white">HK 사회재단 출연</p>
-                            <p class="text-xs text-gray-400 leading-relaxed">공익 사업, 미래 기술 인재 육성 및 사회 공헌 프로젝트 전액 지원</p>
-                        </div>
-                        <div class="bg-gray-900/90 p-6 rounded-2xl border border-gray-700 text-center space-y-2">
-                            <h4 class="text-3xl font-extrabold text-gray-200">40%</h4>
-                            <p class="text-sm font-semibold text-white">플랫폼 지속 운영 및 재투자</p>
-                            <p class="text-xs text-gray-400 leading-relaxed">보안 고도화, 서버 인프라, AGI 삐니 업그레이드 및 글로벌 확장 운영 자금</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. 3대 글로벌 정책 및 21개국 디지털 법안 상세 -->
-            <div class="cyber-card rounded-xl overflow-hidden">
-                <button onclick="toggleAccordion('acc-policy')" class="w-full p-6 text-left font-bold text-lg text-purple-200 flex justify-between items-center hover:bg-purple-900/30 transition-all">
-                    <span class="flex items-center gap-2">🌐 3대 글로벌 정책 및 21개국 디지털 법안 연동 전문</span>
-                    <span id="icon-acc-policy" class="transform transition-transform text-purple-400">▼</span>
-                </button>
-                <div id="acc-policy" class="accordion-content px-6 pb-6 border-t border-purple-900/40 text-gray-300 text-sm space-y-4">
-                    <div class="grid md:grid-cols-2 gap-5 pt-3">
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base">📌 3대 글로벌 정책 아키텍처</h4>
-                            <ul class="text-xs space-y-2.5 text-gray-300 leading-relaxed">
-                                <li><strong>1. 자금세탁방지(AML) 및 고객확인(KYC) 철저 준수:</strong> 국제 기준에 부합하는 자동화 검증 필터 가동</li>
-                                <li><strong>2. 크로스보더 송금 법적 안정성 보장:</strong> 국가 간 외환법 및 디지털 자산 규정 실시간 대조</li>
-                                <li><strong>3. 관할권(Jurisdiction) 맞춤형 서비스 제한:</strong> 국가별 규제에 따른 동적 접근 제어 엔진</li>
-                            </ul>
-                        </div>
-                        <div class="bg-gray-900/90 p-5 rounded-xl border border-purple-900/50 space-y-3">
-                            <h4 class="font-bold text-purple-400 text-base">🌍 글로벌 21개국 디지털 법안 자동 연동 전문</h4>
-                            <p class="text-xs text-gray-400 leading-relaxed">
-                                대한민국 디지털 자산 기본법, 미국 SEC 및 미 증권법, 싱가포르 MAS 페이먼트 규제, 일본 FSA 가이드라인, EU MiCA(가이버자산시장법), 영국 FCA 규제, 스위스 FINMA 규제, UAE VARA 규제, 호주 ASIC 가이드라인, 캐나다 CSA 규제, 홍콩 SFC 가이드라인, 독일 BaFin, 프랑스 AMF, 이탈리아 Consob, 브라질 BCB, 인도네시아 Bappebti, 일본 JBA, 싱가포르 SFA, 뉴질랜드 FMA, 남아프리카공화국 FSCA, 국제 FATF 권고안 등 <strong>21개국 핵심 규제 기관의 법안 개정 실시간 반영 자가 적응형 플러그인 엔진</strong>이 탑재되어 있습니다.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5. 10대 분산 연동망 및 핵심 모듈 프로세스 상세 -->
-            <div class="cyber-card rounded-xl overflow-hidden">
-                <button onclick="toggleAccordion('acc-network')" class="w-full p-6 text-left font-bold text-lg text-purple-200 flex justify-between items-center hover:bg-purple-900/30 transition-all">
-                    <span class="flex items-center gap-2">⚡ 10대 분산 연동망 및 모듈 프로세스 상세 구동</span>
-                    <span id="icon-acc-network" class="transform transition-transform text-purple-400">▼</span>
-                </button>
-                <div id="acc-network" class="accordion-content px-6 pb-6 border-t border-purple-900/40 text-gray-300 text-sm space-y-4">
-                    <p class="text-xs text-purple-300 mt-2">※ 아래 10대 분산 연동망 모듈은 클릭 시 실시간 프로세스 및 스마트 컨트랙트가 구동됩니다.</p>
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-2">
-                        <div onclick="alert('01 지갑연결 모듈 가동: 생체인증 및 파이 지갑 연동 완료')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">01</span>
-                            <span class="font-semibold text-white">지갑연결</span>
-                        </div>
-                        <div onclick="alert('02 송금 모듈 가동: 크로스보더 안전 송금 프로세스 작동')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">02</span>
-                            <span class="font-semibold text-white">송금</span>
-                        </div>
-                        <div onclick="alert('03 결제 모듈 가동: 글로벌 페이먼트 및 VASP 연동 결제')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">03</span>
-                            <span class="font-semibold text-white">결제</span>
-                        </div>
-                        <div onclick="alert('04 예치 모듈 가동: 스마트 자산 예치 및 이율 산정')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">04</span>
-                            <span class="font-semibold text-white">예치</span>
-                        </div>
-                        <div onclick="alert('05 보상 모듈 가동: 플랫폼 기여도 기반 리워드 지급')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">05</span>
-                            <span class="font-semibold text-white">보상</span>
-                        </div>
-                        <div onclick="alert('06 기본소득 모듈 가동: 순이익 30% UBI 자동 분배')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">06</span>
-                            <span class="font-semibold text-white">기본소득</span>
-                        </div>
-                        <div onclick="alert('07 토큰스왑 모듈 가동: 슬리피지 최소화 엔진 작동')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">07</span>
-                            <span class="font-semibold text-white">토큰스왑</span>
-                        </div>
-                        <div onclick="alert('08 DEX스왑 모듈 가동: 오더북 및 AMM 모델 연동')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">08</span>
-                            <span class="font-semibold text-white">DEX스왑</span>
-                        </div>
-                        <div onclick="alert('09 LP스테이킹 모듈 가동: 유동성 풀 예치 및 보상')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">09</span>
-                            <span class="font-semibold text-white">LP스테이킹</span>
-                        </div>
-                        <div onclick="alert('10 파이수량 모듈 가동: 실시간 파이 네트워크 자산 집계')" class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/30 text-center cursor-pointer hover:bg-purple-900/50 transition-all space-y-1">
-                            <span class="block text-purple-400 font-bold">10</span>
-                            <span class="font-semibold text-white">파이수량</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <!-- Main Content Body -->
+    <main>
+        <!-- Section Header -->
+        <div class="section-header">
+            <h2 id="mainTitle">2. 10대 핵심 모듈 [개별 고유 명칭 & 로고 광학]</h2>
+            <p id="subTitle">10가지 모듈이 각각 고유의 네온 색상과 로고 아이콘으로 빛납니다.</p>
         </div>
 
+        <!-- 10 Core Modules Grid -->
+        <div class="modules-grid">
+            <div class="module-card" onclick="selectModule('wallet', '1. 지갑연결')">
+                <div class="icon">💳</div>
+                <h3>1. 지갑연결</h3>
+                <span>DID & Web3 연결</span>
+            </div>
+            <div class="module-card" onclick="selectModule('send', '2. 송금')">
+                <div class="icon">📤</div>
+                <h3>2. 송금</h3>
+                <span>글로벌 실시간 P2P</span>
+            </div>
+            <div class="module-card" onclick="selectModule('pay', '3. 결제')">
+                <div class="icon">🛒</div>
+                <h3>3. 결제</h3>
+                <span>온오프라인 융합 결제</span>
+            </div>
+            <div class="module-card" onclick="selectModule('deposit', '4. 예치')">
+                <div class="icon">🏦</div>
+                <h3>4. 예치</h3>
+                <span>자산 안전 보관 및 이자</span>
+            </div>
+            <div class="module-card" onclick="selectModule('reward', '5. 보상')">
+                <div class="icon">🎁</div>
+                <h3>5. 보상</h3>
+                <span>기여도 기반 리워드</span>
+            </div>
+            <div class="module-card" onclick="selectModule('ubi', '6. 기본소득 (UBI)')">
+                <div class="icon">🌐</div>
+                <h3>6. 기본소득 (UBI)</h3>
+                <span>30% 순이익 UBI 배분</span>
+            </div>
+            <div class="module-card" onclick="selectModule('tokenswap', '7. 토큰스왑')">
+                <div class="icon">🔄</div>
+                <h3>7. 토큰스왑</h3>
+                <span>다중 자산 교환</span>
+            </div>
+            <div class="module-card active" onclick="selectModule('dexswap', '8. DEX스왑')">
+                <div class="icon">⚡</div>
+                <h3>8. DEX스왑</h3>
+                <span>유동성 풀 자동 매칭</span>
+            </div>
+            <div class="module-card" onclick="selectModule('lpstaking', '9. LP스테이킹')">
+                <div class="icon">🔒</div>
+                <h3>9. LP스테이킹</h3>
+                <span>유동성 제공자 보상</span>
+            </div>
+            <div class="module-card" onclick="selectModule('pibalance', '10. 파이수량')">
+                <div class="icon">💎</div>
+                <h3>10. 파이수량</h3>
+                <span>실시간 잔액 및 메트릭</span>
+            </div>
+        </div>
+
+        <!-- Simulation Control Panel -->
+        <div class="sim-panel">
+            <h3 id="panelTitle">
+                <span id="currentModuleLabel">현재 선택된 모듈: [DEX스왑] 시뮬레이션 설정</span>
+                <span id="walletBalance" style="font-size: 1.1rem; color: var(--success-green); background: rgba(56,239,125,0.1); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(56,239,125,0.3);">잔액: 112.00 Test-Pi</span>
+            </h3>
+            
+            <div class="sim-controls">
+                <div class="control-group">
+                    <label id="labelAmt">1. 테스트 파이 수량 (Amount)</label>
+                    <input type="number" id="swapAmount" value="10" min="1">
+                </div>
+                <div class="control-group">
+                    <label id="labelAddr">2. 수신자 지갑 주소 / DID (모친 지갑 등)</label>
+                    <input type="text" id="recipientAddress" value="GCLUZ...FES2U">
+                </div>
+                <div class="control-group">
+                    <label id="labelNode">3. 분산 연동망 노드 선택</label>
+                    <select id="nodeSelect">
+                        <option>Node-A (아시아 릴레이 노드)</option>
+                        <option>Node-B (글로벌 코어 릴레이 노드)</option>
+                        <option>Node-C (유럽 분산 허브 노드)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="action-btn" onclick="executeActiveSimulation()" id="actionBtn">▶ 시뮬레이션 즉시 실행하기</button>
+        </div>
+
+        <!-- Terminal Log Box -->
+        <div class="terminal-container">
+            <div class="terminal-header">
+              <span>🖥️ HK WorldBank Distributed Network & Real-time Log Stream</span>
+              <span style="color: var(--neon-cyan);">Status: SECURE & CONNECTED</span>
+            </div>
+            <div class="terminal-box" id="simulationLog">
+                <div>[시스템] 60개국어 확장 다국어 변환 엔진 및 분산 메인넷 대시보드 구동 완료.</div>
+                <div>[모듈: DEX스왑] LP 유동성 풀 자동 매칭 시스템 정상 대기 중.</div>
+                <div>[안전보안] 지문 인증 및 24개 단어 Seed Phrase 보안 레이어 활성화.</div>
+            </div>
+        </div>
     </main>
 
-    <!-- 푸터 -->
-    <footer class="border-t border-purple-900/60 bg-gray-950 py-8 text-center text-xs text-gray-500 space-y-2">
-        <p>&copy; 2026 HK Group Chairman Lee Jae-wan (Hyekong). All Rights Reserved. | hkwb.world</p>
-        <p class="text-purple-400">Global Web3 Digital Banking & Universal Basic Income Platform</p>
+    <!-- Footer -->
+    <footer>
+        <p>Copyright ⓒ 체어맨 이재완 All Rights Reserved. | 문의 및 고객지원: <a href="mailto:support@hkwb.world">support@hkwb.world</a></p>
     </footer>
 
-    <!-- 자바스크립트 인터랙션 제어 -->
+    <!-- JavaScript Execution & 60-Language Engine -->
     <script>
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            content.classList.toggle('active');
-            if (content.classList.contains('active')) {
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                icon.style.transform = 'rotate(0deg)';
+        // 다국어 확장 사전 데이터베이스
+        const i18nDictionary = {
+            ko: {
+                mainTitle: "2. 10대 핵심 모듈 [개별 고유 명칭 & 로고 광학]",
+                subTitle: "10가지 모듈이 각각 고유의 네온 색상과 로고 아이콘으로 빛납니다.",
+                panelHeader: "현재 선택된 모듈: [{modName}] 시뮬레이션 설정",
+                labelAmt: "1. 테스트 파이 수량 (Amount)",
+                labelAddr: "2. 수신자 지갑 주소 / DID (모친 지갑 등)",
+                labelNode: "3. 분산 연동망 노드 선택",
+                actionBtn: "▶ 시뮬레이션 즉시 실행하기",
+                successSwap: "매칭 성공! [수신 주소: {recipient}] [정상 입금: +{amount} Test-Pi] (Node-A 아시아 릴레이 연동 완료)",
+                langChanged: "60개국어 엔진에 의해 [한국어]로 뼈속까지 실시간 변환되었습니다."
+            },
+            en: {
+                mainTitle: "2. 10 Core Modules [Custom Colors & Optical Logos]",
+                subTitle: "Each of the 10 modules shines with unique neon colors and logo icons.",
+                panelHeader: "Current Module: [{modName}] Simulation Settings",
+                labelAmt: "1. Test Pi Amount",
+                labelAddr: "2. Recipient Wallet Address / DID",
+                labelNode: "3. Distributed Relay Node",
+                actionBtn: "▶ Run Simulation Instantly",
+                successSwap: "Match Success! [Recipient: {recipient}] [Deposit: +{amount} Test-Pi] (Node-A Relay Connected)",
+                langChanged: "Real-time localization successfully applied across 60 global languages [English]."
+            },
+            zh: {
+                mainTitle: "2. 十大核心模块 [独立专属名称与标志光学]",
+                subTitle: "十个模块各自闪耀着独特的霓虹色彩与图标。",
+                panelHeader: "当前选中模块: [{modName}] 模拟设置",
+                labelAmt: "1. 测试派数量 (Amount)",
+                labelAddr: "2. 接收方钱包地址 / DID",
+                labelNode: "3. 分布式中继节点选择",
+                actionBtn: "▶ 立即执行模拟",
+                successSwap: "匹配成功！[接收地址: {recipient}] [入账: +{amount} Test-Pi] (Node-A 中继已连接)",
+                langChanged: "已通过60国语言引擎实时转换为 [中文]."
+            },
+            ja: {
+                mainTitle: "2. 10大コアモジュール [個別固有名称＆ロゴ光学]",
+                subTitle: "10個のモジュールがそれぞれ独自のネオンカラーとロゴアイコンで輝きます。",
+                panelHeader: "現在選択中のモジュール: [{modName}] シミュレーション設定",
+                labelAmt: "1. テストパイ数量 (Amount)",
+                labelAddr: "2. 受取人ウォレットアドレス / DID",
+                labelNode: "3. 分散リレーノード選択",
+                actionBtn: "▶ シミュレーション即時実行",
+                successSwap: "マッチング成功！[受取アドレス: {recipient}] [入金: +{amount} Test-Pi] (Node-A 連携完了)",
+                langChanged: "60ヵ国語エンジンにより [日本語] へリアルタイム変換されました."
+            },
+            vi: {
+                mainTitle: "2. 10 Mô-đun cốt lõi",
+                subTitle: "Các mô-đun tỏa sáng với màu sắc độc đáo.",
+                panelHeader: "Mô-đun hiện tại: [{modName}]",
+                labelAmt: "1. Số lượng Test Pi",
+                labelAddr: "2. Địa chỉ ví người nhận / DID",
+                labelNode: "3. Chọn nút mạng",
+                actionBtn: "▶ Chạy mô phỏng ngay",
+                successSwap: "Khớp thành công! [Người nhận: {recipient}] [Đã nạp: +{amount} Test-Pi]",
+                langChanged: "Đã chuyển đổi sang [Tiếng Việt] qua động cơ 60 ngôn ngữ."
+            },
+            th: {
+                mainTitle: "2. 10 โมดูลหลัก",
+                subTitle: "โมดูลทั้งหมดสว่างด้วยสีนีออน.",
+                panelHeader: "โมดูลปัจจุบัน: [{modName}]",
+                labelAmt: "1. จำนวน Test Pi",
+                labelAddr: "2. ที่อยู่กระเป๋าเงินผู้รับ / DID",
+                labelNode: "3. เลือกโหนดเครือข่าย",
+                actionBtn: "▶ รันการจำลองทันที",
+                successSwap: "จับคู่สำเร็จ! [ผู้รับ: {recipient}] [ฝากเงิน: +{amount} Test-Pi]",
+                langChanged: "แปลเป็น [ภาษาไทย] ผ่านเอ็นจิ้น 60 ภาษาเรียบร้อยแล้ว."
+            },
+            es: {
+                mainTitle: "2. 10 Módulos Principales",
+                subTitle: "Cada módulo brilla con colores neón únicos.",
+                panelHeader: "Módulo Actual: [{modName}]",
+                labelAmt: "1. Cantidad de Test Pi",
+                labelAddr: "2. Dirección de Wallet / DID",
+                labelNode: "3. Nodo de Relevo",
+                actionBtn: "▶ Ejecutar Simulación",
+                successSwap: "¡Coincidencia exitosa! [Destinatario: {recipient}] [Depósito: +{amount} Test-Pi]",
+                langChanged: "Traducido al [Español] mediante el motor de 60 idiomas."
+            },
+            fr: {
+                mainTitle: "2. 10 Modules Principaux",
+                subTitle: "Chaque module brille avec des couleurs néon uniques.",
+                panelHeader: "Module Actuel : [{modName}]",
+                labelAmt: "1. Montant Test Pi",
+                labelAddr: "2. Adresse du portefeuille / DID",
+                labelNode: "3. Nœud de relais",
+                actionBtn: "▶ Exécuter la simulation",
+                successSwap: "Succès de correspondance ! [Destinataire : {recipient}] [Dépôt : +{amount} Test-Pi]",
+                langChanged: "Traduit en [Français] via le moteur à 60 langues."
+            },
+            de: {
+                mainTitle: "2. 10 Kernmodule",
+                subTitle: "Jedes Modul leuchtet in einzigartigen Neonfarben.",
+                panelHeader: "Aktuelles Modul: [{modName}]",
+                labelAmt: "1. Test-Pi-Menge",
+                labelAddr: "2. Empfänger-Wallet-Adresse / DID",
+                labelNode: "3. Relay-Node auswählen",
+                actionBtn: "▶ Simulation sofort ausführen",
+                successSwap: "Übereinstimmung erfolgreich! [Empfänger: {recipient}] [Einzahlung: +{amount} Test-Pi]",
+                langChanged: "In [Deutsch] übersetzt über die 60-Sprachen-Engine."
+            },
+            ru: {
+                mainTitle: "2. 10 основных модулей",
+                subTitle: "Каждый модуль сияет уникальными неоновыми цветами.",
+                panelHeader: "Текущий модуль: [{modName}]",
+                labelAmt: "1. Количество Test Pi",
+                labelAddr: "2. Адрес кошелька получателя / DID",
+                labelNode: "3. Узел ретрансляции",
+                actionBtn: "▶ Запустить симуляцию",
+                successSwap: "Совпадение успешно! [Получатель: {recipient}] [Депозит: +{amount} Test-Pi]",
+                langChanged: "Переведено на [Русский] язык через 60-язычный движок."
             }
+        };
+
+        let currentLang = 'ko';
+        let activeModuleName = 'DEX스왑';
+
+        // 60개국어 실시간 전환 함수
+        function switchLanguage(langCode) {
+            currentLang = langCode;
+            const dict = i18nDictionary[langCode] || i18nDictionary['en'];
+            
+            document.getElementById('mainTitle').innerText = dict.mainTitle;
+            document.getElementById('subTitle').innerText = dict.subTitle;
+            document.getElementById('currentModuleLabel').innerText = `현재 선택된 모듈: [${activeModuleName}] 시뮬레이션 설정`;
+            
+            document.getElementById('labelAmt').innerText = dict.labelAmt;
+            document.getElementById('labelAddr').innerText = dict.labelAddr;
+            document.getElementById('labelNode').innerText = dict.labelNode;
+            document.getElementById('actionBtn').innerText = dict.actionBtn;
+
+            const timestamp = new Date().toLocaleTimeString();
+            const logContainer = document.getElementById('simulationLog');
+            logContainer.innerHTML = `<div>[${timestamp}] [시스템] ${dict.langChanged}</div>` + logContainer.innerHTML;
         }
 
-        function changeLanguage(lang) {
-            alert("🌐 선택하신 언어(" + lang.toUpperCase() + ")로 60개국 실시간 번역 엔진 및 AGI 삐니 컨텍스트가 완벽하게 동기화되었습니다.");
+        // 모듈 선택 시각 효과 및 상태 변경
+        function selectModule(moduleKey, moduleDisplayName) {
+            document.querySelectorAll('.module-card').forEach(card => card.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            
+            activeModuleName = moduleDisplayName.split('. ')[1] || moduleDisplayName;
+            document.getElementById('currentModuleLabel').innerText = `현재 선택된 모듈: [${activeModuleName}] 시뮬레이션 설정`;
+
+            const timestamp = new Date().toLocaleTimeString();
+            const logContainer = document.getElementById('simulationLog');
+            logContainer.innerHTML = `<div>[${timestamp}] [모듈 전환] [${activeModuleName}] 모듈이 정상 활성화되었습니다.</div>` + logContainer.innerHTML;
         }
 
-        function runCoreModules() {
-            alert("🚀 10대 핵심 모듈 프로세스가 정상 가동되었습니다. (지갑연결·송금·결제·예치·보상·기본소득·토큰스왑·DEX스왑·LP스테이킹·파이수량 정상 작동 중)");
+        // 상단 네비게이션바 메뉴 액션
+        function triggerNavAction(menuType) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logContainer = document.getElementById('simulationLog');
+            let msg = "";
+            if(menuType === 'agi') msg = "AGI 삐니 고객센터 및 AI 서포트 모듈 호출 완료.";
+            else if(menuType === 'modules') msg = "10대 핵심 모듈 전체 대시보드 동기화 완료.";
+            else if(menuType === 'ubi') msg = "사회참여 및 30% UBI 배분 스마트컨트랙트 조회 완료.";
+            else if(menuType === 'whitepaper') msg = "HK 백서 100선 아카이브 로드 완료.";
+            else if(menuType === 'faq') msg = "FAQ 20선 데이터베이스 인덱싱 완료.";
+
+            logContainer.innerHTML = `<div>[${timestamp}] [내비게이션] ${msg}</div>` + logContainer.innerHTML;
         }
 
-        function openBiniChat() {
-            alert("🤖 AGI 고객 상담사 '삐니'가 호출되었습니다. 60개국어 실시간 응답 대기 중입니다, 형님!");
+        // 활성화된 모듈 시뮬레이션 실행 (지갑 잔액 정확한 플러스(+) 입금 처리)
+        function executeActiveSimulation() {
+            const amountInput = document.getElementById('swapAmount');
+            const recipientInput = document.getElementById('recipientAddress');
+            const logContainer = document.getElementById('simulationLog');
+
+            const amount = parseFloat(amountInput ? amountInput.value : 10);
+            const recipient = recipientInput ? recipientInput.value : "GCLUZ...FES2U";
+            const timestamp = new Date().toLocaleTimeString();
+            const dict = i18nDictionary[currentLang] || i18nDictionary['en'];
+
+            let logText = dict.successSwap
+                .replace('{recipient}', recipient)
+                .replace('{amount}', amount);
+
+            logContainer.innerHTML = `<div>[${timestamp}] [모듈: ${activeModuleName}] ${logText}</div>` + logContainer.innerHTML;
+
+            updateWalletBalance(amount);
         }
 
-        function runKycAml() {
-            alert("🛡️ KYC 자동화, AML 필터링 및 21개국 VASP 연동 컴플라이언스 엔진이 성공적으로 구동되었습니다.");
+        // 지갑 잔액 동기화 헬퍼 함수
+        function updateWalletBalance(deltaAmount) {
+            const balanceElement = document.getElementById('walletBalance');
+            if (balanceElement) {
+                let currentText = balanceElement.innerText.replace(/[^0-9.]/g, '');
+                let currentBalance = parseFloat(currentText) || 112.00;
+                currentBalance += deltaAmount; // 정확한 플러스(+) 반영
+                balanceElement.innerText = `잔액: ${currentBalance.toFixed(2)} Test-Pi`;
+            }
         }
     </script>
 </body>
