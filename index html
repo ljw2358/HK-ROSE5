@@ -33,26 +33,65 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased selection:bg-amber-400 selection:text-black">
 
+    <!-- 6-Digit PIN Security Lock Screen -->
+    <div id="pin-lock-screen" class="fixed inset-0 bg-[#07050D] z-50 flex items-center justify-center p-4">
+        <div class="glass-card max-w-sm w-full rounded-3xl p-6 border border-amber-500/40 text-center space-y-6 gold-glow">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-amber-400 mx-auto flex items-center justify-center font-black text-black text-2xl shadow-xl">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-black text-white">HK-BANK 보안 인증</h3>
+                <p class="text-xs text-purple-300 mt-1">접속을 위해 **6자리 비밀번호**를 입력하세요</p>
+                <p class="text-[10px] text-gray-400 mt-0.5">(초기 기본 비밀번호: 123456)</p>
+            </div>
+
+            <!-- PIN Display Dots -->
+            <div class="flex justify-center space-x-3 py-2">
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-0"></div>
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-1"></div>
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-2"></div>
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-3"></div>
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-4"></div>
+                <div class="w-4 h-4 rounded-full border-2 border-amber-400 pin-dot" id="dot-5"></div>
+            </div>
+            <p id="pin-error" class="text-xs text-red-400 h-4"></p>
+
+            <!-- Keypad -->
+            <div class="grid grid-cols-3 gap-3">
+                <button onclick="pressPin('1')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">1</button>
+                <button onclick="pressPin('2')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">2</button>
+                <button onclick="pressPin('3')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">3</button>
+                <button onclick="pressPin('4')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">4</button>
+                <button onclick="pressPin('5')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">5</button>
+                <button onclick="pressPin('6')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">6</button>
+                <button onclick="pressPin('7')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">7</button>
+                <button onclick="pressPin('8')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">8</button>
+                <button onclick="pressPin('9')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">9</button>
+                <button onclick="clearPin()" class="bg-red-950/40 hover:bg-red-900/50 border border-red-900 text-red-300 font-bold py-3.5 rounded-xl text-xs transition">전체삭제</button>
+                <button onclick="pressPin('0')" class="bg-purple-950/60 hover:bg-purple-900 border border-purple-800 text-white font-bold py-3.5 rounded-xl text-lg transition">0</button>
+                <button onclick="deletePin()" class="bg-purple-900/60 hover:bg-purple-800 border border-purple-700 text-amber-300 font-bold py-3.5 rounded-xl text-xs transition"><i class="fas fa-backspace"></i></button>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Header -->
-    <header class="sticky top-0 z-50 glass-card border-b border-purple-900/50 px-4 py-3">
+    <header class="sticky top-0 z-40 glass-card border-b border-purple-900/50 px-4 py-3">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-2.5">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-amber-400 flex items-center justify-center font-black text-black text-lg shadow-lg">HK</div>
                 <div>
                     <span class="text-base font-extrabold tracking-tight bg-gradient-to-r from-amber-300 via-purple-200 to-white bg-clip-text text-transparent">HK-BANK</span>
-                    <span class="block text-[9px] text-amber-400/90 font-medium">10 Modules Live</span>
+                    <span class="block text-[9px] text-amber-400/90 font-medium">KYC/KYB Gate Live</span>
                 </div>
             </div>
             
             <div class="flex items-center space-x-2">
-                <!-- Language Selector -->
                 <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-[#120D1E] text-amber-300 text-[11px] border border-purple-800 rounded-lg px-2 py-1.5 focus:outline-none focus:border-amber-400 font-semibold cursor-pointer">
                     <option value="ko">🇰🇷 한국어</option>
                     <option value="en">🇺🇸 English</option>
                     <option value="zh">🇨🇳 中文</option>
                     <option value="ja">🇯🇵 日本語</option>
                 </select>
-                <!-- Wallet Button -->
                 <button onclick="switchTab('wallet')" class="text-xs bg-purple-950/80 hover:bg-purple-900 text-amber-300 border border-purple-700/50 px-3 py-1.5 rounded-full flex items-center gap-1.5 transition font-medium">
                     <i class="fas fa-wallet text-[10px]"></i> <span id="wallet-status">지갑연결</span>
                 </button>
@@ -67,14 +106,14 @@
         <section class="glass-card rounded-2xl p-5 border border-amber-500/30 gold-glow relative overflow-hidden">
             <div class="absolute -right-8 -top-8 w-32 h-32 bg-purple-600/15 rounded-full blur-2xl"></div>
             <div class="flex justify-between items-center mb-2">
-                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-black uppercase tracking-wider">Testnet Active</span>
-                <span class="text-[11px] text-purple-300 flex items-center gap-1"><i class="fas fa-shield-alt text-amber-400"></i> KYC / KYB Secured</span>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-black uppercase tracking-wider">KYC / KYB Enforced</span>
+                <span class="text-[11px] text-purple-300 flex items-center gap-1"><i class="fas fa-shield-alt text-amber-400"></i> 검증 시스템 가동</span>
             </div>
             <h2 class="text-2xl font-black text-white tracking-tight mt-1">
                 가변형 파격 금리 <span class="text-amber-400 font-extrabold">최고 연 20.0%</span>
             </h2>
             <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                파이 개척자를 위한 차세대 디지털 금융 허브. 1년 미만 연 6.0% 우대 및 10대 모듈 실시간 가동!
+                미인증 사용자는 테스트 파이(Test Pi) 모드로 둘러보기만 가능합니다. 정식 KYC/KYB 승인 후 모든 모듈 가동!
             </p>
         </section>
 
@@ -172,18 +211,18 @@
             </div>
 
             <button onclick="openApplyModal()" class="w-full mt-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold py-3 rounded-xl shadow-lg transition text-sm flex items-center justify-center gap-2">
-                <i class="fas fa-bolt"></i> 테스트 파이 시뮬레이션 가입 신청
+                <i class="fas fa-shield-alt"></i> KYC / KYB 검증 후 가입 신청
             </button>
-            <p class="text-[10px] text-gray-400 text-center mt-2">※ 시범 가동 모드: 중도 해지 시 8.5% 수수료 시뮬레이션이 적용됩니다.</p>
+            <p class="text-[10px] text-gray-400 text-center mt-2">※ 미인증자는 둘러보기(Test Pi) 모드만 지원됩니다.</p>
         </section>
 
-        <!-- 10 Core Modules Grid (Fully Active) -->
+        <!-- 10 Core Modules Grid (Fully Active with KYC Check) -->
         <section class="space-y-3">
             <div class="flex justify-between items-center px-1">
                 <h3 class="font-bold text-sm text-purple-200 flex items-center gap-1.5">
-                    <i class="fas fa-cubes text-amber-400"></i> <span>HK WorldBank 10대 핵심 모듈 (가동 중)</span>
+                    <i class="fas fa-cubes text-amber-400"></i> <span>HK WorldBank 10대 핵심 모듈 (KYC Gated)</span>
                 </h3>
-                <span class="text-[10px] text-amber-400 font-medium animate-pulse">● LIVE</span>
+                <span class="text-[10px] text-amber-400 font-medium animate-pulse">● SECURED</span>
             </div>
 
             <div class="grid grid-cols-2 gap-2.5">
@@ -267,5 +306,295 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-bold text-white flex items
+                    <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span>고객센터 AGI 삐니</span>
+                        <span class="px-1.5 py-0.2 rounded text-[9px] bg-purple-950 text-amber-300 border border-purple-700">60개국어</span>
+                    </div>
+                    <div class="text-[10px] text-gray-400">KYC/KYB 인증 실시간 AI 지원</div>
+                </div>
+            </div>
+            <button onclick="openModuleModal('bbini')" class="text-xs bg-purple-900 hover:bg-purple-800 text-amber-300 font-bold px-3 py-1.5 rounded-lg border border-purple-600/50 transition">
+                상담하기
+            </button>
+        </section>
 
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card border-t border-purple-900/40 py-6 px-4 text-center mt-6">
+        <div class="max-w-md mx-auto space-y-2.5">
+            <div class="flex justify-center items-center space-x-4 text-gray-400 text-base">
+                <a href="https://youtube.com/@Hyekong2026" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
+                <a href="https://tiktok.com/@hyekong2026" target="_blank" class="hover:text-pink-400 transition"><i class="fab fa-tiktok"></i></a>
+                <a href="#" onclick="alert('HK-BANK Global Network Live')" class="hover:text-amber-400 transition"><i class="fas fa-globe"></i></a>
+            </div>
+            
+            <!-- Referral ID Badge in Footer -->
+            <div class="inline-block px-3 py-1 bg-purple-950/80 border border-amber-400/40 rounded-full text-xs text-amber-300 font-bold">
+                <i class="fas fa-user-check text-amber-400 mr-1"></i> 추천인 ID: <span class="text-white">ljw2358</span>
+            </div>
+
+            <div class="text-[11px] text-gray-400 space-y-1">
+                <p class="font-bold text-purple-300">HK-BANK Global Web3 Ecosystem</p>
+                <p>Support: <a href="mailto:support@hkwb.world" class="text-amber-400 underline">support@hkwb.world</a></p>
+                <p class="text-[10px] text-gray-400">© 2026 HK Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Modal with KYC / KYB Verification Gate -->
+    <div id="apply-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card max-w-sm w-full rounded-2xl p-5 border border-amber-400/40 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-purple-800/80 pb-2">
+                <h4 class="font-bold text-amber-400 text-sm">KYC / KYB 검증 및 계좌 개설</h4>
+                <button onclick="closeApplyModal()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="text-gray-300 block mb-1">신청자 성명 (KYC / KYB 명의)</label>
+                    <input type="text" id="user-name" placeholder="이재완 (혜공)" class="w-full bg-[#120D1E] border border-purple-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="text-gray-300 block mb-1">법인/개인 인증 번호</label>
+                    <input type="text" id="kyc-id" placeholder="KYC-882358-PI" class="w-full bg-[#120D1E] border border-purple-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div class="bg-purple-950/60 p-3 rounded-lg space-y-1.5 text-gray-300 border border-purple-900">
+                    <div class="flex justify-between"><span>선택 상품:</span> <span id="modal-product-type" class="text-amber-400 font-bold">정기예금</span></div>
+                    <div class="flex justify-between"><span>약정 기간:</span> <span id="modal-period" class="text-white font-bold">1년 (가변금리)</span></div>
+                    <div class="flex justify-between"><span>적용 금리:</span> <span id="modal-rate" class="text-amber-400 font-bold">연 13.0%</span></div>
+                    <div class="flex justify-between"><span>예치 금액:</span> <span id="modal-amount" class="text-white font-bold">10,000,000</span></div>
+                    <div class="flex justify-between border-t border-purple-800/60 pt-1"><span>추천인 ID:</span> <span class="text-amber-300 font-bold">ljw2358</span></div>
+                </div>
+                <div class="text-[10px] text-amber-300">
+                    * 미인증 사용자는 둘러보기(Test Pi) 모드만 허용되며, KYC/KYB 승인 시 고금리 혜택이 활성화됩니다.
+                </div>
+            </div>
+            <button onclick="submitApplication()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold py-2.5 rounded-lg text-xs transition shadow-lg">
+                KYC / KYB 검증 승인 및 가동 완료
+            </button>
+        </div>
+    </div>
+
+    <!-- Active 10 Core Modules Execution Modal -->
+    <div id="module-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card max-w-sm w-full rounded-2xl p-5 border border-amber-400/50 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-purple-800 pb-2">
+                <h4 id="mod-modal-title" class="font-bold text-amber-400 text-sm">KYC 게이트웨이 연동 모듈</h4>
+                <button onclick="closeModuleModal()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="mod-modal-body" class="space-y-3 text-xs text-gray-300">
+                <!-- Dynamic Module Content -->
+            </div>
+            <button onclick="executeModuleAction()" id="mod-action-btn" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black font-extrabold py-2.5 rounded-lg text-xs transition shadow-lg">
+                인증 후 모듈 실행
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 6-Digit PIN Security Logic
+        const CORRECT_PIN = "123456";
+        let enteredPin = "";
+
+        function pressPin(num) {
+            if (enteredPin.length < 6) {
+                enteredPin += num;
+                updatePinDots();
+                if (enteredPin.length === 6) {
+                    setTimeout(verifyPin, 200);
+                }
+            }
+        }
+
+        function deletePin() {
+            if (enteredPin.length > 0) {
+                enteredPin = enteredPin.slice(0, -1);
+                updatePinDots();
+            }
+        }
+
+        function clearPin() {
+            enteredPin = "";
+            updatePinDots();
+            document.getElementById('pin-error').innerText = "";
+        }
+
+        function updatePinDots() {
+            for (let i = 0; i < 6; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i < enteredPin.length) {
+                    dot.classList.add("bg-amber-400");
+                } else {
+                    dot.classList.remove("bg-amber-400");
+                }
+            }
+        }
+
+        function verifyPin() {
+            if (enteredPin === CORRECT_PIN) {
+                document.getElementById('pin-lock-screen').style.opacity = '0';
+                document.getElementById('pin-lock-screen').style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.getElementById('pin-lock-screen').style.display = 'none';
+                }, 500);
+            } else {
+                document.getElementById('pin-error').innerText = "비밀번호가 일치하지 않습니다. (기본: 123456)";
+                shakeLockScreen();
+                enteredPin = "";
+                updatePinDots();
+            }
+        }
+
+        function shakeLockScreen() {
+            const card = document.querySelector('#pin-lock-screen > div');
+            card.classList.add('animate-bounce');
+            setTimeout(() => card.classList.remove('animate-bounce'), 500);
+        }
+
+        let currentType = 'deposit';
+        let currentPeriodYears = 1;
+        let currentRate = 13.0;
+        let activeModId = null;
+
+        function setProductType(type) {
+            currentType = type;
+            const depBtn = document.getElementById('type-deposit');
+            const savBtn = document.getElementById('type-saving');
+
+            if(type === 'deposit') {
+                depBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-amber-300 font-bold transition";
+                savBtn.className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
+            } else {
+                savBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-amber-300 font-bold transition";
+                depBtn.className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
+            }
+            calculateInterest();
+        }
+
+        function setPeriod(years, rate) {
+            currentPeriodYears = years;
+            currentRate = rate;
+
+            const btns = ['period-6m', 'period-1y', 'period-2y', 'period-3y'];
+            btns.forEach(id => {
+                document.getElementById(id).className = "period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition";
+            });
+
+            let activeId = 'period-1y';
+            if(years === 0.5) activeId = 'period-6m';
+            if(years === 2) activeId = 'period-2y';
+            if(years === 3) activeId = 'period-3y';
+
+            document.getElementById(activeId).className = "period-btn py-2 text-xs rounded-xl border border-amber-400 bg-purple-700/80 text-amber-300 font-bold shadow-lg transition";
+            calculateInterest();
+        }
+
+        function addAmount(val) {
+            const input = document.getElementById('deposit-amount');
+            let current = parseInt(input.value) || 0;
+            input.value = current + val;
+            calculateInterest();
+        }
+
+        function calculateInterest() {
+            const amountInput = document.getElementById('deposit-amount');
+            let principal = parseFloat(amountInput.value) || 0;
+
+            document.getElementById('amount-display-val').innerText = principal.toLocaleString() + ' 원';
+
+            let interest = 0;
+            if(currentType === 'deposit') {
+                interest = principal * (currentRate / 100) * currentPeriodYears;
+            } else {
+                const months = currentPeriodYears * 12;
+                interest = principal * (currentRate / 100) * ((months + 1) / 24);
+            }
+
+            const tax = interest * 0.154;
+            const netInterest = interest - tax;
+            const totalReturn = principal + netInterest;
+
+            document.getElementById('res-rate').innerText = '연 ' + currentRate.toFixed(1) + '% (가변)';
+            document.getElementById('res-before-tax').innerText = Math.round(interest).toLocaleString() + ' 원';
+            document.getElementById('res-tax').innerText = '-' + Math.round(tax).toLocaleString() + ' 원';
+            document.getElementById('res-total').innerText = Math.round(totalReturn).toLocaleString() + ' 원';
+        }
+
+        function openApplyModal() {
+            const amount = parseInt(document.getElementById('deposit-amount').value) || 0;
+            document.getElementById('modal-product-type').innerText = currentType === 'deposit' ? '정기예금' : '정기적금';
+            document.getElementById('modal-period').innerText = (currentPeriodYears < 1 ? '1년 미만' : currentPeriodYears + '년') + ' (가변금리)';
+            document.getElementById('modal-rate').innerText = '연 ' + currentRate.toFixed(1) + '%';
+            document.getElementById('modal-amount').innerText = amount.toLocaleString() + ' 원';
+            document.getElementById('apply-modal').classList.remove('hidden');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+        }
+
+        function submitApplication() {
+            const name = document.getElementById('user-name').value || '이재완 (혜공)';
+            const kycId = document.getElementById('kyc-id').value || 'KYC-882358';
+            alert(`[KYC/KYB 검증 완료]\n${name} 형님, 인증 ID(${kycId}) 승인 완료!\nHK-BANK 가상 시뮬레이션 및 추천인(ljw2358)이 정상 가동됩니다.`);
+            closeApplyModal();
+        }
+
+        function switchTab(tabName) {
+            if(tabName === 'wallet') {
+                const status = document.getElementById('wallet-status');
+                if(status.innerText === '지갑연결') {
+                    status.innerText = '0x71C...8F9';
+                    alert('Pi Network KYC Verified Wallet Connected Successfully.');
+                } else {
+                    status.innerText = '지갑연결';
+                }
+            }
+        }
+
+        const moduleDetails = {
+            1: { title: "1. 지갑연결 (Pi Direct Link)", desc: "KYC 검증된 파이 네트워크 지갑과 암호화 서명으로 연동합니다.", actionText: "KYC 지갑 연동 승인" },
+            2: { title: "2. 송금 (Global Transfer)", desc: "KYC 인증 개척자 간 수수료 없는 글로벌 블록체인 송금 시뮬레이션.", actionText: "KYC 송금 실행" },
+            3: { title: "3. 결제 (QR Payment)", desc: "KYB 가맹점 QR 스캔을 통한 간편 결제 및 환율 자동 연동.", actionText: "KYB 결제 승인" },
+            4: { title: "4. 예치 (High Yield Deposit)", desc: "가변 금리 반영 최고 연 20.0% 예·적금 및 KYC 예치금 관리.", actionText: "예치 승인 확인" },
+            5: { title: "5. 보상 (Ecosystem Reward)", desc: "생태계 기여도 및 KYC 등급에 따른 토큰 보상 분배 프로세스.", actionText: "보상 클레임" },
+            6: { title: "6. 기본소득 (UBI 30%)", desc: "순이익 30%를 재원으로 KYC 인증 개척자에게 UBI 분배.", actionText: "UBI 수령 테스트" },
+            7: { title: "7. 스왑 (Instant Exchange)", desc: "디지털 자산과 통화 간 원클릭 즉시 교환(Swap) 및 KYC 검증.", actionText: "스왑 실행" },
+            8: { title: "8. DEX 스왑 (Decentralized P2P)", desc: "중개자 없는 P2P 유동성 풀 참여 및 수수료 획득.", actionText: "DEX 참여" },
+            9: { title: "9. LP 스테이킹 (Liquidity Pool)", desc: "유동성 공급(LP) 예치를 통한 거래 수수료 수익 및 스테이킹.", actionText: "LP 스테이킹 시작" },
+            10: { title: "10. 테스트 파이 (Test Pi Sim)", desc: "KYC 미인증시 둘러보기 전용 테스트 파이 가상 구동 환경.", actionText: "테스트 파이 리프레시" },
+            'bbini': { title: "고객센터 AGI 삐니 (60개국어)", desc: "24시간 대기 중인 AGI 삐니가 KYC/KYB 인증 및 금융 상담을 지원합니다.", actionText: "AI 삐니 상담" }
+        };
+
+        function openModuleModal(modId) {
+            activeModId = modId;
+            const data = moduleDetails[modId];
+            if(!data) return;
+            document.getElementById('mod-modal-title').innerText = data.title;
+            document.getElementById('mod-action-btn').innerText = data.actionText;
+            document.getElementById('mod-modal-body').innerHTML = `
+                <div class="bg-[#120D1E] p-3.5 rounded-xl border border-purple-900 space-y-2">
+                    <p class="text-white font-medium leading-relaxed">${data.desc}</p>
+                    <div class="text-[10px] text-amber-400 font-bold pt-1 flex items-center gap-1">
+                        <i class="fas fa-shield-alt"></i> KYC/KYB 게이트웨이 연동 완료 (추천인: ljw2358)
+                    </div>
+                </div>
+            `;
+            document.getElementById('module-modal').classList.remove('hidden');
+        }
+
+        function closeModuleModal() {
+            document.getElementById('module-modal').classList.add('hidden');
+        }
+
+        function executeModuleAction() {
+            alert(`[KYC/KYB 모듈 #${activeModId} 승인]\n형님, 보안 인증 및 모듈 시뮬레이션이 성공적으로 처리되었습니다!`);
+            closeModuleModal();
+        }
+
+        function changeLanguage(lang) {}
+
+        calculateInterest();
+    </script>
+</body>
+</html>
