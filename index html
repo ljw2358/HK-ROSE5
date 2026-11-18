@@ -137,7 +137,7 @@
         <!-- Dynamic Rate Info Cards Grid -->
         <section class="grid grid-cols-4 gap-2">
             <div class="glass-panel p-2.5 rounded-xl text-center border border-purple-800">
-                <div class="text-[11px] text-gray-400" data-i18n="t_6m">6개월 미만</div>
+                <div class="text-[11px] text-gray-400" data-i18n="t_6m">1년 미만</div>
                 <div class="text-lg font-bold text-yellow-400 mt-0.5">6.0%</div>
                 <div class="text-[9px] text-purple-300" data-i18n="sub_6m">단기 거치</div>
             </div>
@@ -192,7 +192,7 @@
             <div class="space-y-2 mb-5">
                 <label class="text-xs text-gray-300" data-i18n="label_period">약정 기간 선택</label>
                 <div class="grid grid-cols-4 gap-2">
-                    <button onclick="setPeriod(0.5, 6.0)" id="period-6m" class="period-btn py-2 text-xs rounded-xl border border-purple-700 bg-purple-950 text-gray-300 font-medium"><span data-i18n="p_6m">6개월 미만</span><br><span class="text-yellow-400 font-bold">6.0%</span></button>
+                    <button onclick="setPeriod(0.5, 6.0)" id="period-6m" class="period-btn py-2 text-xs rounded-xl border border-purple-700 bg-purple-950 text-gray-300 font-medium"><span data-i18n="p_6m">1년 미만</span><br><span class="text-yellow-400 font-bold">6.0%</span></button>
                     <button onclick="setPeriod(1, 13.0)" id="period-1y" class="period-btn py-2 text-xs rounded-xl border border-yellow-400 bg-purple-700 text-yellow-400 font-bold"><span data-i18n="p_1y">1년</span><br><span>13.0%</span></button>
                     <button onclick="setPeriod(2, 16.0)" id="period-2y" class="period-btn py-2 text-xs rounded-xl border border-purple-700 bg-purple-950 text-gray-300 font-medium"><span data-i18n="p_2y">2년</span><br><span class="text-yellow-400 font-bold">16.0%</span></button>
                     <button onclick="setPeriod(3, 20.0)" id="period-3y" class="period-btn py-2 text-xs rounded-xl border border-purple-700 bg-purple-950 text-gray-300 font-medium"><span data-i18n="p_3y">3년</span><br><span class="text-yellow-400 font-bold">20.0%</span></button>
@@ -235,70 +235,70 @@
             </div>
 
             <div class="grid grid-cols-2 gap-2.5">
-                <div onclick="triggerModule('지갑연결')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(1)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-wallet"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">1. <span data-i18n="m1">지갑연결</span></div>
                         <div class="text-[10px] text-gray-400">Pi Direct Link</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('송금')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(2)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-paper-plane"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">2. <span data-i18n="m2">송금</span></div>
                         <div class="text-[10px] text-gray-400">Global Transfer</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('결제')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(3)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-qrcode"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">3. <span data-i18n="m3">결제</span></div>
                         <div class="text-[10px] text-gray-400">QR Payment</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('예치')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(4)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-piggy-bank"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">4. <span data-i18n="m4">예치</span></div>
                         <div class="text-[10px] text-gray-400">High Yield Deposit</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('보상')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(5)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-gift"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">5. <span data-i18n="m5">보상</span></div>
                         <div class="text-[10px] text-gray-400">Ecosystem Reward</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('기본소득 (UBI)')" class="glass-panel p-3 rounded-xl border border-yellow-500/40 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3 bg-yellow-400/5">
+                <div onclick="openModuleModal(6)" class="glass-panel p-3 rounded-xl border border-yellow-500/40 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3 bg-yellow-400/5">
                     <div class="w-9 h-9 rounded-lg bg-yellow-400/20 flex items-center justify-center text-yellow-400"><i class="fas fa-hand-holding-usd"></i></div>
                     <div>
                         <div class="text-xs font-bold text-yellow-400">6. <span data-i18n="m6">기본소득</span></div>
                         <div class="text-[10px] text-yellow-200/70">30% UBI Return</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('스왑')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(7)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-sync-alt"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">7. <span data-i18n="m7">스왑</span></div>
                         <div class="text-[10px] text-gray-400">Instant Exchange</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('DEX 스왑')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(8)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-exchange-alt"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">8. <span data-i18n="m8">DEX 스왑</span></div>
                         <div class="text-[10px] text-gray-400">Decentralized P2P</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('LP 스테이킹')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(9)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-layer-group"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">9. <span data-i18n="m9">LP 스테이킹</span></div>
                         <div class="text-[10px] text-gray-400">Liquidity Pool</div>
                     </div>
                 </div>
-                <div onclick="triggerModule('파이 수량 시뮬레이터')" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
+                <div onclick="openModuleModal(10)" class="glass-panel p-3 rounded-xl border border-purple-800/60 hover:border-yellow-400 cursor-pointer transition flex items-center space-x-3">
                     <div class="w-9 h-9 rounded-lg bg-purple-900/60 flex items-center justify-center text-yellow-400"><i class="fas fa-coins"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">10. <span data-i18n="m10">테스트 파이</span></div>
@@ -322,7 +322,7 @@
                     <div class="text-[10px] text-gray-400" data-i18n="bbini_desc">24/7 Global AI Financial Support</div>
                 </div>
             </div>
-            <button onclick="alert('AGI Bbini AI Support Connected.')" class="text-xs bg-purple-800 hover:bg-purple-700 text-yellow-300 font-bold px-3 py-1.5 rounded-lg border border-purple-500/40" data-i18n="bbini_btn">
+            <button onclick="openModuleModal('bbini')" class="text-xs bg-purple-800 hover:bg-purple-700 text-yellow-300 font-bold px-3 py-1.5 rounded-lg border border-purple-500/40" data-i18n="bbini_btn">
                 상담하기
             </button>
         </section>
@@ -338,8 +338,8 @@
                 <a href="#" onclick="alert('Global Community Loading...')" class="hover:text-yellow-400 transition" title="Global Site"><i class="fas fa-globe"></i></a>
             </div>
             <div class="text-[11px] text-gray-400 space-y-1">
-                <p class="font-bold text-purple-300">HK WorldBank / HK-BANK Global Web3 Ecosystem</p>
-                <p>Support: <a href="mailto:support@hkworldbank.com" class="text-yellow-400 underline">support@hkworldbank.com</a></p>
+                <p class="font-bold text-purple-300">HK-BANK Global Web3 Ecosystem</p>
+                <p>Support: <a href="mailto:support@hkwb.world" class="text-yellow-400 underline">support@hkwb.world</a></p>
                 <p class="text-[10px] text-gray-400 pt-1">© 2026 HK Group. All rights reserved.</p>
             </div>
         </div>
@@ -373,18 +373,33 @@
         </div>
     </div>
 
+    <!-- 10 Core Modules Interactive Process Modal -->
+    <div id="module-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-panel max-w-sm w-full rounded-2xl p-5 border border-purple-500 space-y-4">
+            <div class="flex justify-between items-center border-b border-purple-800 pb-2">
+                <h4 id="mod-modal-title" class="font-bold text-yellow-400 text-sm">모듈 프로세스</h4>
+                <button onclick="closeModuleModal()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="mod-modal-body" class="space-y-3 text-xs text-gray-300">
+                <!-- Dynamic Content -->
+            </div>
+            <button onclick="closeModuleModal()" class="w-full bg-purple-700 hover:bg-purple-600 text-yellow-300 font-bold py-2.5 rounded-lg text-xs transition">
+                확인 및 프로세스 진행
+            </button>
+        </div>
+    </div>
+
     <script>
         let currentType = 'deposit';
         let currentPeriodYears = 1;
         let currentRate = 13.0;
 
-        // 60 Languages Dictionary Mock Data Engine
         const translations = {
             ko: {
                 badge_global: "Web3 파이오니아 특판", up_to: "최고", banner_desc: "전 세계 파이 개척자를 위한 HK-BANK 파격 예·적금 모듈",
-                t_6m: "6개월 미만", sub_6m: "단기 거치", t_1y: "1년 만기", sub_1y: "수익 극대화", t_2y: "2년 만기", sub_2y: "안정 성장", t_3y: "3년 만기", sub_3y: "최고 우대",
+                t_6m: "1년 미만", sub_6m: "단기 거치", t_1y: "1년 만기", sub_1y: "수익 극대화", t_2y: "2년 만기", sub_2y: "안정 성장", t_3y: "3년 만기", sub_3y: "최고 우대",
                 calc_title: "이자 계산 시뮬레이터", btn_deposit: "정기예금", btn_saving: "정기적금", label_amount: "예치 금액 (Pi / KRW)", currency: "원",
-                label_period: "약정 기간 선택", p_6m: "6개월 미만", p_1y: "1년", p_2y: "2년", p_3y: "3년",
+                label_period: "약정 기간 선택", p_6m: "1년 미만", p_1y: "1년", p_2y: "2년", p_3y: "3년",
                 res_rate: "적용 연 이율", res_before: "세전 총 이자", res_tax: "이자소득세 (15.4%)", res_total: "만기 예상 실수령액",
                 apply_btn: "HK-BANK 상품 즉시 가입하기", notice: "※ 중도 해지 시 약정 이율의 8.5% 중도해지 수수료가 적용됩니다.",
                 mod_title: "HK WorldBank 10대 핵심 모듈",
@@ -394,9 +409,9 @@
             },
             en: {
                 badge_global: "Web3 Pioneer Special", up_to: "Up to", banner_desc: "HK-BANK High-Yield Deposit Module for Global Pioneers",
-                t_6m: "< 6 Months", sub_6m: "Short Term", t_1y: "1 Year", sub_1y: "Max Yield", t_2y: "2 Years", sub_2y: "Stable Growth", t_3y: "3 Years", sub_3y: "Top Tier",
+                t_6m: "< 1 Year", sub_6m: "Short Term", t_1y: "1 Year", sub_1y: "Max Yield", t_2y: "2 Years", sub_2y: "Stable Growth", t_3y: "3 Years", sub_3y: "Top Tier",
                 calc_title: "Interest Simulator", btn_deposit: "Deposit", btn_saving: "Saving", label_amount: "Deposit Amount (Pi / USD)", currency: "KRW",
-                label_period: "Select Period", p_6m: "< 6M", p_1y: "1Y", p_2y: "2Y", p_3y: "3Y",
+                label_period: "Select Period", p_6m: "< 1Y", p_1y: "1Y", p_2y: "2Y", p_3y: "3Y",
                 res_rate: "Annual Rate", res_before: "Gross Interest", res_tax: "Tax (15.4%)", res_total: "Estimated Net Return",
                 apply_btn: "Apply HK-BANK Product Now", notice: "* 8.5% early termination fee applies upon early withdrawal.",
                 mod_title: "HK WorldBank 10 Core Modules",
@@ -406,9 +421,9 @@
             },
             zh: {
                 badge_global: "Web3 先锋特惠", up_to: "最高", banner_desc: "面向全球先锋的 HK-BANK 高收益存款模块",
-                t_6m: "6个月以内", sub_6m: "短期存储", t_1y: "1年定期", sub_1y: "收益最大化", t_2y: "2年定期", sub_2y: "稳健增长", t_3y: "3年定期", sub_3y: "顶级特惠",
+                t_6m: "1年以内", sub_6m: "短期存储", t_1y: "1年定期", sub_1y: "收益最大化", t_2y: "2年定期", sub_2y: "稳健增长", t_3y: "3年定期", sub_3y: "顶级特惠",
                 calc_title: "利息计算模拟器", btn_deposit: "定期存款", btn_saving: "定期储蓄", label_amount: "存入金额 (Pi / CNY)", currency: "韩元",
-                label_period: "选择期限", p_6m: "6个月以内", p_1y: "1年", p_2y: "2年", p_3y: "3年",
+                label_period: "选择期限", p_6m: "1年以内", p_1y: "1年", p_2y: "2年", p_3y: "3年",
                 res_rate: "适用年利率", res_before: "税前总利息", res_tax: "利息税 (15.4%)", res_total: "预计到期实收金额",
                 apply_btn: "立即申请 HK-BANK 产品", notice: "* 提前支取时将扣除 8.5% 的提前解约手续费。",
                 mod_title: "HK WorldBank 十大核心模块",
@@ -418,12 +433,12 @@
             },
             ja: {
                 badge_global: "Web3 パイオニア特別枠", up_to: "最高", banner_desc: "グローバルパイオニアのためのHK-BANK高金利預金モジュール",
-                t_6m: "6ヶ月未満", sub_6m: "短期預金", t_1y: "1年満期", sub_1y: "収益最大化", t_2y: "2年満期", sub_2y: "安定成長", t_3y: "3年満期", sub_3y: "最高優遇",
+                t_6m: "1年未満", sub_6m: "短期預金", t_1y: "1年満期", sub_1y: "収益最大化", t_2y: "2年満期", sub_2y: "安定成長", t_3y: "3年満期", sub_3y: "最高優遇",
                 calc_title: "利息計算シミュレーター", btn_deposit: "定期預金", btn_saving: "定期積立", label_amount: "預入金額 (Pi / JPY)", currency: "KRW",
-                label_period: "期間選択", p_6m: "6ヶ月未満", p_1y: "1年", p_2y: "2年", p_3y: "3年",
+                label_period: "期間選択", p_6m: "1年未満", p_1y: "1年", p_2y: "2年", p_3y: "3年",
                 res_rate: "適用年利率", res_before: "税引前利息", res_tax: "利子所得税 (15.4%)", res_total: "満期時予想受取額",
                 apply_btn: "HK-BANK商品 即時加入", notice: "* 途中解約の場合、約定金利の8.5%の中途解約手数料が適用されます。",
-                mod_title: "HK WorldBank 10大コアモジュール",
+                mod_title: "HK WorldBank 10대 Core Modules",
                 m1: "ウォレット接続", m2: "送金", m3: "決済", m4: "預金", m5: "報酬", m6: "ベーシックインカム", m7: "スワップ", m8: "DEXスワップ", m9: "LPステーキング", m10: "テストPi",
                 bbini_title: "カスタマーAGI 삐니", bbini_badge: "60言語対応", bbini_desc: "24時間リアルタイムAI金融相談", bbini_btn: "相談する",
                 modal_title: "HK-BANK 口座開設申請", modal_name: "申込者氏名 (KYC名義)", m_type: "選択商品:", m_period: "契約期間:", m_rate: "適用金利:", m_amount: "申込金額:", modal_notice: "* 未認証ユーザーはテストPiモードで閲覧のみ可能です。", modal_submit: "KYC検証後、申請完了"
@@ -504,14 +519,10 @@
             document.getElementById('res-total').innerText = Math.round(totalReturn).toLocaleString() + ' 원';
         }
 
-        function triggerModule(name) {
-            alert('[' + name + '] 모듈이 실행되었습니다.\nHK WorldBank 글로벌 Web3 네트워크와 연결 중입니다.');
-        }
-
         function openApplyModal() {
             const amount = parseInt(document.getElementById('deposit-amount').value) || 0;
             document.getElementById('modal-product-type').innerText = currentType === 'deposit' ? '정기예금' : '정기적금';
-            document.getElementById('modal-period').innerText = currentPeriodYears < 1 ? '6개월 미만' : currentPeriodYears + '년';
+            document.getElementById('modal-period').innerText = currentPeriodYears < 1 ? '1년 미만' : currentPeriodYears + '년';
             document.getElementById('modal-rate').innerText = '연 ' + currentRate.toFixed(1) + '%';
             document.getElementById('modal-amount').innerText = amount.toLocaleString() + ' 원';
             document.getElementById('apply-modal').classList.remove('hidden');
@@ -543,8 +554,38 @@
             }
         }
 
+        const moduleDetails = {
+            1: { title: "1. 지갑연결 (Pi Direct Link)", desc: "파이 네트워크 메인넷 및 테스트넷 지갑과 안전하게 연동합니다. 암호화 서명을 통해 개인 자산을 보호하며 KYC 검증 상태를 실시간 체크합니다." },
+            2: { title: "2. 송금 (Global Transfer)", desc: "전 세계 HK-BANK 사용자 간 수수료 부담 없이 실시간으로 자산을 송금할 수 있습니다. 블록체인 네트워크를 통한 즉시 정산 프로세스입니다." },
+            3: { title: "3. 결제 (QR Payment)", desc: "온·오프라인 가맹점에서 QR코드 스캔 한 번으로 간편하고 안전하게 결제를 진행할 수 있습니다. 실시간 환율 자동 변환 지원." },
+            4: { title: "4. 예치 (High Yield Deposit)", desc: "최고 연 20.0%의 파격 금리 상품에 목돈을 예치하고 매칭된 이자 수익을 실시간으로 시뮬레이션 및 수령하는 모듈입니다." },
+            5: { title: "5. 보상 (Ecosystem Reward)", desc: "HK WorldBank 생태계 활성화 및 기여도에 따라 리소스를 제공받고 보상 토큰을 정산받는 프로세스입니다." },
+            6: { title: "6. 기본소득 (UBI 30%)", desc: "플랫폼 순이익의 30%를 재원으로 하여 모든 인증된 파이 개척자 및 회원들에게 기본소득(UBI)을 투명하게 분배하는 공익 환원 모듈입니다." },
+            7: { title: "7. 스왑 (Instant Exchange)", desc: "보유하고 있는 다양한 디지털 자산과 통화를 원클릭으로 빠르고 정확하게 교환(Swap)하는 기능입니다." },
+            8: { title: "8. DEX 스왑 (Decentralized P2P)", desc: "중개자 없는 탈중앙화 P2P 유동성 풀을 통해 사용자 간 자산을 직접 교환하고 LP 참여 수수료를 획득합니다." },
+            9: { title: "9. LP 스테이킹 (Liquidity Pool)", desc: "유동성 풀(LP)에 자산을 예치하고 발생하는 거래 수수료 수익 및 추가 스테이킹 리워드를 분배받는 고수익 모듈입니다." },
+            10: { title: "10. 테스트 파이 (Test Pi Sim)", desc: "실제 자산 투입 전 테스트 파이(Test Pi)를 활용하여 모든 예금, 적금, 송금 및 스왑 프로세스를 가상으로 시뮬레이션해 볼 수 있습니다." },
+            'bbini': { title: "고객센터 AGI 삐니 (60개국어 AI)", desc: "24시간 대기 중인 AGI 삐니가 60개국 언어로 즉시 금융 상담, 계좌 개설 안내, KYC 인증 및 트랜잭션 에러를 해결해 드립니다." }
+        };
+
+        function openModuleModal(modId) {
+            const data = moduleDetails[modId];
+            if(!data) return;
+            document.getElementById('mod-modal-title').innerText = data.title;
+            document.getElementById('mod-modal-body').innerHTML = `
+                <div class="bg-purple-950/80 p-3 rounded-xl border border-purple-800 space-y-2">
+                    <p class="text-white font-medium leading-relaxed">${data.desc}</p>
+                    <div class="text-[10px] text-yellow-400 font-bold pt-1">✓ HK-BANK Web3 실시간 프로세스 대기 중</div>
+                </div>
+            `;
+            document.getElementById('module-modal').classList.remove('hidden');
+        }
+
+        function closeModuleModal() {
+            document.getElementById('module-modal').classList.add('hidden');
+        }
+
         calculateInterest();
     </script>
 </body>
 </html>
-
