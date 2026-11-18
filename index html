@@ -40,7 +40,7 @@
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-amber-400 flex items-center justify-center font-black text-black text-lg shadow-lg">HK</div>
                 <div>
                     <span class="text-base font-extrabold tracking-tight bg-gradient-to-r from-amber-300 via-purple-200 to-white bg-clip-text text-transparent">HK-BANK</span>
-                    <span class="block text-[9px] text-amber-400/90 font-medium">Web3 Testnet Live</span>
+                    <span class="block text-[9px] text-amber-400/90 font-medium">10 Modules Live</span>
                 </div>
             </div>
             
@@ -74,7 +74,7 @@
                 가변형 파격 금리 <span class="text-amber-400 font-extrabold">최고 연 20.0%</span>
             </h2>
             <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                파이 개척자를 위한 차세대 디지털 금융 허브. 실시간 테스트 파이 시뮬레이션으로 지금 바로 경험하세요.
+                파이 개척자를 위한 차세대 디지털 금융 허브. 1년 미만 연 6.0% 우대 및 10대 모듈 실시간 가동!
             </p>
         </section>
 
@@ -144,7 +144,7 @@
             <div class="space-y-1.5 mb-5">
                 <label class="text-xs text-gray-300">약정 기간 선택 (가변 금리 적용)</label>
                 <div class="grid grid-cols-4 gap-2">
-                    <button onclick="setPeriod(0.5, 6.0)" id="period-6m" class="period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition">6개월<br><span class="text-amber-400 font-bold">6.0%</span></button>
+                    <button onclick="setPeriod(0.5, 6.0)" id="period-6m" class="period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition">1년 미만<br><span class="text-amber-400 font-bold">6.0%</span></button>
                     <button onclick="setPeriod(1, 13.0)" id="period-1y" class="period-btn py-2 text-xs rounded-xl border border-amber-400 bg-purple-700/80 text-amber-300 font-bold shadow-lg transition">1년<br><span>13.0%</span></button>
                     <button onclick="setPeriod(2, 16.0)" id="period-2y" class="period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition">2년<br><span class="text-amber-400 font-bold">16.0%</span></button>
                     <button onclick="setPeriod(3, 20.0)" id="period-3y" class="period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition">3년<br><span class="text-amber-400 font-bold">20.0%</span></button>
@@ -177,13 +177,13 @@
             <p class="text-[10px] text-gray-400 text-center mt-2">※ 시범 가동 모드: 중도 해지 시 8.5% 수수료 시뮬레이션이 적용됩니다.</p>
         </section>
 
-        <!-- 10 Core Modules Grid -->
+        <!-- 10 Core Modules Grid (Fully Active) -->
         <section class="space-y-3">
             <div class="flex justify-between items-center px-1">
                 <h3 class="font-bold text-sm text-purple-200 flex items-center gap-1.5">
-                    <i class="fas fa-cubes text-amber-400"></i> <span>HK-BANK 10대 핵심 모듈</span>
+                    <i class="fas fa-cubes text-amber-400"></i> <span>HK WorldBank 10대 핵심 모듈 (가동 중)</span>
                 </h3>
-                <span class="text-[10px] text-purple-400 font-medium">Testnet Ready</span>
+                <span class="text-[10px] text-amber-400 font-medium animate-pulse">● LIVE</span>
             </div>
 
             <div class="grid grid-cols-2 gap-2.5">
@@ -191,70 +191,70 @@
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-wallet text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">1. 지갑연결</div>
-                        <div class="text-[9px] text-gray-400">Pi Direct Link</div>
+                        <div class="text-[9px] text-amber-300">Pi Direct Link</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(2)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-paper-plane text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">2. 송금</div>
-                        <div class="text-[9px] text-gray-400">Global Transfer</div>
+                        <div class="text-[9px] text-amber-300">Global Transfer</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(3)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-qrcode text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">3. 결제</div>
-                        <div class="text-[9px] text-gray-400">QR Payment</div>
+                        <div class="text-[9px] text-amber-300">QR Payment</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(4)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-piggy-bank text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">4. 예치</div>
-                        <div class="text-[9px] text-gray-400">High Yield Deposit</div>
+                        <div class="text-[9px] text-amber-300">High Yield Deposit</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(5)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-gift text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">5. 보상</div>
-                        <div class="text-[9px] text-gray-400">Ecosystem Reward</div>
+                        <div class="text-[9px] text-amber-300">Ecosystem Reward</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(6)" class="glass-card p-3 rounded-xl border border-amber-500/40 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 bg-amber-400/5 group">
                     <div class="w-8 h-8 rounded-lg bg-amber-400/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-hand-holding-usd text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-amber-400">6. 기본소득</div>
-                        <div class="text-[9px] text-amber-200/70">30% UBI Return</div>
+                        <div class="text-[9px] text-amber-200">30% UBI Return</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(7)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-sync-alt text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">7. 스왑</div>
-                        <div class="text-[9px] text-gray-400">Instant Exchange</div>
+                        <div class="text-[9px] text-amber-300">Instant Exchange</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(8)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-exchange-alt text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">8. DEX 스왑</div>
-                        <div class="text-[9px] text-gray-400">Decentralized P2P</div>
+                        <div class="text-[9px] text-amber-300">Decentralized P2P</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(9)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-layer-group text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">9. LP 스테이킹</div>
-                        <div class="text-[9px] text-gray-400">Liquidity Pool</div>
+                        <div class="text-[9px] text-amber-300">Liquidity Pool</div>
                     </div>
                 </div>
                 <div onclick="openModuleModal(10)" class="glass-card p-3 rounded-xl border border-purple-900/50 hover:border-amber-400 cursor-pointer transition flex items-center space-x-3 group">
                     <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-amber-400 group-hover:scale-110 transition"><i class="fas fa-coins text-xs"></i></div>
                     <div>
                         <div class="text-xs font-bold text-white">10. 테스트 파이</div>
-                        <div class="text-[9px] text-gray-400">Test Pi Sim</div>
+                        <div class="text-[9px] text-amber-300">Test Pi Sim</div>
                     </div>
                 </div>
             </div>
@@ -267,214 +267,5 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-bold text-white flex items-center gap-1.5">
-                        <span>고객센터 AGI 삐니</span>
-                        <span class="px-1.5 py-0.2 rounded text-[9px] bg-purple-950 text-amber-300 border border-purple-700">60개국어</span>
-                    </div>
-                    <div class="text-[10px] text-gray-400">24/7 실시간 AI 금융 지원 시스템</div>
-                </div>
-            </div>
-            <button onclick="openModuleModal('bbini')" class="text-xs bg-purple-900 hover:bg-purple-800 text-amber-300 font-bold px-3 py-1.5 rounded-lg border border-purple-600/50 transition">
-                상담하기
-            </button>
-        </section>
+                    <div class="text-xs font-bold text-white flex items
 
-    </main>
-
-    <!-- Footer -->
-    <footer class="glass-card border-t border-purple-900/40 py-6 px-4 text-center mt-6">
-        <div class="max-w-md mx-auto space-y-2.5">
-            <div class="flex justify-center items-center space-x-4 text-gray-400 text-base">
-                <a href="https://youtube.com/@Hyekong2026" target="_blank" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
-                <a href="https://tiktok.com/@hyekong2026" target="_blank" class="hover:text-pink-400 transition"><i class="fab fa-tiktok"></i></a>
-                <a href="#" onclick="alert('HK-BANK Global Network Live')" class="hover:text-amber-400 transition"><i class="fas fa-globe"></i></a>
-            </div>
-            <div class="text-[11px] text-gray-400 space-y-1">
-                <p class="font-bold text-purple-300">HK-BANK Global Web3 Ecosystem</p>
-                <p>Support: <a href="mailto:support@hkwb.world" class="text-amber-400 underline">support@hkwb.world</a></p>
-                <p class="text-[10px] text-gray-400">© 2026 HK Group. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Application Modal -->
-    <div id="apply-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card max-w-sm w-full rounded-2xl p-5 border border-amber-400/40 space-y-4 shadow-2xl">
-            <div class="flex justify-between items-center border-b border-purple-800/80 pb-2">
-                <h4 class="font-bold text-amber-400 text-sm">HK-BANK 테스트 시뮬레이션 신청</h4>
-                <button onclick="closeApplyModal()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="text-gray-300 block mb-1">신청자 성명 (KYC 명의)</label>
-                    <input type="text" id="user-name" placeholder="이재완 (혜공)" class="w-full bg-[#120D1E] border border-purple-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-amber-400">
-                </div>
-                <div class="bg-purple-950/60 p-3 rounded-lg space-y-1.5 text-gray-300 border border-purple-900">
-                    <div class="flex justify-between"><span>선택 상품:</span> <span id="modal-product-type" class="text-amber-400 font-bold">정기예금</span></div>
-                    <div class="flex justify-between"><span>약정 기간:</span> <span id="modal-period" class="text-white font-bold">1년 (가변금리)</span></div>
-                    <div class="flex justify-between"><span>적용 금리:</span> <span id="modal-rate" class="text-amber-400 font-bold">연 13.0%</span></div>
-                    <div class="flex justify-between"><span>예치 금액:</span> <span id="modal-amount" class="text-white font-bold">10,000,000</span></div>
-                </div>
-                <div class="text-[10px] text-purple-300">
-                    * 테스트넷 환경이므로 가상 Test Pi로 즉시 시뮬레이션 가동됩니다.
-                </div>
-            </div>
-            <button onclick="submitApplication()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold py-2.5 rounded-lg text-xs transition shadow-lg">
-                테스트 파이 시뮬레이션 가동 완료
-            </button>
-        </div>
-    </div>
-
-    <!-- Module Modal -->
-    <div id="module-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card max-w-sm w-full rounded-2xl p-5 border border-purple-700 space-y-4 shadow-2xl">
-            <div class="flex justify-between items-center border-b border-purple-800 pb-2">
-                <h4 id="mod-modal-title" class="font-bold text-amber-400 text-sm">모듈 프로세스</h4>
-                <button onclick="closeModuleModal()" class="text-gray-400 hover:text-white"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="mod-modal-body" class="space-y-3 text-xs text-gray-300"></div>
-            <button onclick="closeModuleModal()" class="w-full bg-purple-700 hover:bg-purple-600 text-amber-200 font-bold py-2.5 rounded-lg text-xs transition">
-                확인 및 시뮬레이션 실행
-            </button>
-        </div>
-    </div>
-
-    <script>
-        let currentType = 'deposit';
-        let currentPeriodYears = 1;
-        let currentRate = 13.0;
-
-        function setProductType(type) {
-            currentType = type;
-            const depBtn = document.getElementById('type-deposit');
-            const savBtn = document.getElementById('type-saving');
-
-            if(type === 'deposit') {
-                depBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-amber-300 font-bold transition";
-                savBtn.className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
-            } else {
-                savBtn.className = "px-2.5 py-1 rounded-md bg-purple-600 text-amber-300 font-bold transition";
-                depBtn.className = "px-2.5 py-1 rounded-md text-gray-400 hover:text-white transition";
-            }
-            calculateInterest();
-        }
-
-        function setPeriod(years, rate) {
-            currentPeriodYears = years;
-            currentRate = rate;
-
-            const btns = ['period-6m', 'period-1y', 'period-2y', 'period-3y'];
-            btns.forEach(id => {
-                document.getElementById(id).className = "period-btn py-2 text-xs rounded-xl border border-purple-800 bg-[#120D1E] text-gray-300 font-medium transition";
-            });
-
-            let activeId = 'period-1y';
-            if(years === 0.5) activeId = 'period-6m';
-            if(years === 2) activeId = 'period-2y';
-            if(years === 3) activeId = 'period-3y';
-
-            document.getElementById(activeId).className = "period-btn py-2 text-xs rounded-xl border border-amber-400 bg-purple-700/80 text-amber-300 font-bold shadow-lg transition";
-            calculateInterest();
-        }
-
-        function addAmount(val) {
-            const input = document.getElementById('deposit-amount');
-            let current = parseInt(input.value) || 0;
-            input.value = current + val;
-            calculateInterest();
-        }
-
-        function calculateInterest() {
-            const amountInput = document.getElementById('deposit-amount');
-            let principal = parseFloat(amountInput.value) || 0;
-
-            document.getElementById('amount-display-val').innerText = principal.toLocaleString() + ' 원';
-
-            let interest = 0;
-            if(currentType === 'deposit') {
-                interest = principal * (currentRate / 100) * currentPeriodYears;
-            } else {
-                const months = currentPeriodYears * 12;
-                interest = principal * (currentRate / 100) * ((months + 1) / 24);
-            }
-
-            const tax = interest * 0.154;
-            const netInterest = interest - tax;
-            const totalReturn = principal + netInterest;
-
-            document.getElementById('res-rate').innerText = '연 ' + currentRate.toFixed(1) + '% (가변)';
-            document.getElementById('res-before-tax').innerText = Math.round(interest).toLocaleString() + ' 원';
-            document.getElementById('res-tax').innerText = '-' + Math.round(tax).toLocaleString() + ' 원';
-            document.getElementById('res-total').innerText = Math.round(totalReturn).toLocaleString() + ' 원';
-        }
-
-        function openApplyModal() {
-            const amount = parseInt(document.getElementById('deposit-amount').value) || 0;
-            document.getElementById('modal-product-type').innerText = currentType === 'deposit' ? '정기예금' : '정기적금';
-            document.getElementById('modal-period').innerText = (currentPeriodYears < 1 ? '6개월' : currentPeriodYears + '년') + ' (가변금리)';
-            document.getElementById('modal-rate').innerText = '연 ' + currentRate.toFixed(1) + '%';
-            document.getElementById('modal-amount').innerText = amount.toLocaleString() + ' 원';
-            document.getElementById('apply-modal').classList.remove('hidden');
-        }
-
-        function closeApplyModal() {
-            document.getElementById('apply-modal').classList.add('hidden');
-        }
-
-        function submitApplication() {
-            const name = document.getElementById('user-name').value || '이재완 (혜공)';
-            alert(name + ' 형님, HK-BANK 테스트 파이 시뮬레이션 가동이 성공적으로 완료되었습니다!');
-            closeApplyModal();
-        }
-
-        function switchTab(tabName) {
-            if(tabName === 'wallet') {
-                const status = document.getElementById('wallet-status');
-                if(status.innerText === '지갑연결') {
-                    status.innerText = '0x71C...8F9';
-                    alert('Pi Network Testnet Wallet Connected Successfully.');
-                } else {
-                    status.innerText = '지갑연결';
-                }
-            }
-        }
-
-        const moduleDetails = {
-            1: { title: "1. 지갑연결 (Pi Direct Link)", desc: "파이 네트워크 테스트넷 지갑과 암호화 서명으로 안전하게 연동하여 가상 자산을 관리합니다." },
-            2: { title: "2. 송금 (Global Transfer)", desc: "전 세계 개척자 간 수수료 없는 초고속 테스트넷 블록체인 송금 시뮬레이션." },
-            3: { title: "3. 결제 (QR Payment)", desc: "오프라인 가맹점 QR 스캔을 통한 간편 결제 및 실시간 환율 자동 연동 테스트." },
-            4: { title: "4. 예치 (High Yield Deposit)", desc: "가변 금리 반영 최고 연 20.0% 예·적금 상품 시뮬레이터 및 이자 수령 테스트." },
-            5: { title: "5. 보상 (Ecosystem Reward)", desc: "생태계 기여도에 따라 실시간으로 지급되는 리소스 및 토큰 보상 프로세스." },
-            6: { title: "6. 기본소득 (UBI 30%)", desc: "순이익의 30%를 활용해 모든 인증된 개척자에게 UBI를 분배하는 공익 환원 시뮬레이터." },
-            7: { title: "7. 스왑 (Instant Exchange)", desc: "디지털 자산과 법정화폐 간 원클릭 즉시 교환(Swap) 프로세스." },
-            8: { title: "8. DEX 스왑 (Decentralized P2P)", desc: "중개자 없는 P2P 유동성 풀에서 참여 수수료를 획득하는 탈중앙 거래 모듈." },
-            9: { title: "9. LP 스테이킹 (Liquidity Pool)", desc: "유동성 공급(LP) 예치를 통한 거래 수수료 수익 및 스테이킹 리워드 분배." },
-            10: { title: "10. 테스트 파이 (Test Pi Sim)", desc: "실제 자산 투입 전 모든 금융 모듈을 안전하게 검증하는 테스트 파이 가상 구동 환경." },
-            'bbini': { title: "고객센터 AGI 삐니 (60개국어)", desc: "24시간 대기 중인 AGI 삐니가 60개국 언어로 금융 상담 및 에러를 즉시 해결해 드립니다." }
-        };
-
-        function openModuleModal(modId) {
-            const data = moduleDetails[modId];
-            if(!data) return;
-            document.getElementById('mod-modal-title').innerText = data.title;
-            document.getElementById('mod-modal-body').innerHTML = `
-                <div class="bg-[#120D1E] p-3.5 rounded-xl border border-purple-900 space-y-2">
-                    <p class="text-white font-medium leading-relaxed">${data.desc}</p>
-                    <div class="text-[10px] text-amber-400 font-bold pt-1">✓ HK-BANK Testnet 실시간 가동 중</div>
-                </div>
-            `;
-            document.getElementById('module-modal').classList.remove('hidden');
-        }
-
-        function closeModuleModal() {
-            document.getElementById('module-modal').classList.add('hidden');
-        }
-
-        function changeLanguage(lang) {
-            // 언어 전환 확장 영역
-        }
-
-        calculateInterest();
-    </script>
-</body>
-</html>
