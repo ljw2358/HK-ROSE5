@@ -13,6 +13,7 @@
             --text-white: #ffffff;
             --text-gray: #a1a1aa;
             --border-color: #27272a;
+            --success-green: #10b981;
         }
 
         * {
@@ -62,6 +63,12 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .lang-select {
             background-color: var(--card-bg);
             color: var(--text-white);
@@ -71,6 +78,27 @@
             font-size: 14px;
             outline: none;
             cursor: pointer;
+        }
+
+        .auth-badge {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-green);
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid var(--success-green);
+        }
+
+        .auth-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success-green);
         }
 
         /* 메인 배너 */
@@ -105,7 +133,7 @@
             color: var(--text-gray);
         }
 
-        /* 금리 요약 카드 */
+        /* 금리 요약 카드 (요청하신 이율 적용) */
         .rate-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -132,7 +160,7 @@
             color: var(--accent-yellow);
         }
 
-        /* 시뮬레이터 카운터 */
+        /* 이자 계산 시뮬레이터 */
         .simulator {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -262,9 +290,14 @@
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
 
-        /* 10대 핵심 모듈 */
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* 10대 핵심 모듈 (클릭 가능 인터랙티브 카드) */
         .modules-section {
             margin-top: 10px;
         }
@@ -289,6 +322,18 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 12px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+            background-color: #1e1830;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
         }
 
         .module-card .num {
@@ -302,6 +347,15 @@
             font-size: 14px;
             font-weight: bold;
             margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .module-card .title::after {
+            content: '↗';
+            color: var(--text-gray);
+            font-size: 12px;
         }
 
         .module-card .desc {
@@ -321,30 +375,62 @@
         footer p {
             margin-bottom: 4px;
         }
+
+        /* 알림 토스트 */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #27272a;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+            animation: fadeInOut 2s ease-in-out;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-purple);
+            z-index: 1000;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            15% { opacity: 1; transform: translate(-50%, 0); }
+            85% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 헤더 (우측 상단 언어 선택 드롭다운 배치) -->
+    <!-- 헤더: 우측 상단 연결 버튼 제거 후 언어 드롭다운 및 KYC/KYB 인증 뱃지 배치 -->
     <header>
         <div class="logo">HK <span>HK-BANK</span></div>
-        <select class="lang-select">
-            <option value="ko">한국어</option>
-            <option value="en">English</option>
-            <option value="zh">中文</option>
-            <option value="ja">日本語</option>
-        </select>
+        <div class="header-controls">
+            <div class="auth-badge" title="KYC 개인인증 및 KYB 기업인증 완료">
+                <div class="auth-pulse"></div>
+                KYC / KYB 인증완료
+            </div>
+            <select class="lang-select" onchange="changeLanguage(this.value)">
+                <option value="ko">한국어</option>
+                <option value="en">English</option>
+                <option value="zh">中文</option>
+                <option value="ja">日本語</option>
+            </select>
+        </div>
     </header>
 
     <!-- 메인 배너 -->
     <div class="banner">
         <span class="badge">Web3 파이 금융 특화</span>
-        <h1>최고 연 18.0%</h1>
-        <p>파이 생태계를 위한 HK-BANK 예금 수익률</p>
+        <h1 id="banner-title">최고 연 18.0%</h1>
+        <p id="banner-desc">파이 생태계를 위한 HK-BANK 예금 수익률</p>
     </div>
 
-    <!-- 수정된 이율 구간 요약 -->
+    <!-- 수정된 이율 구간 요약 (6개월 미만 6.0% / 1년 미만 12.0% / 1년 이상 15.0% / 2년 이상 18.0%) -->
     <div class="rate-grid">
         <div class="rate-card">
             <div class="label">6개월 미만</div>
@@ -415,63 +501,63 @@
             </div>
         </div>
 
-        <button class="submit-btn">HK-BANK 상품 즉시 가입하기</button>
+        <button class="submit-btn" onclick="triggerAction('HK-BANK 상품 가입')">HK-BANK 상품 즉시 가입하기</button>
     </div>
 
-    <!-- HK WorldBank 10대 핵심 모듈 -->
+    <!-- HK WorldBank 10대 핵심 모듈 (클릭 및 연동 기능 포함) -->
     <div class="modules-section">
         <div class="section-title">🌐 HK WorldBank 10대 핵심 모듈</div>
         <div class="module-grid">
-            <div class="module-card">
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('지갑연결 모듈 이동')">
                 <div class="num">1. 지갑연결</div>
                 <div class="title">Wallet Connect</div>
                 <div class="desc">Pi 지갑 안전 연동</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('송금 모듈 이동')">
                 <div class="num">2. 송금</div>
                 <div class="title">Transfer</div>
                 <div class="desc">초고속 글로벌 P2P</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('결제 모듈 이동')">
                 <div class="num">3. 결제</div>
                 <div class="title">Payment</div>
                 <div class="desc">온/오프라인 QR 결제</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('예치 모듈 이동')">
                 <div class="num">4. 예치</div>
                 <div class="title">Deposit</div>
                 <div class="desc">최고 연 18% 최고 수익</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('보상 모듈 이동')">
                 <div class="num">5. 보상</div>
                 <div class="title">Reward</div>
                 <div class="desc">생태계 기여 기여금</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('기본소득 모듈 이동')">
                 <div class="num">6. 기본소득</div>
                 <div class="title">UBI</div>
                 <div class="desc">순익 30% UBI 지급</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('토큰스왑 모듈 이동')">
                 <div class="num">7. 토큰스왑</div>
                 <div class="title">Token Swap</div>
                 <div class="desc">자산 간 즉시 교환</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('DEX 모듈 이동')">
                 <div class="num">8. DEX 스왑</div>
                 <div class="title">DEX Swap</div>
                 <div class="desc">탈중앙화 P2P 거래</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('스테이킹 모듈 이동')">
                 <div class="num">9. LP 스테이킹</div>
                 <div class="title">LP Staking</div>
                 <div class="desc">유동성 공급 추가 수익</div>
-            </div>
-            <div class="module-card">
+            </a>
+            <a href="javascript:void(0)" class="module-card" onclick="triggerAction('PI 수량 모듈 이동')">
                 <div class="num">10. PI 수량</div>
                 <div class="title">PI Balance</div>
                 <div class="desc">Real-time PI 연동</div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -483,10 +569,141 @@
     </footer>
 </div>
 
+<!-- 알림 토스트 메시지 -->
+<div id="toast" class="toast"></div>
+
 <script>
     let currentAmount = 10000000;
     let currentRate = 12.0;
-    let currentYears = 1.0;
+    let currentYears = 0.99;
+
+    // 60개국어 확장 지원용 다국어 팩
+    const translations = {
+        ko: {
+            bannerBadge: "Web3 파이 금융 특화",
+            bannerTitle: "최고 연 18.0%",
+            bannerDesc: "파이 생태계를 위한 HK-BANK 예금 수익률",
+            simTitle: "📊 이자 계산 시뮬레이터",
+            depAmount: "예치 금액 (PI / KRW)",
+            plus1M: "+100만", plus5M: "+500만", plus10M: "+1,000만", reset: "초기화",
+            termSelect: "약정 기간 선택",
+            joinBtn: "HK-BANK 상품 즉시 가입하기",
+            modulesTitle: "🌐 HK WorldBank 10대 핵심 모듈",
+            modules: [
+                { num: "1. 지갑연결", title: "Wallet Connect", desc: "Pi 지갑 안전 연동" },
+                { num: "2. 송금", title: "Transfer", desc: "초고속 글로벌 P2P" },
+                { num: "3. 결제", title: "Payment", desc: "온/오프라인 QR 결제" },
+                { num: "4. 예치", title: "Deposit", desc: "최고 연 18% 최고 수익" },
+                { num: "5. 보상", title: "Reward", desc: "생태계 기여 기여금" },
+                { num: "6. 기본소득", title: "UBI", desc: "순익 30% UBI 지급" },
+                { num: "7. 토큰스왑", title: "Token Swap", desc: "자산 간 즉시 교환" },
+                { num: "8. DEX 스왑", title: "DEX Swap", desc: "탈중앙화 P2P 거래" },
+                { num: "9. LP 스테이킹", title: "LP Staking", desc: "유동성 공급 추가 수익" },
+                { num: "10. PI 수량", title: "PI Balance", desc: "Real-time PI 연동" }
+            ]
+        },
+        en: {
+            bannerBadge: "Web3 Pi Finance Specialized",
+            bannerTitle: "Up to 18.0% APY",
+            bannerDesc: "HK-BANK Deposit Yields for Pi Ecosystem",
+            simTitle: "📊 Interest Calculator",
+            depAmount: "Deposit Amount (PI / KRW)",
+            plus1M: "+1M", plus5M: "+5M", plus10M: "+10M", reset: "Reset",
+            termSelect: "Select Term",
+            joinBtn: "Join HK-BANK Product Now",
+            modulesTitle: "🌐 HK WorldBank Top 10 Core Modules",
+            modules: [
+                { num: "1. Connect", title: "Wallet Connect", desc: "Secure Pi Wallet Link" },
+                { num: "2. Transfer", title: "Transfer", desc: "High-speed Global P2P" },
+                { num: "3. Payment", title: "Payment", desc: "Online/Offline QR Pay" },
+                { num: "4. Deposit", title: "Deposit", desc: "Up to 18% Max Yield" },
+                { num: "5. Reward", title: "Reward", desc: "Ecosystem Contribution" },
+                { num: "6. UBI", title: "UBI", desc: "30% Net Profit Distribution" },
+                { num: "7. Swap", title: "Token Swap", desc: "Instant Asset Exchange" },
+                { num: "8. DEX", title: "DEX Swap", desc: "Decentralized P2P Trading" },
+                { num: "9. Staking", title: "LP Staking", desc: "Liquidity Provider Yield" },
+                { num: "10. Balance", title: "PI Balance", desc: "Real-time PI Integration" }
+            ]
+        },
+        zh: {
+            bannerBadge: "Web3 Pi金融专区",
+            bannerTitle: "最高年化 18.0%",
+            bannerDesc: "专为Pi生态打造的HK-BANK存款收益率",
+            simTitle: "📊 利息计算模拟器",
+            depAmount: "存款金额 (PI / KRW)",
+            plus1M: "+100万", plus5M: "+500万", plus10M: "+1000万", reset: "重置",
+            termSelect: "选择存款期限",
+            joinBtn: "立即加入HK-BANK产品",
+            modulesTitle: "🌐 HK WorldBank 十大核心模块",
+            modules: [
+                { num: "1. 钱包连接", title: "Wallet Connect", desc: "Pi钱包安全联动" },
+                { num: "2. 转账", title: "Transfer", desc: "超高速全球P2P" },
+                { num: "3. 支付", title: "Payment", desc: "线上/线下QR支付" },
+                { num: "4. 存款", title: "Deposit", desc: "最高18%高额收益" },
+                { num: "5. 奖励", title: "Reward", desc: "生态系统贡献奖金" },
+                { num: "6. 基本收入", title: "UBI", desc: "净利润30% UBI派发" },
+                { num: "7. 代币兑换", title: "Token Swap", desc: "资产间即时兑换" },
+                { num: "8. DEX兑换", title: "DEX Swap", desc: "去中心化P2P交易" },
+                { num: "9. LP质押", title: "LP Staking", desc: "流动性提供额外收益" },
+                { num: "10. PI余额", title: "PI Balance", desc: "实时PI数据联动" }
+            ]
+        },
+        ja: {
+            bannerBadge: "Web3パイ金融特化",
+            bannerTitle: "最高年利 18.0%",
+            bannerDesc: "パイエコシステム向けHK-BANK預金利回り",
+            simTitle: "📊 利息計算シミュレーター",
+            depAmount: "預託金額 (PI / KRW)",
+            plus1M: "+100万", plus5M: "+500万", plus10M: "+1,000万", reset: "リセット",
+            termSelect: "期間を選択",
+            joinBtn: "HK-BANK商品に今すぐ申し込む",
+            modulesTitle: "🌐 HK WorldBank 10大コアモジュール",
+            modules: [
+                { num: "1. ウォレット接続", title: "Wallet Connect", desc: "Piウォレット安全連携" },
+                { num: "2. 送金", title: "Transfer", desc: "超高速グローバルP2P" },
+                { num: "3. 決済", title: "Payment", desc: "オンライン/オフラインQR決済" },
+                { num: "4. 預金", title: "Deposit", desc: "最高年利18%の収益" },
+                { num: "5. 報酬", title: "Reward", desc: "エコシステム貢献報酬" },
+                { num: "6. ベーシックインカム", title: "UBI", desc: "純利益30% UBI支給" },
+                { num: "7. トークンスワップ", title: "Token Swap", desc: "資産間即時交換" },
+                { num: "8. DEXスワップ", title: "DEX Swap", desc: "分散型P2P取引" },
+                { num: "9. LPステーキング", title: "LP Staking", desc: "流動性提供追加収益" },
+                { num: "10. PI残高", title: "PI Balance", desc: "リアルタイムPI連携" }
+            ]
+        }
+    };
+
+    function changeLanguage(lang) {
+        const data = translations[lang] || translations.ko;
+        
+        document.querySelector('.banner .badge').innerText = data.bannerBadge;
+        document.getElementById('banner-title').innerText = data.bannerTitle;
+        document.getElementById('banner-desc').innerText = data.bannerDesc;
+        
+        document.querySelector('.sim-title').innerText = data.simTitle;
+        document.querySelector('.input-label').innerText = data.depAmount;
+        document.querySelector('.period-selector').previousElementSibling.innerText = data.termSelect;
+        
+        const quickBtns = document.querySelectorAll('.quick-btn');
+        quickBtns[0].innerText = data.plus1M;
+        quickBtns[1].innerText = data.plus5M;
+        quickBtns[2].innerText = data.plus10M;
+        quickBtns[3].innerText = data.reset;
+        
+        document.querySelector('.submit-btn').innerText = data.joinBtn;
+        document.querySelector('.section-title').innerText = data.modulesTitle;
+
+        const cards = document.querySelectorAll('.module-card');
+        data.modules.forEach((mod, index) => {
+            if (cards[index]) {
+                cards[index].querySelector('.num').innerText = mod.num;
+                cards[index].querySelector('.title').innerText = mod.title;
+                cards[index].querySelector('.desc').innerText = mod.desc;
+            }
+        });
+
+        showToast(`${lang.toUpperCase()} 언어로 전환되었습니다.`);
+    }
 
     function updateCalc() {
         document.getElementById('amount').value = currentAmount.toLocaleString();
@@ -517,6 +734,19 @@
         currentYears = years;
         currentRate = rate;
         updateCalc();
+    }
+
+    function triggerAction(actionName) {
+        showToast(`[${actionName}] 기능이 실행되었습니다.`);
+    }
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.innerText = message;
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 2000);
     }
 
     // 초기 실행
