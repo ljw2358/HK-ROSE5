@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HK-WORLD | HK WorldBank</title>
+  <title>HK WorldBank | hkwb.world</title>
   <style>
     :root {
-      --bg: #070410;
-      --surface: #130b26;
-      --surface-2: #1c1136;
-      --surface-3: #261848;
-      --border: rgba(167, 139, 250, 0.22);
-      --text: #f8f5ff;
-      --muted: #b8acd6;
-      --accent: #8b5cf6;
+      --bg: #070512;
+      --surface: #120d26;
+      --surface-2: #1b1338;
+      --surface-3: #24194a;
+      --border: rgba(167, 139, 250, 0.24);
+      --text: #f8f6ff;
+      --muted: #b8aed6;
+      --accent: #7c3aed;
       --accent-2: #22d3ee;
       --gold: #f59e0b;
       --ok: #22c55e;
@@ -23,10 +23,13 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-      background: radial-gradient(circle at 20% 0%, rgba(139, 92, 246, 0.18), var(--bg) 55%);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(124, 58, 237, 0.22), transparent 45%),
+        radial-gradient(circle at 85% 8%, rgba(34, 211, 238, 0.14), transparent 40%),
+        var(--bg);
       color: var(--text);
-      line-height: 1.55;
-      padding-bottom: 56px;
+      line-height: 1.58;
+      padding-bottom: 64px;
     }
     a { color: inherit; text-decoration: none; }
     button, input, select {
@@ -42,11 +45,11 @@
     input:focus, select:focus { border-color: var(--accent-2); }
     button {
       cursor: pointer;
-      background: linear-gradient(135deg, var(--accent), #6d28d9);
+      background: linear-gradient(135deg, var(--accent), #5b21b6);
       border: none;
       font-weight: 700;
     }
-    button:hover { filter: brightness(1.06); }
+    button:hover { filter: brightness(1.07); }
     button.ghost {
       background: var(--surface-2);
       border: 1px solid var(--border);
@@ -60,32 +63,43 @@
       border: 1px solid var(--border);
       font-weight: 600;
     }
-    .container { max-width: 1040px; margin: 0 auto; padding: 18px 16px; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 18px 16px; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
     .muted { color: var(--muted); font-size: 13px; }
 
-    /* Header */
+    /* Top Header */
     header {
       position: sticky; top: 0; z-index: 30;
       backdrop-filter: blur(12px);
-      background: rgba(7, 4, 16, 0.9);
+      background: rgba(7, 5, 18, 0.9);
       border-bottom: 1px solid var(--border);
     }
     .header-inner {
-      max-width: 1040px; margin: 0 auto; padding: 13px 16px;
+      max-width: 1060px; margin: 0 auto; padding: 12px 16px;
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
     }
-    .brand-title { font-size: 21px; font-weight: 900; letter-spacing: 0.6px; color: #f5eaff; }
-    .ref-id { font-size: 12px; color: var(--accent-2); font-weight: 700; margin-top: 2px; }
-    .header-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .brand-title { font-size: 20px; font-weight: 900; letter-spacing: 0.4px; color: #f6eeff; }
+    .brand-sub { font-size: 12px; color: var(--accent-2); font-weight: 700; margin-top: 2px; }
+    .header-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .pill {
       padding: 6px 11px; border-radius: 999px; font-size: 12px; font-weight: 700;
       background: var(--surface-2); border: 1px solid var(--border);
-      display: inline-flex; align-items: center; gap: 5px;
+      display: inline-flex; align-items: center; gap: 6px;
     }
     .pill.verified { color: var(--ok); border-color: rgba(34, 197, 94, 0.45); }
     .pill.browse { color: var(--warn); border-color: rgba(251, 191, 36, 0.45); }
     .pill.net { color: var(--accent-2); border-color: rgba(34, 211, 238, 0.4); }
+
+    /* Sub Nav */
+    .subnav {
+      max-width: 1060px; margin: 12px auto 0; padding: 0 16px;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .subnav a {
+      padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+    }
+    .subnav a:hover { color: var(--text); border-color: var(--accent-2); }
 
     /* Cards */
     .card {
@@ -99,20 +113,43 @@
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
       gap: 10px; margin-bottom: 14px;
     }
-    .section-title { font-size: 17px; font-weight: 800; }
+    .section-title { font-size: 18px; font-weight: 800; }
 
-    /* Gateway */
-    .gateway-top {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(18, 13, 38, 0.96) 55%, rgba(34, 211, 238, 0.1));
+      border-color: rgba(196, 181, 253, 0.3);
     }
-    .gateway-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-    .api-box {
+    .hero-top-tag {
+      display: inline-block; padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      background: rgba(124, 58, 237, 0.24); border: 1px solid var(--border); color: #e9d5ff;
+      margin-bottom: 10px;
+    }
+    .hero h1 { font-size: 28px; font-weight: 900; line-height: 1.28; margin-bottom: 10px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+    /* Gateway & API */
+    .gate-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .gate-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+    .api-row {
       margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
       display: grid; grid-template-columns: 1fr auto auto; gap: 10px;
     }
-    @media (max-width: 720px) { .api-box { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { .api-row { grid-template-columns: 1fr; } }
 
-    /* 2x5 Module Grid */
+    /* Pinny AI Box */
+    .chat-log {
+      max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+      padding: 12px; border-radius: 12px; background: rgba(7, 5, 18, 0.72); border: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .msg { padding: 10px 13px; border-radius: 11px; font-size: 13px; max-width: 90%; white-space: pre-line; }
+    .msg.bot { background: var(--surface-2); border: 1px solid var(--border); align-self: flex-start; }
+    .msg.user { background: rgba(124, 58, 237, 0.42); align-self: flex-end; }
+    .chat-input-row { display: flex; gap: 8px; }
+    .chat-input-row input { flex: 1; }
+
+    /* 2x5 Core Modules */
     .grid-2x5 {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -124,10 +161,7 @@
       padding: 14px; border-radius: 12px; text-align: left;
       background: var(--surface-2); border: 1px solid var(--border);
     }
-    .mod-btn.active {
-      border-color: var(--accent-2);
-      background: rgba(139, 92, 246, 0.22);
-    }
+    .mod-btn.active { border-color: var(--accent-2); background: rgba(124, 58, 237, 0.24); }
     .mod-num { font-size: 11px; color: var(--accent-2); font-weight: 800; }
     .mod-name { font-size: 14px; font-weight: 800; }
     .mod-sub { font-size: 11px; color: var(--muted); }
@@ -135,7 +169,7 @@
     /* Workspace */
     .workspace {
       margin-top: 14px; padding: 18px; border-radius: 14px;
-      background: rgba(7, 4, 16, 0.72); border: 1px solid var(--border);
+      background: rgba(7, 5, 18, 0.74); border: 1px solid var(--border);
     }
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-top: 12px; }
     .field { display: flex; flex-direction: column; gap: 6px; }
@@ -158,13 +192,13 @@
       background: var(--surface-2); border: 1px solid var(--border); font-size: 13px;
     }
 
-    /* Profit Allocation */
+    /* UBI & Profit Allocation */
     .alloc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     @media (max-width: 720px) { .alloc-grid { grid-template-columns: 1fr; } }
     .alloc-item { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
     .alloc-pct { font-size: 22px; font-weight: 900; color: var(--accent-2); }
 
-    /* Core Policy Archive Accordion */
+    /* Archive Accordion */
     .acc-header {
       width: 100%; display: flex; justify-content: space-between; align-items: center;
       background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
@@ -184,19 +218,6 @@
     }
     .acc-body.open { display: block; }
 
-    /* AI Pinny */
-    .quick-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-    .chat-log {
-      max-height: 250px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
-      padding: 12px; border-radius: 12px; background: rgba(7, 4, 16, 0.72); border: 1px solid var(--border);
-      margin-bottom: 10px;
-    }
-    .msg { padding: 10px 12px; border-radius: 11px; font-size: 13px; max-width: 90%; white-space: pre-line; }
-    .msg.bot { background: var(--surface-2); border: 1px solid var(--border); align-self: flex-start; }
-    .msg.user { background: rgba(139, 92, 246, 0.4); align-self: flex-end; }
-    .chat-row { display: flex; gap: 8px; }
-    .chat-row input { flex: 1; }
-
     /* Social & Footer */
     .social-row { display: flex; flex-wrap: wrap; gap: 10px; }
     .social-link {
@@ -205,7 +226,7 @@
     }
     .social-link:hover { border-color: var(--accent-2); }
     footer {
-      max-width: 1040px; margin: 24px auto 0; padding: 16px;
+      max-width: 1060px; margin: 24px auto 0; padding: 16px;
       border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;
       display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px;
     }
@@ -215,10 +236,11 @@
   <header>
     <div class="header-inner">
       <div>
-        <div class="brand-title">HK-WORLD</div>
-        <div class="ref-id">추천인 ID: ljw2358</div>
+        <div class="brand-title">HK WorldBank</div>
+        <div class="brand-sub">추천인 ID: ljw2358 · hkwb.world</div>
       </div>
-      <div class="header-controls">
+      <div class="header-right">
+        <span class="muted">support@hkwb.world</span>
         <select id="langSelect" aria-label="60개국어 선택"></select>
         <select id="netSelector" aria-label="네트워크 선택" onchange="switchNetwork(this.value)">
           <option value="TESTNET" selected>Pi Testnet (테스트넷)</option>
@@ -229,31 +251,77 @@
     </div>
   </header>
 
+  <nav class="subnav" aria-label="주요 섹션 이동">
+    <a href="#sec-pinny">1. 고객센터 AGI '삐니'</a>
+    <a href="#sec-modules">2. 10대 핵심 모듈</a>
+    <a href="#sec-ubi">3. UBI · 순이익 배분</a>
+    <a href="#sec-archive">4. 핵심 정책 아카이브</a>
+    <a href="#sec-channels">5. 공식 채널</a>
+  </nav>
+
   <main class="container">
-    <!-- 1. HK-BANK 관문 & KYC/KYB & 백엔드 API -->
+    <!-- 히어로 -->
+    <section class="card hero">
+      <div class="hero-top-tag">공식 릴리즈 · 디지털 뱅킹 &amp; 사회환원 플랫폼 (hkwb.world)</div>
+      <h1>인류와 기술이 공존하는 차세대 디지털 금융 혁신</h1>
+      <p class="muted">
+        순이익 최대 60% 투명한 사회환원(UBI 30% · HK 사회재단 최대 30% · 경영비 30%), 실시간 고객센터 AGI '삐니', 그리고 10대 분산 연동망이 당신의 자산을 안전하고 체계적으로 관리합니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#sec-modules"><button>10대 핵심 모듈 실행</button></a>
+        <a href="#sec-pinny"><button class="ghost">AGI 삐니와 대화하기</button></a>
+      </div>
+    </section>
+
+    <!-- 관문 & 인증 & 백엔드 API -->
     <section class="card">
-      <div class="gateway-top">
+      <div class="gate-row">
         <div>
-          <div class="section-title" style="margin-bottom:3px;">HK-BANK 관문 &amp; 개척자 인증</div>
+          <div class="section-title" style="margin-bottom:3px;">HK-BANK 관문 &amp; 파이 개척자 인증</div>
           <div id="authDesc" class="muted">KYC/KYB 미인증 시 둘러보기 모드로 제공됩니다. 인증 완료 후 실거래 및 6자리 인증 절차가 활성화됩니다.</div>
         </div>
-        <div class="gateway-actions">
+        <div class="gate-btns">
           <button class="ghost" onclick="enterFromHkBank()">HK-BANK 출입문 진입</button>
           <button class="ghost" onclick="setVerification(false)">둘러보기 모드</button>
           <button onclick="setVerification(true)">KYC/KYB 인증 완료</button>
         </div>
       </div>
-      <div class="api-box">
+      <div class="api-row">
         <input type="text" id="apiUrlInput" placeholder="백엔드 API URL (예: https://testnet.api.hkwb.world/v1)" />
         <button class="ghost" onclick="testApiConnection()">API 연결 테스트</button>
         <button onclick="saveApiUrl()">URL 저장</button>
       </div>
     </section>
 
-    <!-- 2. 10대 핵심 모듈 (2x5 그리드) -->
-    <section class="card">
+    <!-- 1. 고객센터 AGI '삐니' -->
+    <section id="sec-pinny" class="card">
       <div class="section-head">
-        <div class="section-title">10대 핵심 모듈 (2×5 분산 연동망)</div>
+        <div class="section-title">1. 고객센터 AGI '삐니'</div>
+        <span class="pill net">실시간 정책·금리·보안 안내</span>
+      </div>
+      <p class="muted" style="margin-bottom:10px;">
+        단 한 번의 터치로 원하는 정보를 빠르게 수령하는 즉시 소통형 AI 어시스턴트입니다.
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">
+        <button class="chip" onclick="askQuick('예치와 LP 스테이킹 이율 및 중도해지 기준 알려줘')">예치·스테이킹 금리</button>
+        <button class="chip" onclick="askQuick('6자리 인증번호와 KYC/KYB 둘러보기 설명해줘')">6자리 인증 · KYC/KYB</button>
+        <button class="chip" onclick="askQuick('순이익 배분과 UBI, HK 사회재단 활용 기준 알려줘')">UBI · 순이익 배분</button>
+        <button class="chip" onclick="askQuick('토큰스왑과 DEX 스왑 차이 알려줘')">토큰스왑 · DEX 스왑</button>
+        <button class="chip" onclick="askQuick('테스트넷 검증 후 메인넷 전환 단계 알려줘')">테스트넷 → 메인넷</button>
+      </div>
+      <div id="chatLog" class="chat-log">
+        <div class="msg bot">안녕하세요, 삐니입니다. HK WorldBank의 10대 핵심 모듈, 예치·LP 스테이킹 금리(8.5% / 15.5% / 19% / 24%), 중도해지(8.5%), 6자리 인증번호, KYC/KYB 및 둘러보기 모드, 순이익 배분(UBI 30% · 경영비 30% · HK 사회재단 최대 30%)까지 빠르고 명확하게 안내해 드립니다.</div>
+      </div>
+      <div class="chat-input-row">
+        <input id="chatInput" type="text" placeholder="삐니에게 질문하기 (예: 예치 이율 확인, 추천인 ID, 사회환원 등)" onkeydown="if(event.key==='Enter') sendChat()" />
+        <button onclick="sendChat()">전송</button>
+      </div>
+    </section>
+
+    <!-- 2. 10대 핵심 모듈 (2x5 그리드) -->
+    <section id="sec-modules" class="card">
+      <div class="section-head">
+        <div class="section-title">2. 10대 핵심 모듈 (2×5 분산 연동망)</div>
         <span id="netBadge" class="pill net">네트워크: TESTNET</span>
       </div>
       <div class="grid-2x5" id="moduleGrid"></div>
@@ -267,9 +335,12 @@
       </div>
     </section>
 
-    <!-- 3. 순이익 배분 구조 -->
-    <section class="card">
-      <div class="section-title" style="margin-bottom:12px;">순이익 배분 구조</div>
+    <!-- 3. UBI · 순이익 배분 구조 -->
+    <section id="sec-ubi" class="card">
+      <div class="section-head">
+        <div class="section-title">3. UBI · 순이익 배분 구조</div>
+        <span class="muted">순이익 기준 투명 분배</span>
+      </div>
       <div class="alloc-grid">
         <div class="alloc-item">
           <div class="alloc-pct">30%</div>
@@ -290,39 +361,17 @@
     </section>
 
     <!-- 4. 핵심 정책 아카이브 (제목만 노출, 클릭 시 6개 항목 펼침) -->
-    <section class="card">
+    <section id="sec-archive" class="card">
       <button id="archiveToggle" class="acc-header" onclick="toggleArchive()" aria-expanded="false">
-        <span>핵심 정책 아카이브</span>
+        <span>4. 핵심 정책 아카이브</span>
         <span id="archiveIcon">+</span>
       </button>
       <div id="archiveList" class="acc-list"></div>
     </section>
 
-    <!-- 5. 고객센터 AI 삐니 -->
-    <section class="card">
-      <div class="section-head">
-        <div class="section-title">고객센터 AI · 삐니</div>
-        <span class="pill net">정책 · 금리 · 보안 안내</span>
-      </div>
-      <div class="quick-chips">
-        <button class="chip" onclick="askQuick('예치와 LP 스테이킹 이율 및 중도해지 기준 알려줘')">예치·스테이킹 금리</button>
-        <button class="chip" onclick="askQuick('6자리 인증번호와 KYC/KYB 둘러보기 설명해줘')">6자리 인증 · KYC/KYB</button>
-        <button class="chip" onclick="askQuick('순이익 배분과 HK 사회재단 활용 기준 알려줘')">순이익 배분 · 재단</button>
-        <button class="chip" onclick="askQuick('토큰스왑과 DEX 스왑 차이 알려줘')">토큰스왑 · DEX 스왑</button>
-        <button class="chip" onclick="askQuick('테스트넷 검증 후 메인넷 전환 단계 알려줘')">테스트넷 → 메인넷</button>
-      </div>
-      <div id="chatLog" class="chat-log">
-        <div class="msg bot">안녕하세요, 삐니입니다. HK-WORLD 10대 모듈, 예치·LP 스테이킹 금리(8.5% / 15.5% / 19% / 24%), 중도해지(8.5%), 6자리 인증번호, KYC/KYB 및 둘러보기 모드, 순이익 배분, 테스트넷·메인넷 전환까지 안내해 드립니다.</div>
-      </div>
-      <div class="chat-row">
-        <input id="chatInput" type="text" placeholder="궁금한 점을 입력하세요" onkeydown="if(event.key==='Enter') sendChat()" />
-        <button onclick="sendChat()">전송</button>
-      </div>
-    </section>
-
-    <!-- 6. 공식 채널 -->
-    <section class="card">
-      <div class="section-title" style="margin-bottom:12px;">공식 채널</div>
+    <!-- 5. 공식 채널 -->
+    <section id="sec-channels" class="card">
+      <div class="section-title" style="margin-bottom:12px;">5. 공식 채널</div>
       <div class="social-row">
         <a class="social-link" href="https://www.youtube.com/@Hyekong2026" target="_blank" rel="noopener noreferrer">YouTube (@Hyekong2026)</a>
         <a class="social-link" href="https://www.tiktok.com/@hyekong2026" target="_blank" rel="noopener noreferrer">TikTok (@hyekong2026)</a>
@@ -331,7 +380,7 @@
   </main>
 
   <footer>
-    <span>© HK-WORLD · 추천인 ID: ljw2358</span>
+    <span>© HK WorldBank · 추천인 ID: ljw2358</span>
     <span>고객지원: support@hkwb.world</span>
   </footer>
 
@@ -357,7 +406,7 @@
       { id: "payment", title: "03. 결제", name: "결제", desc: "6자리 인증 결제" },
       { id: "deposit", title: "04. 예치", name: "예치", desc: "수익 계산·6자리" },
       { id: "reward", title: "05. 보상", name: "보상", desc: "생태계 리워드" },
-      { id: "ubi", title: "06. 기본소득", name: "기본소득", desc: "순이익 30% 분배" },
+      { id: "ubi", title: "06. 기본소득", name: "기본소득", desc: "UBI 30% 분배" },
       { id: "token_swap", title: "07. 토큰스왑", name: "토큰스왑", desc: "1:1 연동 스왑" },
       { id: "dex_swap", title: "08. DEX 스왑", name: "DEX 스왑", desc: "7종 자산 교환" },
       { id: "lp_staking", title: "09. LP 스테이킹", name: "LP 스테이킹", desc: "유동성·6자리" },
@@ -385,7 +434,7 @@
       },
       {
         title: "5. 추천인(ljw2358) 및 HK-BANK 관문 연동 기준",
-        detail: "추천인 ID는 ljw2358로 운영되며, HK-BANK 출입문 진입과 HK-WORLD 간 사용자 흐름을 연결합니다."
+        detail: "추천인 ID는 ljw2358로 운영되며, HK-BANK 출입문 진입과 HK WorldBank 간 사용자 흐름을 연결합니다."
       },
       {
         title: "6. 테스트넷 검증 및 메인넷 전환 보안 정책",
@@ -786,7 +835,7 @@
         return "예치 및 LP 스테이킹 기준 이율은 6개월 미만 8.5%, 12개월 15.5%, 24개월 19.0%, 36개월 24.0%이며, 중도 해지 시 8.5% 기준이 적용됩니다. 실행 시 6자리 인증번호를 검증합니다.";
       }
       if (q.includes("인증") || q.includes("6자리") || q.includes("kyc") || q.includes("kyb") || q.includes("둘러보기")) {
-        return "예치·LP 스테이킹·송금·결제 단계에서는 6자리 인증번호를 확인합니다. KYC/KYB 미인증 상태는 둘러보기 모드로 제공되며, 인증 완료 후 실거래가 활성화됩니다.";
+        return "예치·LP 스테이킹·송금·결제 단계에서는 6자리 인증번호를 확인합니다. KYC/KYB 미인증 상태는 둘러보기 모드로 제공되며, 인증 완료 후 정식 거래가 활성화됩니다.";
       }
       if (q.includes("수익") || q.includes("배분") || q.includes("ubi") || q.includes("재단")) {
         return "순이익 배분은 UBI(기본소득) 30%, 회사 경영비 30%, HK 사회재단 최대 30% 구조입니다. HK 사회재단 재원은 회사 인수나 전략적 투자 등 핵심 자본이 필요한 시점에 활용합니다.";
