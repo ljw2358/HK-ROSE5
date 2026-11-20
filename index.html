@@ -13,6 +13,7 @@
             --primary-purple: #8b5cf6;
             --neon-purple: #a855f7;
             --neon-blue: #38bdf8;
+            --neon-pink: #f472b6;
             --text-main: #f3f4f6;
             --text-sub: #9ca3af;
             --accent-green: #10b981;
@@ -34,20 +35,20 @@
             line-height: 1.45;
         }
 
-        /* 최상단 헤더: HK WorldBank 로고 + 언어 드롭다운 */
+        /* 1. 최상단 헤더: HK WorldBank 로고 + 언어 드롭다운 */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             padding: 6px 4px;
         }
 
         .brand-logo {
-            font-size: 1.85rem;
+            font-size: 1.9rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 25%, var(--primary-purple) 85%, var(--neon-blue) 100%);
+            background: linear-gradient(135deg, #ffffff 20%, var(--primary-purple) 70%, var(--neon-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.6px;
@@ -71,30 +72,32 @@
             border-color: var(--primary-purple);
         }
 
-        /* 히어로 섹션 */
+        /* 2. 히어로 섹션 (컬러풀 그라데이션 적용) */
         .hero {
             text-align: center;
-            margin-bottom: 24px;
-            padding: 16px 14px;
-            background: radial-gradient(circle at top, rgba(139, 92, 246, 0.16), rgba(20, 25, 35, 0.7) 70%);
-            border: 1px solid var(--card-border);
+            margin-bottom: 20px;
+            padding: 18px 14px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.18) 0%, rgba(56, 189, 248, 0.12) 55%, rgba(244, 114, 182, 0.14) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.35);
             border-radius: 18px;
         }
 
         .hero h1 {
-            font-size: 1.42rem;
+            font-size: 1.45rem;
             font-weight: 800;
             line-height: 1.38;
             margin-bottom: 8px;
-            color: #ffffff;
+            background: linear-gradient(90deg, #38bdf8 0%, #c084fc 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 0.82rem;
-            color: var(--text-sub);
+            color: #d1d5db;
         }
 
-        /* KYC / KYB 및 둘러보기 접근 바 */
+        /* 3. KYC / KYB 및 둘러보기 영역 */
         .access-bar {
             display: flex;
             flex-wrap: wrap;
@@ -144,13 +147,13 @@
             cursor: pointer;
         }
 
-        /* 10대 핵심 분산 연동망 (중앙 정렬 섹션) */
+        /* 4. 10대 핵심 분산 연동망 (중앙 정렬 그리드) */
         .modules-section {
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
 
         .section-title {
-            font-size: 0.98rem;
+            font-size: 1rem;
             font-weight: 800;
             margin-bottom: 14px;
             display: flex;
@@ -186,7 +189,7 @@
         .grid-card:hover {
             border-color: var(--primary-purple);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.15);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.16);
         }
 
         .card-icon {
@@ -223,13 +226,13 @@
         .theme-9 .card-icon { background: rgba(20, 184, 166, 0.18); color: #2dd4bf; }
         .theme-10 .card-icon { background: rgba(249, 115, 22, 0.18); color: #fb923c; }
 
-        /* UBI & 사회환원 카드 */
+        /* 5. 순수익 배분 및 UBI 카드 */
         .info-card {
             background: linear-gradient(135deg, rgba(20, 25, 35, 0.95) 0%, rgba(46, 16, 101, 0.45) 100%);
             border: 1px solid rgba(139, 92, 246, 0.35);
             border-radius: 16px;
             padding: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
@@ -254,10 +257,13 @@
             color: #f3e8ff;
         }
 
-        /* 푸터 및 공식 미디어 한 줄 배치 */
-        footer {
-            border-top: 1px solid var(--card-border);
-            padding-top: 16px;
+        /* 6. 공식 미디어 한 줄 배치 */
+        .media-section {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
             text-align: center;
         }
 
@@ -265,8 +271,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 10px;
+            gap: 18px;
             white-space: nowrap;
         }
 
@@ -276,12 +281,58 @@
             gap: 6px;
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 700;
         }
 
         .media-link:hover {
             color: var(--neon-blue);
+        }
+
+        /* 7. 맨 아래 고객센터 삐니 안내 카드 */
+        .pinny-box {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(139, 92, 246, 0.16));
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+        }
+
+        .pinny-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .pinny-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #e0f2fe;
+        }
+
+        .pinny-btn {
+            background: linear-gradient(135deg, var(--primary-purple), #2563eb);
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pinny-desc {
+            font-size: 0.76rem;
+            color: var(--text-sub);
+        }
+
+        /* 푸터 */
+        footer {
+            border-top: 1px solid var(--card-border);
+            padding-top: 14px;
+            text-align: center;
         }
 
         .copyright {
@@ -314,6 +365,8 @@
             border-radius: 18px;
             padding: 18px;
             box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-head {
@@ -368,6 +421,36 @@
             border-color: var(--primary-purple);
         }
 
+        .otp-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .otp-code-badge {
+            background: rgba(56, 189, 248, 0.16);
+            color: #7dd3fc;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .btn-mini {
+            background: rgba(139, 92, 246, 0.22);
+            color: #ede9fe;
+            border: 1px solid rgba(139, 92, 246, 0.45);
+            padding: 4px 9px;
+            border-radius: 7px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
         .badge-info {
             display: block;
             background: rgba(139, 92, 246, 0.16);
@@ -406,7 +489,7 @@
 </head>
 <body>
 
-    <!-- 1. 상단 헤더: 로고 + 언어 드롭다운 -->
+    <!-- 1. 상단 헤더: HK WorldBank 로고 + 언어 드롭다운 -->
     <header>
         <div class="brand-logo">HK WorldBank</div>
         <select id="langSelect" class="lang-select" aria-label="언어 선택">
@@ -425,10 +508,10 @@
         </select>
     </header>
 
-    <!-- 2. 히어로 영역 -->
+    <!-- 2. 히어로 섹션 -->
     <section class="hero">
         <h1>인류와 기술이 공존하는 차세대<br>디지털 금융 혁신</h1>
-        <p>파이 네트워크 개척자를 위한 10대 핵심 분산 연동망 &amp; 실시간 AGI 금융 인터페이스</p>
+        <p>파이 네트워크 개척자를 위한 10대 핵심 분산 연동망 &amp; 실시간 금융 인터페이스</p>
     </section>
 
     <!-- 3. KYC/KYB 인증 및 둘러보기 영역 -->
@@ -503,15 +586,15 @@
 
     <!-- 5. 순수익 배분 및 UBI 안내 -->
     <section class="info-card">
-        <h3><i class="fa-solid fa-heart"></i> 순수익 배분 &amp; 글로벌 UBI</h3>
-        <p>순수익 발생 시 시스템 컨트롤러에 의해 자동 배분되며(UBI 30%, 회사 경영비 30%, HK 사회재단 전략자본 최대 30%), 온체인 검증 기반 투명성을 지향합니다.</p>
+        <h3><i class="fa-solid fa-heart"></i> 순수익 30%~60% 자동 사회환원 &amp; UBI</h3>
+        <p>순수익 발생 시 시스템 컨트롤러에 의해 자동 배분되며, 100% 온체인 검증 기반 실시간 수익 환원 내역을 공개합니다.</p>
         <div class="ubi-highlight">
             ★ 추천인 <strong>ljw2358</strong> 등록 시 UBI 수령 우선순위 안내
         </div>
     </section>
 
-    <!-- 6. 푸터 및 공식 미디어 (한 줄 정렬) -->
-    <footer>
+    <!-- 6. 공식 미디어 한 줄 정렬 -->
+    <section class="media-section" aria-label="공식 미디어">
         <div class="media-row">
             <a href="https://youtube.com/@Hyekong2026" class="media-link" target="_blank" rel="noopener noreferrer">
                 <i class="fa-brands fa-youtube" style="color:#ff0000"></i> YouTube
@@ -521,6 +604,19 @@
                 <i class="fa-brands fa-tiktok" style="color:#00f2fe"></i> TikTok
             </a>
         </div>
+    </section>
+
+    <!-- 7. 맨 아래 고객센터 삐니 -->
+    <section class="pinny-box">
+        <div class="pinny-head">
+            <div class="pinny-title"><i class="fa-solid fa-robot" style="color:#38bdf8"></i> 고객센터 삐니</div>
+            <button type="button" class="pinny-btn" onclick="openModuleModal('pinny')">삐니 상담 열기</button>
+        </div>
+        <p class="pinny-desc">예치·스테이킹 이율, 송금 절차, KYC/KYB 및 플랫폼 이용 안내를 도와드리는 HK WorldBank 안내 도우미입니다.</p>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
         <div class="copyright">
             © 2026 HK WorldBank. All rights reserved. · 문의: support@hkwb.world
         </div>
@@ -549,6 +645,20 @@
             { value: 'HK', label: 'HK Token (1:1 연동)' }
         ];
 
+        let currentOtpCode = generateSixDigitOtp();
+
+        function generateSixDigitOtp() {
+            return String(Math.floor(100000 + Math.random() * 900000));
+        }
+
+        function refreshOtpDisplay() {
+            currentOtpCode = generateSixDigitOtp();
+            const badge = document.getElementById('otpBadge');
+            if (badge) {
+                badge.textContent = `발급코드: ${currentOtpCode}`;
+            }
+        }
+
         function assetOptionsHtml(selectedVal) {
             return ASSETS_7.map(a =>
                 `<option value="${a.value}" ${a.value === selectedVal ? 'selected' : ''}>${a.label}</option>`
@@ -567,6 +677,10 @@
             const resultEl = document.getElementById('modalResult');
             resultEl.style.display = 'none';
             resultEl.textContent = '';
+
+            if (type === 'transfer') {
+                currentOtpCode = generateSixDigitOtp();
+            }
 
             const templates = {
                 kyc: {
@@ -607,14 +721,24 @@
                     title: '송금 프로세스 (P2P / 글로벌)',
                     html: `
                         <div class="form-group">
-                            <label class="form-label">받는 지갑 주소</label>
-                            <input id="toAddr" type="text" class="form-control" placeholder="수신자 지갑 주소 입력">
+                            <label class="form-label">수신자 지갑 주소</label>
+                            <input id="toAddr" type="text" class="form-control" placeholder="G... 또는 수신자 지갑 주소 입력">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">송금 수량</label>
+                            <label class="form-label">전송 수량</label>
                             <input id="sendAmt" type="number" class="form-control" placeholder="0.00" step="any">
                         </div>
-                        <button type="button" class="btn-submit" onclick="submitProcess('송금 트랜잭션 검증 단계로 이동했습니다.')">송금 진행</button>
+                        <div class="form-group">
+                            <div class="otp-row">
+                                <label class="form-label" style="margin:0;">6자리 보안 인증번호</label>
+                                <div style="display:flex;align-items:center;gap:6px;">
+                                    <span id="otpBadge" class="otp-code-badge">발급코드: ${currentOtpCode}</span>
+                                    <button type="button" class="btn-mini" onclick="refreshOtpDisplay()">재발급</button>
+                                </div>
+                            </div>
+                            <input id="otpInput" type="text" maxlength="6" inputmode="numeric" class="form-control" placeholder="6자리 인증번호 입력">
+                        </div>
+                        <button type="button" class="btn-submit" onclick="verifyAndSubmitTransfer()">송금 실행</button>
                     `
                 },
                 payment: {
@@ -647,7 +771,7 @@
                                 <option value="3년">3년 만기 예치</option>
                             </select>
                             <div class="badge-info">
-                                <i class="fa-solid fa-circle-info"></i> 중도 해지 시 이율 8.5% 적용 · 상황별 변동 이율은 AGI 산정 후 보고됩니다.
+                                <i class="fa-solid fa-circle-info"></i> 중도 해지 시 이율 8.5% 적용 · 상황별 이율 조정 내역은 별도 보고됩니다.
                             </div>
                         </div>
                         <button type="button" class="btn-submit" onclick="submitProcess('선택한 예치 기간 설정이 반영되었습니다.')">예치 신청</button>
@@ -749,6 +873,21 @@
                         </div>
                         <button type="button" class="btn-submit" onclick="submitProcess('선택한 PI 수량 조회 기준이 적용되었습니다.')">PI 수량 조회</button>
                     `
+                },
+                pinny: {
+                    title: '고객센터 삐니 안내',
+                    html: `
+                        <div class="form-group">
+                            <label class="form-label">문의 주제 선택</label>
+                            <select id="pinnyTopic" class="form-control">
+                                <option value="예치 및 LP 스테이킹 (6개월·1년·2년·3년 / 중도해지 8.5%)">예치 및 LP 스테이킹 안내</option>
+                                <option value="7대 자산 토큰스왑 및 DEX 스왑">토큰스왑 · DEX 스왑 안내</option>
+                                <option value="송금 6자리 보안 인증 및 지갑연결">송금 인증 및 지갑연결 안내</option>
+                                <option value="UBI 우선순위 (추천인 ljw2358) 및 사회환원">UBI 우선순위 및 사회환원 안내</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn-submit" onclick="submitPinnyGuide()">삐니 안내 보기</button>
+                    `
                 }
             };
 
@@ -756,6 +895,33 @@
             titleEl.textContent = selected.title;
             bodyEl.innerHTML = selected.html;
             modal.classList.add('active');
+        }
+
+        function verifyAndSubmitTransfer() {
+            const addr = document.getElementById('toAddr').value.trim();
+            const amt = document.getElementById('sendAmt').value.trim();
+            const otpVal = document.getElementById('otpInput').value.trim();
+            const resultEl = document.getElementById('modalResult');
+
+            if (!addr || !amt) {
+                resultEl.textContent = '수신자 지갑 주소와 전송 수량을 입력해 주세요.';
+                resultEl.style.display = 'block';
+                return;
+            }
+            if (otpVal.length !== 6 || otpVal !== currentOtpCode) {
+                resultEl.textContent = `6자리 보안 인증번호(${currentOtpCode})를 정확히 입력해 주세요.`;
+                resultEl.style.display = 'block';
+                return;
+            }
+            resultEl.textContent = `인증번호(${otpVal}) 확인 완료! ${amt} 수량 송금 실행 단계가 준비되었습니다.`;
+            resultEl.style.display = 'block';
+        }
+
+        function submitPinnyGuide() {
+            const topic = document.getElementById('pinnyTopic').value;
+            const resultEl = document.getElementById('modalResult');
+            resultEl.textContent = `[삐니 안내] "${topic}" 관련 항목이 최신 화면에 반영되어 있습니다. 추가 문의는 support@hkwb.world로 접수됩니다.`;
+            resultEl.style.display = 'block';
         }
 
         function submitProcess(message) {
