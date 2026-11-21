@@ -6,31 +6,43 @@
   <title>HK-WORLD | HK WorldBank · HK-BANK</title>
   <style>
     :root {
-      --bg: #080c14;
-      --surface: #0f1624;
-      --card: #141e30;
-      --card-2: #19263d;
-      --border: #263654;
-      --text: #f5f8fc;
-      --muted: #9fb0cc;
+      --bg: #060911;
+      --surface: #0d1422;
+      --card: #131d30;
+      --card-2: #19263e;
+      --border: rgba(148, 163, 184, 0.16);
+      --border-strong: rgba(56, 189, 248, 0.45);
+      --text: #f8fafc;
+      --muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.14);
+      --accent-2: #818cf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
       --ok: #22c55e;
+      --ok-soft: rgba(34, 197, 94, 0.14);
       --warn: #f59e0b;
+      --warn-soft: rgba(245, 158, 11, 0.15);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 9px;
+      --shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(56, 189, 248, 0.12), transparent 36%),
+        radial-gradient(circle at 88% 8%, rgba(129, 140, 248, 0.1), transparent 38%),
+        var(--bg);
       color: var(--text);
-      line-height: 1.5;
-      padding: 20px;
+      line-height: 1.55;
+      padding: 22px 18px 48px;
+      min-height: 100vh;
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1160px;
       margin: 0 auto;
     }
 
@@ -39,25 +51,51 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 14px;
-      padding: 18px 22px;
-      background: var(--surface);
+      gap: 16px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, rgba(19, 29, 48, 0.95), rgba(13, 20, 34, 0.95));
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .brand-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+      font-size: 1.65rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, #ffffff 0%, var(--accent) 65%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
     .ref-id {
       font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .ref-id strong {
       color: var(--accent);
-      font-weight: 700;
-      margin-top: 2px;
+      letter-spacing: 0.02em;
     }
 
     .header-actions {
@@ -70,34 +108,51 @@
     select, input, button {
       font-family: inherit;
       font-size: 0.88rem;
-      border-radius: 9px;
+      border-radius: var(--radius-sm);
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text);
-      padding: 8px 12px;
+      padding: 9px 13px;
+      transition: border-color 0.16s ease, background 0.16s ease, transform 0.12s ease, box-shadow 0.16s ease;
     }
 
     select:focus, input:focus {
       outline: none;
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.16);
     }
 
     button {
       cursor: pointer;
       font-weight: 600;
-      transition: 0.15s ease;
     }
 
     button:hover {
-      border-color: var(--accent);
+      border-color: var(--border-strong);
       background: var(--card-2);
     }
 
+    button:active {
+      transform: translateY(1px);
+    }
+
     button.primary {
-      background: var(--accent);
-      color: #051018;
+      background: linear-gradient(135deg, var(--accent), #0ea5e9);
+      color: #041019;
       border: none;
       font-weight: 800;
+      box-shadow: 0 8px 20px -8px rgba(56, 189, 248, 0.65);
+    }
+
+    button.primary:hover {
+      filter: brightness(1.06);
+      background: linear-gradient(135deg, #56c8fa, var(--accent));
+    }
+
+    button.ghost-ok {
+      background: var(--ok-soft);
+      border-color: rgba(34, 197, 94, 0.35);
+      color: #86efac;
     }
 
     .banner {
@@ -105,32 +160,41 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 12px;
-      margin-bottom: 20px;
+      gap: 12px;
+      padding: 13px 20px;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.11), rgba(129, 140, 248, 0.08));
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
       font-size: 0.88rem;
+    }
+
+    .banner-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .pill {
       padding: 3px 10px;
       border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      background: rgba(245, 158, 11, 0.2);
-      color: var(--warn);
-      margin-left: 6px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      background: var(--warn-soft);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      margin-left: 4px;
     }
 
     .pill.ok {
-      background: rgba(34, 197, 94, 0.2);
-      color: var(--ok);
+      background: var(--ok-soft);
+      color: #4ade80;
+      border-color: rgba(34, 197, 94, 0.35);
     }
 
     .section {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .section-head {
@@ -138,15 +202,36 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
     .section-title {
-      font-size: 1.08rem;
+      font-size: 1.1rem;
       font-weight: 800;
-      padding-left: 10px;
+      padding-left: 12px;
       border-left: 4px solid var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    .bal-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .bal-chip {
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .bal-chip strong {
+      color: var(--accent);
     }
 
     .grid-2x5 {
@@ -155,78 +240,106 @@
       gap: 10px;
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
       .grid-2x5 { grid-template-columns: repeat(2, 1fr); }
     }
 
     .mod-btn {
+      position: relative;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 15px 12px;
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
       text-align: center;
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       font-weight: 800;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .mod-btn .mod-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.04em;
     }
 
     .mod-btn:hover, .mod-btn.active {
       background: var(--card-2);
       border-color: var(--accent);
       color: var(--accent);
+      box-shadow: 0 10px 24px -14px rgba(56, 189, 248, 0.55);
+    }
+
+    .mod-btn.active .mod-num {
+      color: var(--accent);
     }
 
     .process-box {
       margin-top: 14px;
       background: var(--surface);
-      border: 1px solid var(--accent);
-      border-radius: 14px;
-      padding: 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow);
     }
 
     .process-top {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
     .steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 14px;
+      gap: 9px;
+      margin-bottom: 16px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 820px) {
       .steps { grid-template-columns: repeat(2, 1fr); }
     }
 
     .step {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 8px 10px;
-      font-size: 0.8rem;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.82rem;
     }
 
     .step strong {
       display: block;
       color: var(--accent);
+      font-size: 0.84rem;
+      margin-bottom: 2px;
+    }
+
+    .step span {
+      color: var(--muted);
     }
 
     .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 10px;
-      margin-bottom: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
     .field label {
       display: block;
       font-size: 0.78rem;
+      font-weight: 600;
       color: var(--muted);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .field input, .field select {
@@ -236,34 +349,78 @@
     .result-box {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
+      border-radius: 11px;
+      padding: 13px 15px;
+      margin-bottom: 14px;
       font-size: 0.88rem;
+    }
+
+    .log-box {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .log-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .log-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.82rem;
+    }
+
+    .log-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 11px;
+      background: rgba(19, 29, 48, 0.7);
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .log-time {
+      color: var(--muted);
+      font-size: 0.75rem;
+      white-space: nowrap;
     }
 
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       .grid-3 { grid-template-columns: 1fr; }
     }
 
     .title-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .title-card h3 {
-      font-size: 0.98rem;
+      font-size: 1rem;
       font-weight: 800;
       color: var(--accent);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .kv-list {
@@ -274,13 +431,44 @@
     .kv-list li {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 8px;
-      padding: 5px 0;
-      border-bottom: 1px dashed rgba(159, 176, 204, 0.2);
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.18);
+    }
+
+    .kv-list li span {
+      color: var(--muted);
     }
 
     .kv-list li:last-child {
       border-bottom: none;
+    }
+
+    .out-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .out-cell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 8px;
+      font-size: 0.76rem;
+    }
+
+    .out-cell small {
+      display: block;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .out-cell strong {
+      color: var(--text);
+      font-size: 0.8rem;
     }
 
     footer {
@@ -289,10 +477,10 @@
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: var(--radius-lg);
       font-size: 0.86rem;
       color: var(--muted);
     }
@@ -300,12 +488,37 @@
     footer a {
       color: var(--text);
       text-decoration: none;
-      margin-left: 14px;
-      font-weight: 600;
+      margin-left: 16px;
+      font-weight: 700;
     }
 
     footer a:hover {
       color: var(--accent);
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      max-width: 360px;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: var(--card-2);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 600;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -313,8 +526,11 @@
   <div class="container">
     <header>
       <div>
-        <div class="brand-title">HK-WORLD</div>
-        <div class="ref-id">추천인 ID: ljw2358</div>
+        <div class="brand-row">
+          <div class="brand-title">HK-WORLD</div>
+          <span class="brand-tag">HK WorldBank · HK-BANK</span>
+        </div>
+        <div class="ref-id">추천인 ID: <strong>ljw2358</strong></div>
       </div>
 
       <div class="header-actions">
@@ -324,7 +540,7 @@
     </header>
 
     <div class="banner">
-      <div>
+      <div class="banner-left">
         <strong id="aiTitle">AI 삐니</strong>
         <span id="modePill" class="pill">둘러보기 모드 (미인증)</span>
       </div>
@@ -336,76 +552,93 @@
     <section class="section">
       <div class="section-head">
         <div class="section-title">10대 핵심 모듈</div>
-        <div id="balSummary" style="font-size: 0.84rem; color: var(--accent); font-weight: 700;">
-          PI: 1,250.00 · HK 토큰(1:1): 1,250.00 · LP: 0.00
-        </div>
+        <div class="bal-bar" id="balSummary"></div>
       </div>
 
       <div class="grid-2x5" id="modGrid"></div>
 
       <div class="process-box">
         <div class="process-top">
-          <div id="procTitle" style="font-size: 1.08rem; font-weight: 800;">지갑연결</div>
-          <button style="padding: 5px 10px; font-size: 0.78rem;" onclick="quickVerify()">인증 완료 처리</button>
+          <div id="procTitle" style="font-size: 1.1rem; font-weight: 800;">지갑연결 프로세스</div>
+          <button class="ghost-ok" style="padding: 6px 12px; font-size: 0.8rem;" onclick="quickVerify()">인증 완료 처리</button>
         </div>
         <div class="steps" id="stepGrid"></div>
         <div id="procBody"></div>
+        <div class="log-box">
+          <div class="log-title">최근 실행 내역</div>
+          <ul class="log-list" id="logList"></ul>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="section-title">순이익 배분 · 예치 이율 · HK-BANK</div>
-      <div class="grid-3" style="margin-top: 12px;">
+      <div class="grid-3" style="margin-top: 14px;">
         <div class="title-card">
-          <h3>순이익 배분 (30 / 30 / 최대 30)</h3>
-          <ul class="kv-list">
-            <li><span>UBI (기본소득)</span><strong>30% (최저·최고 30%)</strong></li>
-            <li><span>회사 경영비</span><strong>30%</strong></li>
-            <li><span>HK 사회재단</span><strong>최대 30% (회사 인수 등)</strong></li>
-          </ul>
-          <div class="field" style="margin-top: 10px;">
-            <label>순이익 계산 (원)</label>
-            <input type="number" id="netProfit" value="100000000" step="1000000" oninput="calcProfit()" />
+          <div>
+            <h3>순이익 배분 (30 / 30 / 최대 30)</h3>
+            <ul class="kv-list">
+              <li><span>UBI (기본소득)</span><strong>30% (최저·최고 30%)</strong></li>
+              <li><span>회사 경영비</span><strong>30%</strong></li>
+              <li><span>HK 사회재단</span><strong>최대 30% (회사 인수 등)</strong></li>
+            </ul>
           </div>
-          <div id="profitOut" style="margin-top: 8px; font-size: 0.82rem; color: var(--muted);"></div>
+          <div>
+            <div class="field" style="margin-top: 12px;">
+              <label for="netProfit">순이익 계산 (원)</label>
+              <input type="number" id="netProfit" value="100000000" step="1000000" oninput="calcProfit()" />
+            </div>
+            <div class="out-grid" id="profitOut"></div>
+          </div>
         </div>
 
         <div class="title-card">
-          <h3>HK WorldBank 예치 · 중도해지</h3>
-          <ul class="kv-list">
-            <li><span>6개월 미만</span><strong>8.5%</strong></li>
-            <li><span>12개월</span><strong>15.5%</strong></li>
-            <li><span>2년</span><strong>19%</strong></li>
-            <li><span>3년</span><strong>24%</strong></li>
-            <li><span>중도 해지 이율</span><strong>8.5%</strong></li>
-          </ul>
+          <div>
+            <h3>HK WorldBank 예치 · 중도해지</h3>
+            <ul class="kv-list">
+              <li><span>6개월 미만</span><strong>8.5%</strong></li>
+              <li><span>12개월</span><strong>15.5%</strong></li>
+              <li><span>2년</span><strong>19%</strong></li>
+              <li><span>3년</span><strong>24%</strong></li>
+              <li><span>중도 해지 이율</span><strong style="color: var(--warn);">8.5%</strong></li>
+            </ul>
+          </div>
+          <div style="margin-top: 12px; padding: 10px 12px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); font-size: 0.78rem; color: var(--muted);">
+            예치 모듈에서 기간별 이율(8.5%~24%)과 중도해지(8.5%) 조건을 바로 시뮬레이션할 수 있습니다.
+          </div>
         </div>
 
         <div class="title-card">
-          <h3>HK-BANK 무점포 인터넷뱅킹 (가변)</h3>
-          <ul class="kv-list">
-            <li><span>1년 미만</span><strong>6% (가변)</strong></li>
-            <li><span>1년 만기</span><strong>13% (가변)</strong></li>
-            <li><span>2년 만기</span><strong>16% (가변)</strong></li>
-            <li><span>3년 만기</span><strong>20% (가변)</strong></li>
-          </ul>
-          <div class="field" style="margin-top: 10px;">
-            <label>예치금 계산 (원 · 1년 13% 기준)</label>
-            <input type="number" id="bankAmt" value="10000000" step="100000" oninput="calcBank()" />
+          <div>
+            <h3>HK-BANK 무점포 인터넷뱅킹 (가변)</h3>
+            <ul class="kv-list">
+              <li><span>1년 미만</span><strong>6% (가변)</strong></li>
+              <li><span>1년 만기</span><strong>13% (가변)</strong></li>
+              <li><span>2년 만기</span><strong>16% (가변)</strong></li>
+              <li><span>3년 만기</span><strong>20% (가변)</strong></li>
+            </ul>
           </div>
-          <div id="bankOut" style="margin-top: 8px; font-size: 0.82rem; color: var(--ok); font-weight: 700;"></div>
+          <div>
+            <div class="field" style="margin-top: 12px;">
+              <label for="bankAmt">예치금 계산 (원 · 1년 13% 기준)</label>
+              <input type="number" id="bankAmt" value="10000000" step="100000" oninput="calcBank()" />
+            </div>
+            <div id="bankOut" style="margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: var(--ok-soft); font-size: 0.82rem; color: #86efac; font-weight: 700;"></div>
+          </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <div>문의: support@hkwb.world</div>
+      <div>문의: <strong style="color: var(--text);">support@hkwb.world</strong></div>
       <div>
         <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">유튜브</a>
         <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">틱톡</a>
       </div>
     </footer>
   </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
     const LANGS = [
@@ -445,8 +678,36 @@
       hk: 1250,
       lp: 0,
       reward: 45,
-      ubi: 120
+      ubi: 120,
+      logs: [
+        { text: "시스템 초기화 완료 · 추천인 ljw2358 연동 준비", time: "방금 전" }
+      ]
     };
+
+    let toastTimer = null;
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+    }
+
+    function addLog(text) {
+      const now = new Date();
+      const time = now.toTimeString().slice(0, 8);
+      state.logs.unshift({ text, time });
+      state.logs = state.logs.slice(0, 4);
+      renderLogs();
+    }
+
+    function renderLogs() {
+      const list = document.getElementById("logList");
+      list.innerHTML = state.logs
+        .map((item) => `<li class="log-item"><span>${item.text}</span><span class="log-time">${item.time}</span></li>`)
+        .join("");
+    }
 
     function initLang() {
       const sel = document.getElementById("langSelect");
@@ -462,18 +723,27 @@
     function onLangChange() {
       state.lang = document.getElementById("langSelect").value;
       document.getElementById("aiTitle").textContent = `AI 삐니 · ${state.lang}`;
+      showToast(`언어가 ${state.lang}으로 변경되었습니다.`);
     }
 
     function toggleKyc() {
       state.verified = !state.verified;
       renderMode();
       renderProcessBody();
+      addLog(state.verified ? "KYC / KYB 인증 활성화" : "둘러보기 모드로 전환");
+      showToast(state.verified ? "KYC / KYB 인증이 완료되었습니다." : "둘러보기 모드로 전환되었습니다.");
     }
 
     function quickVerify() {
+      if (state.verified) {
+        showToast("이미 KYC / KYB 인증이 완료된 상태입니다.");
+        return;
+      }
       state.verified = true;
       renderMode();
       renderProcessBody();
+      addLog("빠른 인증 완료 처리됨");
+      showToast("인증 완료 처리되었습니다.");
     }
 
     function renderMode() {
@@ -491,17 +761,22 @@
     }
 
     function renderSummary() {
-      document.getElementById("balSummary").textContent =
-        `PI: ${state.pi.toFixed(2)} · HK 토큰(1:1): ${state.hk.toFixed(2)} · LP: ${state.lp.toFixed(2)}`;
+      const walletBadge = state.wallet ? `연결됨 (${state.wallet.slice(0, 8)}...)` : "미연결";
+      document.getElementById("balSummary").innerHTML = `
+        <span class="bal-chip">PI: <strong>${state.pi.toFixed(2)}</strong></span>
+        <span class="bal-chip">HK 토큰(1:1): <strong>${state.hk.toFixed(2)}</strong></span>
+        <span class="bal-chip">LP: <strong>${state.lp.toFixed(2)}</strong></span>
+        <span class="bal-chip">지갑: <strong>${walletBadge}</strong></span>
+      `;
     }
 
     function renderModGrid() {
       const grid = document.getElementById("modGrid");
       grid.innerHTML = "";
-      MODS.forEach((m) => {
+      MODS.forEach((m, idx) => {
         const btn = document.createElement("button");
         btn.className = `mod-btn ${state.activeId === m.id ? "active" : ""}`;
-        btn.textContent = m.title;
+        btn.innerHTML = `<span class="mod-num">0${idx + 1 === 10 ? 10 : idx + 1}</span><span>${m.title}</span>`;
         btn.onclick = () => selectMod(m.id);
         grid.appendChild(btn);
       });
@@ -524,7 +799,7 @@
 
       if (!state.verified) {
         body.innerHTML = `
-          <div class="result-box" style="border-color: var(--warn); color: var(--warn);">
+          <div class="result-box" style="border-color: rgba(245, 158, 11, 0.45); background: var(--warn-soft); color: #fcd34d;">
             <strong>[둘러보기 전용]</strong> ${mod.title} 실행을 위해 KYC / KYB 인증을 완료해 주세요.
           </div>
         `;
@@ -534,7 +809,7 @@
       if (mod.id === "wallet") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>파이 지갑 주소</label><input id="fWallet" value="${state.wallet}" placeholder="지갑 주소 입력" /></div>
+            <div class="field"><label for="fWallet">파이 지갑 주소</label><input id="fWallet" value="${state.wallet}" placeholder="예: GDHK...LJWW2358" /></div>
             <div class="field"><label>추천인 ID</label><input value="ljw2358" readonly /></div>
           </div>
           <button class="primary" onclick="doWallet()">지갑 연결</button>
@@ -542,25 +817,25 @@
       } else if (mod.id === "transfer") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>수신 주소</label><input id="fTo" placeholder="받는 지갑 주소" /></div>
-            <div class="field"><label>송금 수량 (PI)</label><input type="number" id="fAmt" value="10" min="0.1" /></div>
+            <div class="field"><label for="fTo">수신 주소</label><input id="fTo" placeholder="받는 지갑 주소" /></div>
+            <div class="field"><label for="fAmt">송금 수량 (PI)</label><input type="number" id="fAmt" value="10" min="0.1" step="0.1" /></div>
           </div>
           <button class="primary" onclick="doTransfer()">송금 실행</button>
         `;
       } else if (mod.id === "payment") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>결제 항목</label><input id="fPayItem" value="HK-WORLD 결제" /></div>
-            <div class="field"><label>결제 금액 (HK)</label><input type="number" id="fPayAmt" value="20" min="1" /></div>
+            <div class="field"><label for="fPayItem">결제 항목</label><input id="fPayItem" value="HK-WORLD 결제" /></div>
+            <div class="field"><label for="fPayAmt">결제 금액 (HK)</label><input type="number" id="fPayAmt" value="20" min="1" step="1" /></div>
           </div>
           <button class="primary" onclick="doPayment()">결제 승인</button>
         `;
       } else if (mod.id === "deposit") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>예치 수량 (HK)</label><input type="number" id="fDepAmt" value="300" min="1" oninput="updateDepCalc()" /></div>
+            <div class="field"><label for="fDepAmt">예치 수량 (HK)</label><input type="number" id="fDepAmt" value="300" min="1" step="10" oninput="updateDepCalc()" /></div>
             <div class="field">
-              <label>기간 / 이율 (중도해지 8.5%)</label>
+              <label for="fDepRate">기간 / 이율 (중도해지 8.5%)</label>
               <select id="fDepRate" onchange="updateDepCalc()">
                 <option value="0.085">6개월 미만 (8.5%)</option>
                 <option value="0.155" selected>12개월 (15.5%)</option>
@@ -575,45 +850,45 @@
         updateDepCalc();
       } else if (mod.id === "reward") {
         body.innerHTML = `
-          <div class="result-box">수령 가능 보상: <strong>${state.reward.toFixed(2)} HK</strong></div>
+          <div class="result-box">수령 가능 보상: <strong style="color: var(--accent);">${state.reward.toFixed(2)} HK</strong></div>
           <button class="primary" onclick="doReward()">보상 수령</button>
         `;
       } else if (mod.id === "ubi") {
         body.innerHTML = `
-          <div class="result-box">순이익 UBI 배분 <strong>30%</strong> · 누적 수령: <strong>${state.ubi.toFixed(2)} HK</strong></div>
+          <div class="result-box">순이익 UBI 배분 <strong style="color: var(--accent);">30%</strong> · 누적 수령: <strong style="color: var(--ok);">${state.ubi.toFixed(2)} HK</strong></div>
           <button class="primary" onclick="doUbi()">기본소득 수령</button>
         `;
       } else if (mod.id === "swap") {
         body.innerHTML = `
           <div class="form-row">
             <div class="field">
-              <label>스왑 방향 (1:1 기준)</label>
+              <label for="fSwapDir">스왑 방향 (1:1 기준)</label>
               <select id="fSwapDir"><option value="pi2hk">PI → HK (1:1)</option><option value="hk2pi">HK → PI (1:1)</option></select>
             </div>
-            <div class="field"><label>수량</label><input type="number" id="fSwapAmt" value="50" min="1" /></div>
+            <div class="field"><label for="fSwapAmt">수량</label><input type="number" id="fSwapAmt" value="50" min="1" step="1" /></div>
           </div>
           <button class="primary" onclick="doSwap()">1:1 스왑 실행</button>
         `;
       } else if (mod.id === "dex") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>DEX 풀</label><select id="fDexPool"><option>HK / PI</option><option>HK / USDT</option></select></div>
-            <div class="field"><label>교환 수량</label><input type="number" id="fDexAmt" value="50" min="1" /></div>
+            <div class="field"><label for="fDexPool">DEX 풀</label><select id="fDexPool"><option>HK / PI</option><option>HK / USDT</option></select></div>
+            <div class="field"><label for="fDexAmt">교환 수량</label><input type="number" id="fDexAmt" value="50" min="1" step="1" /></div>
           </div>
           <button class="primary" onclick="doDex()">DEX 스왑 실행</button>
         `;
       } else if (mod.id === "lp") {
         body.innerHTML = `
           <div class="form-row">
-            <div class="field"><label>스테이킹 수량 (HK)</label><input type="number" id="fLpAmt" value="100" min="1" /></div>
+            <div class="field"><label for="fLpAmt">스테이킹 수량 (HK)</label><input type="number" id="fLpAmt" value="100" min="1" step="10" /></div>
             <div class="field"><label>현재 LP 잔액</label><input value="${state.lp.toFixed(2)} LP" readonly /></div>
           </div>
           <button class="primary" onclick="doLp()">LP 스테이킹</button>
         `;
       } else if (mod.id === "pi") {
         body.innerHTML = `
-          <div class="result-box">보유 PI: <strong>${state.pi.toFixed(2)} PI</strong> · 연동 HK(1:1): <strong>${state.hk.toFixed(2)} HK</strong></div>
-          <button class="primary" onclick="renderSummary(); alert('PI 수량이 갱신되었습니다.');">PI 수량 갱신</button>
+          <div class="result-box">보유 PI: <strong style="color: var(--accent);">${state.pi.toFixed(2)} PI</strong> · 연동 HK(1:1): <strong style="color: var(--ok);">${state.hk.toFixed(2)} HK</strong></div>
+          <button class="primary" onclick="doRefreshPi()">PI 수량 갱신</button>
         `;
       }
     }
@@ -623,49 +898,58 @@
       const rate = parseFloat(document.getElementById("fDepRate")?.value || 0.155);
       const el = document.getElementById("depCalc");
       if (el) {
-        el.innerHTML = `예상 이자(${(rate * 100).toFixed(1)}%): <strong>+${(amt * rate).toFixed(2)} HK</strong> · 중도해지(8.5%): <strong>+${(amt * 0.085).toFixed(2)} HK</strong>`;
+        el.innerHTML = `예상 이자(${(rate * 100).toFixed(1)}%): <strong style="color: var(--ok);">+${(amt * rate).toFixed(2)} HK</strong> · 중도해지(8.5%): <strong style="color: var(--warn);">+${(amt * 0.085).toFixed(2)} HK</strong>`;
       }
     }
 
     function doWallet() {
       const v = document.getElementById("fWallet").value.trim();
-      if (!v) return alert("지갑 주소를 입력해 주세요.");
+      if (!v) return showToast("지갑 주소를 입력해 주세요.");
       state.wallet = v;
-      alert("지갑이 연결되었습니다.");
+      renderSummary();
+      addLog(`지갑 연결 완료 (${v.slice(0, 10)}...)`);
+      showToast("지갑이 연결되었습니다.");
     }
 
     function doTransfer() {
       const to = document.getElementById("fTo").value.trim();
       const amt = parseFloat(document.getElementById("fAmt").value || 0);
-      if (!to || amt <= 0 || amt > state.pi) return alert("주소와 수량을 확인해 주세요.");
+      if (!to || amt <= 0 || amt > state.pi) return showToast("수신 주소와 송금 수량을 확인해 주세요.");
       state.pi -= amt;
       renderSummary();
-      alert(`${amt.toFixed(2)} PI 송금 완료`);
+      addLog(`${amt.toFixed(2)} PI 송금 완료 → ${to.slice(0, 8)}...`);
+      showToast(`${amt.toFixed(2)} PI 송금이 완료되었습니다.`);
     }
 
     function doPayment() {
+      const item = document.getElementById("fPayItem").value.trim() || "HK-WORLD 결제";
       const amt = parseFloat(document.getElementById("fPayAmt").value || 0);
-      if (amt <= 0 || amt > state.hk) return alert("결제 금액을 확인해 주세요.");
+      if (amt <= 0 || amt > state.hk) return showToast("결제 금액을 확인해 주세요.");
       state.hk -= amt;
       renderSummary();
-      alert(`${amt.toFixed(2)} HK 결제 완료`);
+      addLog(`${item} · ${amt.toFixed(2)} HK 결제 완료`);
+      showToast(`${amt.toFixed(2)} HK 결제가 완료되었습니다.`);
     }
 
     function doDeposit() {
       const amt = parseFloat(document.getElementById("fDepAmt").value || 0);
-      if (amt <= 0 || amt > state.hk) return alert("예치 수량을 확인해 주세요.");
+      const rate = parseFloat(document.getElementById("fDepRate").value || 0.155);
+      if (amt <= 0 || amt > state.hk) return showToast("예치 수량을 확인해 주세요.");
       state.hk -= amt;
       renderSummary();
-      alert(`${amt.toFixed(2)} HK 예치 신청 완료`);
+      addLog(`${amt.toFixed(2)} HK 예치 신청 (연 ${(rate * 100).toFixed(1)}%)`);
+      showToast(`${amt.toFixed(2)} HK 예치 신청이 완료되었습니다.`);
     }
 
     function doReward() {
-      if (state.reward <= 0) return alert("수령할 보상이 없습니다.");
-      state.hk += state.reward;
+      if (state.reward <= 0) return showToast("수령할 보상이 없습니다.");
+      const claimed = state.reward;
+      state.hk += claimed;
       state.reward = 0;
       renderSummary();
       renderProcessBody();
-      alert("보상 수령 완료");
+      addLog(`생태계 보상 ${claimed.toFixed(2)} HK 수령 완료`);
+      showToast(`${claimed.toFixed(2)} HK 보상을 수령했습니다.`);
     }
 
     function doUbi() {
@@ -673,52 +957,67 @@
       state.ubi += 50;
       renderSummary();
       renderProcessBody();
-      alert("기본소득 50.00 HK 수령 완료");
+      addLog("기본소득(UBI 30% 재원) 50.00 HK 수령");
+      showToast("기본소득 50.00 HK가 지급되었습니다.");
     }
 
     function doSwap() {
       const dir = document.getElementById("fSwapDir").value;
       const amt = parseFloat(document.getElementById("fSwapAmt").value || 0);
-      if (amt <= 0) return alert("수량을 입력해 주세요.");
+      if (amt <= 0) return showToast("스왑 수량을 입력해 주세요.");
       if (dir === "pi2hk") {
-        if (amt > state.pi) return alert("PI 잔액 부족");
+        if (amt > state.pi) return showToast("PI 잔액이 부족합니다.");
         state.pi -= amt;
         state.hk += amt;
+        addLog(`1:1 토큰 스왑: ${amt.toFixed(2)} PI → HK`);
       } else {
-        if (amt > state.hk) return alert("HK 잔액 부족");
+        if (amt > state.hk) return showToast("HK 잔액이 부족합니다.");
         state.hk -= amt;
         state.pi += amt;
+        addLog(`1:1 토큰 스왑: ${amt.toFixed(2)} HK → PI`);
       }
       renderSummary();
-      alert("1:1 스왑 완료");
+      showToast("1:1 스왑이 완료되었습니다.");
     }
 
     function doDex() {
+      const pool = document.getElementById("fDexPool").value;
       const amt = parseFloat(document.getElementById("fDexAmt").value || 0);
-      if (amt <= 0) return alert("수량을 입력해 주세요.");
-      alert(`${amt.toFixed(2)} DEX 스왑 완료`);
+      if (amt <= 0) return showToast("교환 수량을 입력해 주세요.");
+      addLog(`DEX 스왑(${pool}): ${amt.toFixed(2)} 체결`);
+      showToast(`${amt.toFixed(2)} DEX 스왑이 체결되었습니다.`);
     }
 
     function doLp() {
       const amt = parseFloat(document.getElementById("fLpAmt").value || 0);
-      if (amt <= 0 || amt > state.hk) return alert("수량을 확인해 주세요.");
+      if (amt <= 0 || amt > state.hk) return showToast("스테이킹 수량을 확인해 주세요.");
       state.hk -= amt;
       state.lp += amt;
       renderSummary();
       renderProcessBody();
-      alert("LP 스테이킹 완료");
+      addLog(`LP 스테이킹 ${amt.toFixed(2)} HK 공급 완료`);
+      showToast(`${amt.toFixed(2)} LP 스테이킹이 완료되었습니다.`);
+    }
+
+    function doRefreshPi() {
+      renderSummary();
+      addLog(`PI 수량 동기화 (${state.pi.toFixed(2)} PI / ${state.hk.toFixed(2)} HK)`);
+      showToast("PI 수량이 최신 상태로 갱신되었습니다.");
     }
 
     function calcProfit() {
-      const p = parseFloat(document.getElementById("netProfit").value || 0);
-      document.getElementById("profitOut").innerHTML =
-        `UBI 30%: <strong>${(p * 0.3).toLocaleString()}원</strong> · 경영비 30%: <strong>${(p * 0.3).toLocaleString()}원</strong> · 사회재단 최대 30%: <strong>${(p * 0.3).toLocaleString()}원</strong>`;
+      const p = Math.max(0, parseFloat(document.getElementById("netProfit").value || 0));
+      document.getElementById("profitOut").innerHTML = `
+        <div class="out-cell"><small>UBI (30%)</small><strong>${(p * 0.3).toLocaleString()}원</strong></div>
+        <div class="out-cell"><small>경영비 (30%)</small><strong>${(p * 0.3).toLocaleString()}원</strong></div>
+        <div class="out-cell"><small>사회재단 (최대30%)</small><strong>${(p * 0.3).toLocaleString()}원</strong></div>
+      `;
     }
 
     function calcBank() {
-      const a = parseFloat(document.getElementById("bankAmt").value || 0);
+      const a = Math.max(0, parseFloat(document.getElementById("bankAmt").value || 0));
       document.getElementById("bankOut").textContent =
-        `연 13% 가변 기준 예상 이자: +${(a * 0.13).toLocaleString()}원`;
+        `연 13% 가변 기준 예상 이자: +${Math.round(a * 0.13).toLocaleString()}원`;
     }
 
     initLang();
@@ -726,6 +1025,7 @@
     selectMod("wallet");
     renderMode();
     renderSummary();
+    renderLogs();
     calcProfit();
     calcBank();
   </script>
