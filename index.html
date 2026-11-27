@@ -32,6 +32,184 @@
       padding: 16px;
     }
 
+    /* 첫 진입 잠금 오버레이 */
+    .lock-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at top, #1b1542 0%, #060814 75%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .lock-overlay.hidden {
+      display: none;
+    }
+
+    .lock-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(16, 21, 43, 0.96);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      border-radius: 20px;
+      padding: 22px 18px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .lock-badge {
+      display: inline-block;
+      background: rgba(250, 204, 21, 0.16);
+      color: var(--accent-gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+
+    .lock-title {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .lock-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .auth-choice-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .auth-choice-btn {
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: var(--bg-card-soft);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .auth-choice-btn.selected {
+      border-color: var(--accent-gold);
+      background: linear-gradient(90deg, #4c1d95, #6d28d9);
+      color: #fef08a;
+    }
+
+    .auth-box {
+      display: none;
+      background: #0a0e21;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .auth-box.active {
+      display: block;
+    }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 64px);
+      gap: 14px;
+      justify-content: center;
+      margin: 10px auto 12px;
+    }
+
+    .pattern-dot {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #141c38;
+      border: 2px solid rgba(56, 189, 248, 0.45);
+      color: #e2e8f0;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .pattern-dot.picked {
+      background: linear-gradient(135deg, #7c3aed, #facc15);
+      border-color: #facc15;
+      color: #090d1f;
+    }
+
+    .pin-input {
+      width: 100%;
+      text-align: center;
+      letter-spacing: 8px;
+      font-size: 1.25rem;
+      font-weight: 900;
+      background: #10152b;
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 10px;
+      padding: 11px;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .lock-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .btn-ghost {
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 10px;
+      padding: 10px;
+      background: transparent;
+      color: #cbd5e1;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .btn-unlock {
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      background: linear-gradient(90deg, #eab308, #facc15);
+      color: #111827;
+      font-weight: 900;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .btn-browse {
+      width: 100%;
+      margin-top: 10px;
+      border: 1px solid rgba(34, 211, 238, 0.55);
+      border-radius: 12px;
+      padding: 11px 14px;
+      background: rgba(34, 211, 238, 0.14);
+      color: #67e8f9;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .lock-msg {
+      min-height: 20px;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #fda4af;
+    }
+
     .container {
       max-width: 720px;
       margin: 0 auto;
@@ -43,7 +221,7 @@
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
-      background: rgba(16, 21, 43, 0.94);
+      background: rgba(16, 21, 43, 0.95);
       border: 1px solid var(--border-subtle);
       border-radius: 14px;
       padding: 12px 16px;
@@ -59,10 +237,28 @@
       -webkit-text-fill-color: transparent;
     }
 
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .domain-tag {
       font-size: 0.82rem;
       color: var(--accent-gold);
       font-weight: 700;
+    }
+
+    .mini-btn {
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      border-radius: 8px;
+      padding: 5px 10px;
+      background: var(--bg-card-soft);
+      color: #e0f2fe;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .hero-card {
@@ -85,7 +281,7 @@
     .hero-sub {
       font-size: 0.88rem;
       color: #cbd5e1;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero-actions {
@@ -94,26 +290,56 @@
       gap: 10px;
     }
 
-    .btn-primary-web3 {
-      border: none;
-      border-radius: 10px;
-      padding: 12px 14px;
-      background: linear-gradient(90deg, #7c3aed, #d946ef);
-      color: #ffffff;
+    .tab-btn {
+      border-radius: 12px;
+      padding: 13px 14px;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary-web3 {
+      border: 1px solid rgba(232, 121, 249, 0.55);
+      background: linear-gradient(90deg, #7c3aed, #c026d3);
+      color: #ffffff;
     }
 
     .btn-secondary-net {
-      border: 1px solid rgba(56, 189, 248, 0.5);
-      border-radius: 10px;
-      padding: 12px 14px;
-      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.55);
+      background: rgba(15, 23, 42, 0.9);
       color: #e0f2fe;
-      font-weight: 800;
-      font-size: 0.9rem;
-      cursor: pointer;
+    }
+
+    .tab-btn.active-tab {
+      box-shadow: 0 0 0 2px #facc15, 0 8px 20px rgba(250, 204, 21, 0.22);
+    }
+
+    .browse-banner {
+      margin-top: 10px;
+      background: rgba(34, 211, 238, 0.14);
+      border: 1px solid rgba(34, 211, 238, 0.4);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 0.82rem;
+      color: #a5f3fc;
+      display: none;
+    }
+
+    .browse-banner.show {
+      display: block;
+    }
+
+    .mode-panel {
+      display: none;
+    }
+
+    .mode-panel.active {
+      display: block;
     }
 
     .card {
@@ -132,6 +358,43 @@
       padding-left: 10px;
       border-left: 4px solid var(--accent-gold);
       color: #fef08a;
+    }
+
+    .web3-highlight {
+      background: linear-gradient(135deg, #19153b, #29174d);
+      border: 1px solid rgba(192, 132, 252, 0.45);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: #f3e8ff;
+    }
+
+    .rate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .rate-box {
+      background: rgba(9, 13, 31, 0.85);
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    .rate-term {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+
+    .rate-val {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--accent-gold);
     }
 
     .balance-grid {
@@ -462,7 +725,6 @@
       border-left: 4px solid #ec4899;
       border-radius: 10px;
       padding: 11px 14px;
-      margin-bottom: 10px;
       font-size: 0.86rem;
       color: #f8fafc;
     }
@@ -481,6 +743,12 @@
       padding-bottom: 28px;
     }
 
+    @media (max-width: 600px) {
+      .rate-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (max-width: 520px) {
       .hero-actions,
       .balance-grid,
@@ -491,10 +759,79 @@
   </style>
 </head>
 <body>
+  <!-- 첫 진입 시 패턴 또는 6자리 숫자 중 택1 + 둘러보기 -->
+  <div id="entry-lock-overlay" class="lock-overlay">
+    <div class="lock-card">
+      <div class="lock-badge">HKWB 첫 진입 보안 인증</div>
+      <h2 class="lock-title">인증 방식을 선택해 주세요</h2>
+      <p class="lock-desc">패턴 또는 6자리 숫자 중 택1 하거나 둘러보기로 바로 확인하세요.</p>
+
+      <div class="auth-choice-row">
+        <button id="choose-pattern-btn" type="button" class="auth-choice-btn selected" onclick="selectAuthType('pattern')">
+          패턴 인증
+        </button>
+        <button id="choose-pin-btn" type="button" class="auth-choice-btn" onclick="selectAuthType('pin')">
+          6자리 숫자 인증
+        </button>
+      </div>
+
+      <!-- 패턴 3x3 선택 -->
+      <div id="auth-pattern-box" class="auth-box active">
+        <div style="font-size:0.84rem;color:#cbd5e1;margin-bottom:6px;">
+          1~9 숫자를 순서대로 3개 이상 눌러 패턴을 입력하세요.
+        </div>
+        <div class="pattern-grid" id="pattern-grid">
+          <button type="button" class="pattern-dot" onclick="pickDot(1, this)">1</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(2, this)">2</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(3, this)">3</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(4, this)">4</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(5, this)">5</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(6, this)">6</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(7, this)">7</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(8, this)">8</button>
+          <button type="button" class="pattern-dot" onclick="pickDot(9, this)">9</button>
+        </div>
+        <div id="pattern-preview" style="font-size:0.82rem;color:#fde047;">선택된 패턴: 없음</div>
+        <div class="lock-actions">
+          <button type="button" class="btn-ghost" onclick="resetPattern()">다시 그리기</button>
+          <button type="button" class="btn-unlock" onclick="unlockByPattern()">패턴 확인</button>
+        </div>
+      </div>
+
+      <!-- 6자리 숫자 입력 -->
+      <div id="auth-pin-box" class="auth-box">
+        <div style="font-size:0.84rem;color:#cbd5e1;margin-bottom:8px;">
+          6자리 숫자를 입력해 주세요.
+        </div>
+        <input
+          id="six-pin-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          class="pin-input"
+          placeholder="••••••"
+        />
+        <div class="lock-actions">
+          <button type="button" class="btn-ghost" onclick="clearPin()">지우기</button>
+          <button type="button" class="btn-unlock" onclick="unlockByPin()">6자리 확인</button>
+        </div>
+      </div>
+
+      <button type="button" class="btn-browse" onclick="enterBrowseMode()">
+        둘러보기 (인증 없이 바로 보기) &gt;
+      </button>
+
+      <div id="lock-msg" class="lock-msg"></div>
+    </div>
+  </div>
+
   <div class="container">
     <header class="top-bar">
       <div class="brand">HKWB — HK WorldBank</div>
-      <div class="domain-tag">hkwb.world · ljw2358</div>
+      <div class="top-right">
+        <span class="domain-tag">hkwb.world · ljw2358</span>
+        <button type="button" class="mini-btn" onclick="openLockScreen()">보안 잠금</button>
+      </div>
     </header>
 
     <section class="hero-card">
@@ -503,71 +840,180 @@
         추천인: <strong>ljw2358</strong> · 문의: <strong>support@hkwb.world</strong>
       </p>
       <div class="hero-actions">
-        <button type="button" class="btn-primary-web3" onclick="showBankMsg('Web3 디지털 뱅크 메뉴를 선택했습니다.')">
+        <button
+          id="tab-btn-web3"
+          type="button"
+          class="tab-btn btn-primary-web3 active-tab"
+          onclick="switchMode('web3')"
+        >
           Web3 디지털 뱅크 진입하기 &gt;
         </button>
-        <button type="button" class="btn-secondary-net" onclick="showBankMsg('무점포 인터넷 뱅크 메뉴를 선택했습니다.')">
-          무점포 인터넷 뱅크 연결하기 &gt;
+        <button
+          id="tab-btn-internet"
+          type="button"
+          class="tab-btn btn-secondary-net"
+          onclick="switchMode('internet')"
+        >
+          인터넷 은행 연결하기 &gt;
         </button>
+      </div>
+      <div id="browse-banner" class="browse-banner">
+        현재 <strong>둘러보기</strong> 상태로 화면을 확인 중입니다.
       </div>
     </section>
 
-    <!-- 무점포 인터넷 은행 전용 메뉴 -->
-    <section id="no-branch-bank" class="card">
-      <h2 class="section-title">무점포 인터넷 은행 · 계좌 및 대출 한도</h2>
+    <!-- 모드 1: Web3 디지털 뱅크 전용 패널 -->
+    <div id="panel-web3" class="mode-panel active">
+      <section class="card">
+        <h2 class="section-title">Web3 디지털 뱅크 · 개척자 생태계 &amp; 가변 이율 기준</h2>
+        <div class="web3-highlight">
+          파이 개척자를 위한 <strong>HKWB Web3 디지털 뱅크</strong>입니다. 예치 및 운용 이율은 AGI/ASI 운용 기준에 따른 <strong>가변 금리</strong> 구조를 지향하며, 아래 구간을 우선 참고 기준으로 삼습니다.
+        </div>
+        <div class="rate-grid">
+          <div class="rate-box">
+            <div class="rate-term">6개월 기준</div>
+            <div class="rate-val">6%</div>
+          </div>
+          <div class="rate-box">
+            <div class="rate-term">1년 기준</div>
+            <div class="rate-val">13%</div>
+          </div>
+          <div class="rate-box">
+            <div class="rate-term">3년 기준</div>
+            <div class="rate-val">20%</div>
+          </div>
+          <div class="rate-box">
+            <div class="rate-term">5년 기준</div>
+            <div class="rate-val">31.41%</div>
+          </div>
+        </div>
+      </section>
 
-      <div class="balance-grid">
-        <div class="balance-box">
-          <div class="balance-label">무점포 입출금 계좌 잔액</div>
-          <div class="balance-num">₩42,800,000</div>
-        </div>
-        <div class="balance-box">
-          <div class="balance-label">정기 예치 계좌 잔액</div>
-          <div class="balance-num">₩22,200,000</div>
-        </div>
-      </div>
+      <!-- 웹3 디지털 백서 서술형 6개 소주제 100선 & 웹3 디지털 FAQ 20선 -->
+      <section class="card">
+        <h2 class="section-title">웹3 디지털 은행 백서 &amp; FAQ</h2>
 
-      <div class="menu-2x2">
-        <button type="button" class="menu-tile" onclick="showBankMsg('즉시 이체 메뉴가 선택되었습니다.')">
-          <div class="menu-tile-title">즉시 이체</div>
-          <div class="menu-tile-desc">계좌번호 입력 후 빠른 송금 실행</div>
+        <button
+          type="button"
+          class="sub-btn web3-btn"
+          aria-expanded="false"
+          aria-controls="web3-wp-100-panel"
+          onclick="toggleDropdown('web3-wp-100-panel', this)"
+        >
+          <span>웹3 디지털 백서 서술형 6개 소주제 100선 (1~100번)</span>
+          <span class="arrow">▼</span>
         </button>
-        <button type="button" class="menu-tile" onclick="showBankMsg('무점포 예치 메뉴가 선택되었습니다.')">
-          <div class="menu-tile-title">무점포 예치</div>
-          <div class="menu-tile-desc">여유 자금 예치 및 기간별 이율 확인</div>
-        </button>
-        <button type="button" class="menu-tile" onclick="showBankMsg('계좌 내역 조회 메뉴가 선택되었습니다.')">
-          <div class="menu-tile-title">계좌 내역 조회</div>
-          <div class="menu-tile-desc">입출금·거래 상세 내역 확인</div>
-        </button>
-        <button type="button" class="menu-tile" onclick="checkLoanLimit()">
-          <div class="menu-tile-title">대출 한도 조회</div>
-          <div class="menu-tile-desc">개인 신용도 기반 대출 가능·한도 확인</div>
-        </button>
-      </div>
+        <div id="web3-wp-100-panel" class="sub-panel">
+          <div id="web3-wp-100-container"></div>
+        </div>
 
-      <div class="loan-box">
-        <div style="font-size:0.86rem;font-weight:700;color:#fef08a;">
-          개인 신용도 기반 대출 가능 여부 및 한도 확인
+        <button
+          type="button"
+          class="sub-btn web3-btn"
+          aria-expanded="false"
+          aria-controls="web3-faq-20-panel"
+          onclick="toggleDropdown('web3-faq-20-panel', this)"
+        >
+          <span>웹3 디지털 FAQ 20선</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div id="web3-faq-20-panel" class="sub-panel">
+          <ol id="web3-faq-20-list"></ol>
         </div>
-        <div class="loan-row">
-          <input
-            id="creditScoreInput"
-            type="number"
-            min="300"
-            max="1000"
-            class="input-dark"
-            placeholder="신용점수 입력 (예: 780)"
-          />
-          <button type="button" class="btn-gold" onclick="checkLoanLimit()">한도 확인</button>
-        </div>
-        <div id="loanResult" class="loan-result">
-          신용점수를 입력하면 예상 대출 가능 여부와 한도를 안내합니다.
-        </div>
-      </div>
+      </section>
+    </div>
 
-      <div id="bankStatus" class="status-toast"></div>
-    </section>
+    <!-- 모드 2: 인터넷 은행 전용 패널 -->
+    <div id="panel-internet" class="mode-panel">
+      <section id="internet-bank" class="card">
+        <h2 class="section-title">인터넷 은행 · 계좌 및 대출 한도</h2>
+
+        <div class="balance-grid">
+          <div class="balance-box">
+            <div class="balance-label">입출금 계좌 잔액</div>
+            <div class="balance-num">₩42,800,000</div>
+          </div>
+          <div class="balance-box">
+            <div class="balance-label">정기 예치 계좌 잔액</div>
+            <div class="balance-num">₩22,200,000</div>
+          </div>
+        </div>
+
+        <div class="menu-2x2">
+          <button type="button" class="menu-tile" onclick="showBankMsg('즉시 이체 메뉴가 선택되었습니다.')">
+            <div class="menu-tile-title">즉시 이체</div>
+            <div class="menu-tile-desc">계좌번호 입력 후 빠른 송금 실행</div>
+          </button>
+          <button type="button" class="menu-tile" onclick="showBankMsg('예치 메뉴가 선택되었습니다.')">
+            <div class="menu-tile-title">예치</div>
+            <div class="menu-tile-desc">여유 자금 예치 및 기간별 이율 확인</div>
+          </button>
+          <button type="button" class="menu-tile" onclick="showBankMsg('계좌 내역 조회 메뉴가 선택되었습니다.')">
+            <div class="menu-tile-title">계좌 내역 조회</div>
+            <div class="menu-tile-desc">입출금·거래 상세 내역 확인</div>
+          </button>
+          <button type="button" class="menu-tile" onclick="checkLoanLimit()">
+            <div class="menu-tile-title">대출 한도 조회</div>
+            <div class="menu-tile-desc">개인 신용도 기반 대출 가능·한도 확인</div>
+          </button>
+        </div>
+
+        <div class="loan-box">
+          <div style="font-size:0.86rem;font-weight:700;color:#fef08a;">
+            개인 신용도 기반 대출 가능 여부 및 한도 확인
+          </div>
+          <div class="loan-row">
+            <input
+              id="creditScoreInput"
+              type="number"
+              min="300"
+              max="1000"
+              class="input-dark"
+              placeholder="신용점수 입력 (예: 780)"
+            />
+            <button type="button" class="btn-gold" onclick="checkLoanLimit()">한도 확인</button>
+          </div>
+          <div id="loanResult" class="loan-result">
+            신용점수를 입력하면 예상 대출 가능 여부와 한도를 안내합니다.
+          </div>
+        </div>
+
+        <div id="bankStatus" class="status-toast"></div>
+      </section>
+
+      <!-- 인터넷 은행 백서 서술형 50선 & FAQ 20선 -->
+      <section class="card">
+        <h2 class="section-title">인터넷 은행 백서 &amp; FAQ</h2>
+
+        <button
+          type="button"
+          class="sub-btn"
+          aria-expanded="false"
+          aria-controls="wp-50-panel"
+          onclick="toggleDropdown('wp-50-panel', this)"
+        >
+          <span>인터넷 은행 백서 서술형 50선 (1~50번 드롭다운)</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div id="wp-50-panel" class="sub-panel">
+          <ol id="wp-50-list"></ol>
+        </div>
+
+        <button
+          type="button"
+          class="sub-btn"
+          aria-expanded="false"
+          aria-controls="faq-20-panel"
+          onclick="toggleDropdown('faq-20-panel', this)"
+        >
+          <span>인터넷 은행 FAQ 20선</span>
+          <span class="arrow">▼</span>
+        </button>
+        <div id="faq-20-panel" class="sub-panel">
+          <ol id="faq-20-list"></ol>
+        </div>
+      </section>
+    </div>
 
     <!-- 사회 환원 UBI 및 고객센터 삐니 -->
     <section class="card ubi-card">
@@ -669,72 +1115,11 @@
       </div>
     </section>
 
-    <!-- 웹3 디지털 백서 서술형 6개 소주제 100선 & 웹3 디지털 FAQ 20선 -->
-    <section class="card">
-      <h2 class="section-title">웹3 디지털 은행 백서 &amp; FAQ</h2>
-
-      <button
-        type="button"
-        class="sub-btn web3-btn"
-        aria-expanded="false"
-        aria-controls="web3-wp-100-panel"
-        onclick="toggleDropdown('web3-wp-100-panel', this)"
-      >
-        <span>웹3 디지털 백서 서술형 6개 소주제 100선 (1~100번)</span>
-        <span class="arrow">▼</span>
-      </button>
-      <div id="web3-wp-100-panel" class="sub-panel">
-        <div id="web3-wp-100-container"></div>
-      </div>
-
-      <button
-        type="button"
-        class="sub-btn web3-btn"
-        aria-expanded="false"
-        aria-controls="web3-faq-20-panel"
-        onclick="toggleDropdown('web3-faq-20-panel', this)"
-      >
-        <span>웹3 디지털 FAQ 20선</span>
-        <span class="arrow">▼</span>
-      </button>
-      <div id="web3-faq-20-panel" class="sub-panel">
-        <ol id="web3-faq-20-list"></ol>
-      </div>
-    </section>
-
-    <!-- 공식 미디어 · 무점포 인터넷 은행 백서 서술형 50선 · FAQ 20선 -->
+    <!-- 공식 미디어 채널 -->
     <section class="card">
       <div class="media-banner">
         <strong>HKWB 공식 미디어 채널 · 유튜브 &amp; 틱톡</strong><br />
         @Hyekong2026 · support@hkwb.world
-      </div>
-
-      <button
-        type="button"
-        class="sub-btn"
-        aria-expanded="false"
-        aria-controls="wp-50-panel"
-        onclick="toggleDropdown('wp-50-panel', this)"
-      >
-        <span>무점포 인터넷 은행 백서 서술형 50선 (1~50번 드롭다운)</span>
-        <span class="arrow">▼</span>
-      </button>
-      <div id="wp-50-panel" class="sub-panel">
-        <ol id="wp-50-list"></ol>
-      </div>
-
-      <button
-        type="button"
-        class="sub-btn"
-        aria-expanded="false"
-        aria-controls="faq-20-panel"
-        onclick="toggleDropdown('faq-20-panel', this)"
-      >
-        <span>무점포 인터넷 은행 FAQ 20선</span>
-        <span class="arrow">▼</span>
-      </button>
-      <div id="faq-20-panel" class="sub-panel">
-        <ol id="faq-20-list"></ol>
       </div>
     </section>
 
@@ -744,6 +1129,102 @@
   </div>
 
   <script>
+    let pickedPattern = [];
+
+    function selectAuthType(type) {
+      const patternBtn = document.getElementById("choose-pattern-btn");
+      const pinBtn = document.getElementById("choose-pin-btn");
+      const patternBox = document.getElementById("auth-pattern-box");
+      const pinBox = document.getElementById("auth-pin-box");
+      const msgEl = document.getElementById("lock-msg");
+
+      if (msgEl) msgEl.textContent = "";
+
+      if (type === "pin") {
+        if (patternBtn) patternBtn.classList.remove("selected");
+        if (pinBtn) pinBtn.classList.add("selected");
+        if (patternBox) patternBox.classList.remove("active");
+        if (pinBox) pinBox.classList.add("active");
+      } else {
+        if (pinBtn) pinBtn.classList.remove("selected");
+        if (patternBtn) patternBtn.classList.add("selected");
+        if (pinBox) pinBox.classList.remove("active");
+        if (patternBox) patternBox.classList.add("active");
+      }
+    }
+
+    function pickDot(num, btnEl) {
+      if (pickedPattern.includes(num)) return;
+      pickedPattern.push(num);
+      if (btnEl) btnEl.classList.add("picked");
+      const preview = document.getElementById("pattern-preview");
+      if (preview) {
+        preview.textContent = "선택된 패턴: " + pickedPattern.join(" → ");
+      }
+    }
+
+    function resetPattern() {
+      pickedPattern = [];
+      document.querySelectorAll(".pattern-dot").forEach((dot) => {
+        dot.classList.remove("picked");
+      });
+      const preview = document.getElementById("pattern-preview");
+      if (preview) preview.textContent = "선택된 패턴: 없음";
+      const msgEl = document.getElementById("lock-msg");
+      if (msgEl) msgEl.textContent = "";
+    }
+
+    function unlockByPattern() {
+      const msgEl = document.getElementById("lock-msg");
+      if (pickedPattern.length < 3) {
+        if (msgEl) msgEl.textContent = "패턴 점을 3개 이상 순서대로 눌러 주세요.";
+        return;
+      }
+      completeUnlock(false);
+    }
+
+    function clearPin() {
+      const pinInput = document.getElementById("six-pin-input");
+      if (pinInput) pinInput.value = "";
+      const msgEl = document.getElementById("lock-msg");
+      if (msgEl) msgEl.textContent = "";
+    }
+
+    function unlockByPin() {
+      const pinInput = document.getElementById("six-pin-input");
+      const msgEl = document.getElementById("lock-msg");
+      const val = pinInput ? pinInput.value.trim() : "";
+      if (!/^\d{6}$/.test(val)) {
+        if (msgEl) msgEl.textContent = "6자리 숫자를 정확히 입력해 주세요.";
+        return;
+      }
+      completeUnlock(false);
+    }
+
+    function enterBrowseMode() {
+      completeUnlock(true);
+    }
+
+    function completeUnlock(isBrowse) {
+      const overlay = document.getElementById("entry-lock-overlay");
+      if (overlay) overlay.classList.add("hidden");
+      const banner = document.getElementById("browse-banner");
+      if (banner) {
+        if (isBrowse) {
+          banner.classList.add("show");
+        } else {
+          banner.classList.remove("show");
+        }
+      }
+    }
+
+    function openLockScreen() {
+      resetPattern();
+      clearPin();
+      const overlay = document.getElementById("entry-lock-overlay");
+      if (overlay) overlay.classList.remove("hidden");
+    }
+
     const web3WpTopics = [
       {
         title: "소주제 1. 웹3 디지털 은행 비전 및 파이 개척자 생태계 (1~18번)",
@@ -751,7 +1232,7 @@
         items: [
           "HKWB 웹3 디지털 은행은 파이 개척자 커뮤니티의 참여와 신뢰를 바탕으로 설계된 차세대 디지털 금융 모델입니다.",
           "단순한 거래 창구를 넘어 디지털 자산의 실용성과 금융 접근성을 함께 높이는 것을 핵심 방향으로 삼습니다.",
-          "HKWB는 웹3 디지털 은행과 무점포 인터넷 은행을 함께 아우르는 부모 플랫폼 구조로 운영됩니다.",
+          "HKWB는 웹3 디지털 은행과 인터넷 은행을 함께 아우르는 부모 플랫폼 구조로 운영됩니다.",
           "공식 도메인 hkwb.world와 공식 식별자 ljw2358을 기준으로 일관된 정체성과 안내 체계를 유지합니다.",
           "파이 개척자들이 일상 속에서 디지털 가치와 금융 서비스를 자연스럽게 연결할 수 있도록 돕습니다.",
           "폐쇄적이거나 난해한 전문 용어 대신 누구나 이해할 수 있는 명확한 설명과 구조를 지향합니다.",
@@ -885,7 +1366,7 @@
 
     const web3Faq20Data = [
       "Q1. HKWB 웹3 디지털 은행은 어떤 서비스인가요? — 파이 개척자 커뮤니티를 중심으로 설계된 차세대 디지털 금융 플랫폼입니다.",
-      "Q2. HKWB에서 웹3 디지털 은행과 무점포 인터넷 은행의 관계는 무엇인가요? — HKWB를 중심으로 웹3 디지털 은행과 무점포 인터넷 은행이 함께 구성됩니다.",
+      "Q2. HKWB에서 웹3 디지털 은행과 인터넷 은행의 관계는 무엇인가요? — HKWB를 중심으로 웹3 디지털 은행과 인터넷 은행이 함께 구성됩니다.",
       "Q3. 예치 이율은 고정 금리인가요, 가변 금리인가요? — 시장과 운용 조건을 반영하는 가변 금리 구조를 지향하며, 6개월 6%, 1년 13%, 3년 20%, 5년 31.41%를 참고 기준으로 삼습니다.",
       "Q4. 순수익 최대 60% 사회 환원 정책은 무엇인가요? — 순수익의 최대 60%를 사회 환원 및 리워드에 활용하는 환원 기조를 뜻합니다.",
       "Q5. 사회 환원 UBI는 어떻게 확인하나요? — 사회 환원 UBI 섹션에서 배분 예정 금액 확인과 수령 요청 안내를 볼 수 있습니다.",
@@ -907,31 +1388,31 @@
     ];
 
     const wp50Sentences = [
-      "HKWB 무점포 인터넷 은행은 물리적 지점 방문 없이 모바일과 웹 환경에서 핵심 금융 업무를 신속히 처리하도록 설계된 디지털 뱅킹 체계입니다.",
+      "HKWB 인터넷 은행은 모바일과 웹 환경에서 핵심 금융 업무를 신속히 처리하도록 설계된 디지털 뱅킹 체계입니다.",
       "본 플랫폼은 파이 개척자 커뮤니티의 실질적 금융 편의와 디지털 자산 활용성을 높이는 데 목적을 둡니다.",
-      "HKWB는 웹3 디지털 은행과 무점포 인터넷 은행을 양대 축으로 삼아 이용자 상황에 맞는 직관적인 금융 경험을 제공합니다.",
-      "지점 임대료와 오프라인 창구 운영 비용을 줄여 확보한 효율성은 서비스 품질 개선과 이용자 환원 구조로 연결됩니다.",
-      "무점포 인터넷 은행 화면은 불필요한 시각적 혼잡을 줄이고 입출금, 예치, 조회, 대출 한도 확인 등 실제 필요한 기능 중심으로 구성됩니다.",
+      "HKWB는 웹3 디지털 은행과 인터넷 은행을 양대 축으로 삼아 이용자 상황에 맞는 직관적인 금융 경험을 제공합니다.",
+      "온라인 중심의 효율적인 운영 구조는 서비스 품질 개선과 이용자 환원 구조로 연결됩니다.",
+      "인터넷 은행 화면은 불필요한 시각적 혼잡을 줄이고 입출금, 예치, 조회, 대출 한도 확인 등 실제 필요한 기능 중심으로 구성됩니다.",
       "공식 도메인 hkwb.world와 식별자 ljw2358, 공식 문의 창구 support@hkwb.world를 통해 일관된 브랜드 신뢰도를 유지합니다.",
       "즉시 이체 기능은 계좌 정보를 바탕으로 빠르고 명확하게 송금 절차를 안내하여 일상 금융 거래의 속도를 높입니다.",
-      "무점포 예치 기능은 여유 자금을 기간별로 운용하며 예상 이율과 만기 구조를 한눈에 확인할 수 있도록 지원합니다.",
+      "예치 기능은 여유 자금을 기간별로 운용하며 예상 이율과 만기 구조를 한눈에 확인할 수 있도록 지원합니다.",
       "예치 이율은 고정된 단일 수치보다 시장 환경과 운용 조건을 반영하는 가변형 구조를 기본 방향으로 삼습니다.",
       "기준 구간 안내에서는 6개월 6%, 1년 13%, 3년 20%, 5년 31.41%를 참고 기준으로 삼아 장기 예치의 가치를 설명합니다.",
       "계좌 내역 조회 기능은 입출금 이력과 거래 상세를 투명하게 확인하여 이용자가 자신의 자금 흐름을 스스로 관리할 수 있게 돕습니다.",
       "대출 한도 조회 기능은 개인 신용도 입력을 기준으로 대출 가능 여부와 예상 한도를 사전에 안내하여 무분별한 신청을 줄입니다.",
       "신용도 기반 사전 한도 안내는 이용자가 본인의 상환 여력과 금융 계획을 객관적으로 점검할 수 있는 출발점이 됩니다.",
-      "무점포 인터넷 은행의 모든 거래 흐름은 단계별 확인 절차를 거쳐 오송금과 입력 실수를 예방하도록 설계됩니다.",
+      "인터넷 은행의 모든 거래 흐름은 단계별 확인 절차를 거쳐 오송금과 입력 실수를 예방하도록 설계됩니다.",
       "순수익의 최대 60%를 사회 환원 및 커뮤니티 리워드에 활용하는 정책은 금융 수익의 공공성을 강화하는 핵심 원칙입니다.",
       "사회 환원 UBI는 플랫폼 성장의 결실이 구성원에게 기본 소득 형태로 순환하도록 돕는 참여형 환원 모델입니다.",
       "UBI 수령과 안내 절차는 이용자가 복잡한 용어 없이도 배분 내역과 신청 상태를 쉽게 이해할 수 있도록 구성됩니다.",
       "고객센터 AGI/ASI 삐니는 이용자의 반복 문의와 정책 안내를 즉시 지원하여 대기 시간을 줄이고 접근성을 높입니다.",
-      "전담 AI 어시스턴트 체계는 24시간 상시 안내가 가능한 디지털 창구로서 무점포 은행의 비대면 한계를 보완합니다.",
+      "전담 AI 어시스턴트 체계는 24시간 상시 안내가 가능한 디지털 창구로서 비대면 금융의 접근성을 높입니다.",
       "코어 리갈 모듈은 복잡한 법적·제도적 정보를 접이식 구조로 정리해 이용자가 필요할 때만 펼쳐 볼 수 있게 합니다.",
       "3대 POLICIES는 AML 자금세탁방지, KYC 고객확인, 철통보안 원칙을 중심으로 건전한 금융 생태계를 지탱합니다.",
       "21개국 디지털 자산법 및 해킹 방어 컴플라이언스는 국경을 넘는 디지털 금융 환경에서 법적 리스크를 낮추는 기준입니다.",
       "FATF 트래블룰 및 실시간 제재 리스트 검증 규격은 송수신 투명성과 국제 규제 준수를 동시에 충족하기 위한 장치입니다.",
-      "무점포 인터넷 은행은 이용자 인증과 세션 보호를 강화하여 비인가 접근이나 피싱 시도를 사전에 차단합니다.",
-      "중요 거래 전 확인 단계를 명확히 두어 금액, 수신처, 조건을 다시 한 번 점검한 뒤 실행하도록 유도합니다.",
+      "인터넷 은행은 이용자 인증과 세션 보호를 강화하여 비인가 접근이나 피싱 시도를 사전에 차단합니다.",
+      "첫 진입 시 패턴 또는 6자리 숫자 인증과 둘러보기 선택을 제공해 보안성과 편의성의 균형을 맞췄습니다.",
       "모바일 환경에서의 가독성을 최우선으로 고려해 버튼 크기, 여백, 대비를 균형 있게 배치했습니다.",
       "접이식 드롭다운 구조는 한 화면에 너무 많은 정보가 한꺼번에 쏟아져 생기는 피로감을 줄여 줍니다.",
       "HK GLOBAL ECOSYSTEM HUBS는 금융을 넘어 로봇, 안경폰·스마트 글래스, 도심항공교통 등 미래 산업과 연결됩니다.",
@@ -940,38 +1421,38 @@
       "각 생태계 항목을 선택하면 해당 분야의 전용 앱이나 상세 페이지로 바로 이동할 수 있도록 연결성을 높였습니다.",
       "국제 구호 및 인도적 지원 협력 방향은 글로벌 기업 시민으로서의 책임과 연대 가치를 실천하는 기준이 됩니다.",
       "국경없는 의사회, 세이브드 칠드런, 유엔 난민기구 등 인도적 기관과의 협력 및 우선 공간 배려 기조는 사회적 가치를 담고 있습니다.",
-      "무점포 인터넷 은행은 초보자부터 숙련된 디지털 사용자까지 누구나 헤매지 않고 쓸 수 있는 용어와 화면 구성을 지향합니다.",
+      "인터넷 은행은 초보자부터 숙련된 디지털 사용자까지 누구나 헤매지 않고 쓸 수 있는 용어와 화면 구성을 지향합니다.",
       "수수료와 이율, 한도 관련 안내는 오해를 줄이기 위해 명확한 기준과 조건을 함께 제시하는 것을 원칙으로 합니다.",
       "거래 내역과 잔액 표시는 숫자의 자릿수와 통화 단위를 선명하게 구분해 판독 오류를 줄이도록 설계되었습니다.",
       "단일 파일 HTML 구조로도 핵심 화면과 인터랙션을 바로 검증할 수 있어 빠른 프로토타이핑과 점검이 가능합니다.",
       "브라우저 환경에서도 드롭다운 개폐, 신용점수별 예상 한도 계산, UBI 수령 안내, 삐니 문의를 즉시 테스트할 수 있습니다.",
-      "백서 서술형 50선은 무점포 인터넷 은행의 철학, 기능, 거버넌스, 보안, 확장성을 문장 단위로 체계화한 요약본입니다.",
+      "백서 서술형 50선은 인터넷 은행의 철학, 기능, 거버넌스, 보안, 확장성을 문장 단위로 체계화한 요약본입니다.",
       "FAQ 20선은 실제 이용자가 가장 자주 묻는 질문을 중심으로 핵심 답변을 빠르게 찾을 수 있도록 정리했습니다.",
       "비대면 금융 서비스에서는 투명한 안내와 예측 가능한 절차가 곧 신뢰로 이어집니다.",
       "디지털 금융 혁신은 기술 자체의 화려함보다 사람이 안전하고 편리하게 사용할 수 있을 때 완성됩니다.",
-      "무점포 인터넷 은행은 시공간 제약 없이 계좌를 확인하고 자금을 관리할 수 있는 생활 밀착형 허브를 지향합니다.",
+      "인터넷 은행은 시공간 제약 없이 계좌를 확인하고 자금을 관리할 수 있는 생활 밀착형 허브를 지향합니다.",
       "신용도 기반 대출 한도 안내와 예치·이체 기능의 결합은 저축과 자금 활용을 한 공간에서 이어 줍니다.",
       "컴플라이언스와 보안 규격을 내재화함으로써 플랫폼 성장과 규제 적합성을 함께 추구합니다.",
       "커뮤니티 피드백과 현장 테스트 결과를 반영해 화면 구성과 안내 문구를 지속적으로 다듬어 나갑니다.",
       "다국어 확장과 접근성 개선을 염두에 둔 구조는 글로벌 파이 개척자들과의 소통 폭을 넓힙니다.",
       "명확한 책임 주체와 공식 연락 채널을 공개함으로써 이용자 보호와 문의 응대 체계를 분명히 합니다.",
-      "HKWB 무점포 인터넷 은행은 기술과 인류, 금융과 미래 산업이 연결되는 차세대 디지털 금융 모델을 만들어 갑니다.",
-      "지속적인 점검과 개선을 통해 더욱 안정적이고 직관적인 무점포 인터넷 은행 플랫폼으로 발전시켜 나갑니다."
+      "HKWB 인터넷 은행은 기술과 인류, 금융과 미래 산업이 연결되는 차세대 디지털 금융 모델을 만들어 갑니다.",
+      "지속적인 점검과 개선을 통해 더욱 안정적이고 직관적인 인터넷 은행 플랫폼으로 발전시켜 나갑니다."
     ];
 
     const faq20Data = [
-      "Q1. 무점포 인터넷 은행이란 무엇인가요? — 오프라인 지점 없이 웹과 모바일에서 계좌 조회, 이체, 예치, 대출 한도 확인 등을 이용할 수 있는 디지털 뱅킹 서비스입니다.",
-      "Q2. 어떤 주요 메뉴를 제공하나요? — 즉시 이체, 무점포 예치, 계좌 내역 조회, 개인 신용도 기반 대출 한도 조회 기능을 제공합니다.",
+      "Q1. HKWB 인터넷 은행이란 무엇인가요? — 웹과 모바일에서 계좌 조회, 이체, 예치, 대출 한도 확인 등을 이용할 수 있는 디지털 뱅킹 서비스입니다.",
+      "Q2. 어떤 주요 메뉴를 제공하나요? — 즉시 이체, 예치, 계좌 내역 조회, 개인 신용도 기반 대출 한도 조회 기능을 제공합니다.",
       "Q3. 대출 한도 조회는 어떻게 이용하나요? — 신용점수를 입력하면 신용 구간에 따른 대출 가능 여부와 예상 한도를 바로 확인할 수 있습니다.",
       "Q4. 예치 이율은 고정 금리인가요? — 시장과 운용 기준을 반영하는 가변형 구조를 지향하며, 6개월 6%, 1년 13%, 3년 20%, 5년 31.41%를 참고 기준으로 둡니다.",
       "Q5. 사회 환원 UBI는 어떤 제도인가요? — 순수익 최대 60% 사회 환원 및 리워드 정책에 맞춰 기본 소득 형태로 순환하는 환원 모델입니다.",
-      "Q6. 고객센터 AGI/ASI 삐니는 무엇을 도와주나요? — UBI 정책, 가변 금리, 무점포 인터넷 은행 이용 방법 등 궁금한 사항을 안내해 줍니다.",
+      "Q6. 고객센터 AGI/ASI 삐니는 무엇을 도와주나요? — UBI 정책, 가변 금리, 인터넷 은행 이용 방법 등 궁금한 사항을 안내해 줍니다.",
       "Q7. 코어 리갈에는 어떤 내용이 들어있나요? — 3대 POLICIES, 21개국 디지털 자산법 및 해킹 방어 컴플라이언스, FATF 트래블룰 & 실시간 제재 리스트 검증 규격 세 가지를 담았습니다.",
       "Q8. 드롭다운 메뉴는 어떻게 사용하나요? — 각 항목 제목을 누르면 내용이 펼쳐지고, 다시 누르면 접혀서 화면을 깔끔하게 유지할 수 있습니다.",
       "Q9. HK GLOBAL ECOSYSTEM HUBS에서는 무엇을 할 수 있나요? — 로봇, 안경폰·스마트 글래스, UAM, AI, 양자바이오·퀀텀, 우주모빌리티, 부품장비, 국방기술, 165층 랜드마크·해오름 특별시 연계 항목을 누르면 해당 앱/페이지로 이동합니다.",
-      "Q10. 지갑 연결 항목은 왜 빠졌나요? — 무점포 인터넷 은행과 핵심 메뉴에 집중할 수 있도록 화면을 단순화하기 위해 제외했습니다.",
-      "Q11. 무점포 인터넷 은행 백서 서술형 50선은 어디서 보나요? — 하단 '무점포 인터넷 은행 백서 서술형 50선' 드롭다운을 펼쳐 1번부터 50번까지 확인할 수 있습니다.",
-      "Q12. FAQ 20선은 어디서 보나요? — 하단 '무점포 인터넷 은행 FAQ 20선' 드롭다운을 누르면 20개 질문과 답변이 열립니다.",
+      "Q10. 첫 진입 시 어떤 방식이 있나요? — 패턴 또는 6자리 숫자 중 택1 하거나 둘러보기로 바로 화면을 볼 수 있습니다.",
+      "Q11. 인터넷 은행 백서 서술형 50선은 어디서 보나요? — 인터넷 은행 탭에서 '인터넷 은행 백서 서술형 50선' 드롭다운을 펼쳐 1번부터 50번까지 확인할 수 있습니다.",
+      "Q12. FAQ 20선은 어디서 보나요? — '인터넷 은행 FAQ 20선' 드롭다운을 누르면 20개 질문과 답변이 열립니다.",
       "Q13. 공식 도메인은 무엇인가요? — hkwb.world 입니다.",
       "Q14. 공식 문의 이메일 주소는 무엇인가요? — support@hkwb.world 입니다.",
       "Q15. 공식 식별자/추천인 표기는 어떻게 되나요? — 소문자 ljw2358 입니다.",
@@ -981,6 +1462,25 @@
       "Q19. 파일은 어떻게 저장해서 확인하나요? — index.html 파일로 저장한 뒤 크롬이나 엣지 같은 브라우저에서 열면 바로 확인할 수 있습니다.",
       "Q20. 문구나 항목을 더 수정하고 싶으면 어떻게 하나요? — 고칠 문구, 링크 주소, 추가할 항목을 말씀해 주시면 바로 반영해 드립니다."
     ];
+
+    function switchMode(mode) {
+      const web3Panel = document.getElementById("panel-web3");
+      const internetPanel = document.getElementById("panel-internet");
+      const web3Btn = document.getElementById("tab-btn-web3");
+      const internetBtn = document.getElementById("tab-btn-internet");
+
+      if (mode === "internet") {
+        if (web3Panel) web3Panel.classList.remove("active");
+        if (internetPanel) internetPanel.classList.add("active");
+        if (web3Btn) web3Btn.classList.remove("active-tab");
+        if (internetBtn) internetBtn.classList.add("active-tab");
+      } else {
+        if (internetPanel) internetPanel.classList.remove("active");
+        if (web3Panel) web3Panel.classList.add("active");
+        if (internetBtn) internetBtn.classList.remove("active-tab");
+        if (web3Btn) web3Btn.classList.add("active-tab");
+      }
+    }
 
     function toggleDropdown(panelId, btnEl) {
       const panel = document.getElementById(panelId);
@@ -1036,7 +1536,7 @@
 
       logEl.innerHTML =
         `<div><strong>나:</strong> ${escapeHtml(q)}</div>` +
-        `<div style="margin-top:6px;color:#67e8f9;"><strong>삐니:</strong> "${escapeHtml(q)}" 관련 HKWB 웹3·무점포 뱅킹 및 정책 안내를 확인 중입니다. 공식 문의 메일(support@hkwb.world)로도 상세 문의가 가능합니다.</div>`;
+        `<div style="margin-top:6px;color:#67e8f9;"><strong>삐니:</strong> "${escapeHtml(q)}" 관련 HKWB 웹3·인터넷 뱅킹 및 정책 안내를 확인 중입니다. 공식 문의 메일(support@hkwb.world)로도 상세 문의가 가능합니다.</div>`;
       inputEl.value = "";
     }
 
