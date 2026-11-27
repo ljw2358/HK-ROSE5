@@ -3,41 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HKWB | HK WorldBank Web3 &amp; 무점포 인터넷 은행</title>
+  <title>HKWB | HK WorldBank 웹3 디지털 은행 &amp; 무점포 인터넷 은행</title>
   <style>
     :root {
       --bg-void: #040714;
       --bg-navy: #0a1229;
-      --bg-indigo: #121b3d;
-      --bg-purple: #1d0e3d;
-      --surface-1: rgba(13, 22, 52, 0.88);
-      --surface-2: rgba(20, 32, 72, 0.92);
-      --border-soft: rgba(148, 163, 184, 0.22);
-      --border-purple: rgba(192, 132, 252, 0.42);
-      --border-cyan: rgba(56, 189, 248, 0.42);
-      --border-gold: rgba(251, 191, 36, 0.52);
+      --bg-purple: #1b0d38;
+      --surface: rgba(13, 22, 52, 0.9);
+      --border-gold: rgba(251, 191, 36, 0.5);
+      --border-purple: rgba(192, 132, 252, 0.4);
+      --border-cyan: rgba(56, 189, 248, 0.4);
       --gold: #fbbf24;
-      --gold-dim: #d97706;
       --purple: #c084fc;
-      --purple-deep: #7e22ce;
       --cyan: #38bdf8;
-      --blue: #3b82f6;
       --emerald: #34d399;
-      --text-primary: #f8fafc;
-      --text-secondary: #cbd5e1;
+      --text-main: #f8fafc;
+      --text-sub: #cbd5e1;
       --text-muted: #94a3b8;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 26px;
-      --shadow-glow-purple: 0 0 28px rgba(168, 85, 247, 0.22);
-      --shadow-glow-gold: 0 0 28px rgba(251, 191, 36, 0.20);
-      --shadow-card: 0 14px 36px rgba(2, 6, 23, 0.48);
     }
 
-    *,
-    *::before,
-    *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -50,17 +35,14 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", "Malgun Gothic", sans-serif;
-      color: var(--text-primary);
-      background-color: var(--bg-void);
-      background-image:
-        radial-gradient(circle at 12% 10%, rgba(147, 51, 234, 0.28), transparent 38%),
-        radial-gradient(circle at 88% 14%, rgba(56, 189, 248, 0.20), transparent 36%),
-        radial-gradient(circle at 50% 45%, rgba(59, 130, 246, 0.10), transparent 52%),
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(147, 51, 234, 0.25), transparent 38%),
+        radial-gradient(circle at 88% 14%, rgba(56, 189, 248, 0.18), transparent 36%),
         radial-gradient(circle at 82% 85%, rgba(251, 191, 36, 0.14), transparent 40%),
-        linear-gradient(165deg, var(--bg-void) 0%, var(--bg-navy) 45%, var(--bg-purple) 100%);
+        linear-gradient(165deg, var(--bg-void) 0%, var(--bg-navy) 50%, var(--bg-purple) 100%);
       min-height: 100vh;
       line-height: 1.65;
-      overflow-x: hidden;
     }
 
     a {
@@ -75,212 +57,177 @@
     }
 
     .container {
-      width: 100%;
-      max-width: 1220px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
     }
 
-    /* Sticky Top Navigation */
-    .site-header {
+    header {
       position: sticky;
       top: 0;
-      z-index: 120;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: rgba(4, 7, 20, 0.84);
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      background: rgba(4, 7, 20, 0.86);
       border-bottom: 1px solid var(--border-gold);
     }
 
-    .header-inner {
+    .nav-wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       padding: 13px 0;
       flex-wrap: wrap;
     }
 
-    .brand-link {
+    .brand {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--purple-deep), var(--blue), var(--gold));
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7e22ce, #2563eb, #fbbf24);
       display: grid;
       place-items: center;
       font-weight: 900;
-      font-size: 17px;
+      font-size: 16px;
       color: #ffffff;
-      box-shadow: 0 0 22px rgba(192, 132, 252, 0.45);
-      flex-shrink: 0;
     }
 
-    .brand-name {
-      font-size: 19px;
+    .brand-title {
+      font-size: 18px;
       font-weight: 900;
-      letter-spacing: 0.3px;
-      background: linear-gradient(90deg, #ffffff 0%, var(--purple) 52%, var(--gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
     }
 
-    .brand-tagline {
+    .brand-sub {
       font-size: 11.5px;
       color: var(--text-muted);
     }
 
-    .main-nav {
+    nav {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    .main-nav a {
-      font-size: 13.5px;
+    nav a {
+      font-size: 13px;
       font-weight: 600;
-      color: var(--text-secondary);
+      color: var(--text-sub);
       padding: 6px 8px;
-      border-radius: var(--radius-sm);
-      transition: color 0.2s ease, background 0.2s ease;
+      border-radius: 8px;
     }
 
-    .main-nav a:hover {
+    nav a:hover {
       color: var(--gold);
       background: rgba(251, 191, 36, 0.08);
     }
 
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 11px 18px;
-      border-radius: var(--radius-md);
-      font-size: 13.5px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #9333ea 0%, #2563eb 100%);
-      color: #ffffff;
-      box-shadow: 0 8px 24px rgba(147, 51, 234, 0.38);
-    }
-
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 100%);
-      color: #070b1a;
-      box-shadow: 0 8px 24px rgba(251, 191, 36, 0.32);
-    }
-
-    .btn-cyan {
-      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-      color: #041024;
-      box-shadow: 0 8px 22px rgba(56, 189, 248, 0.28);
-    }
-
-    .btn-ghost {
-      background: rgba(15, 23, 56, 0.78);
-      color: var(--text-primary);
-      border-color: var(--border-purple);
-    }
-
-    /* Hero Banner */
-    .hero-section {
-      padding: 56px 0 36px;
+    .hero {
+      padding: 52px 0 32px;
       text-align: center;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(126, 34, 206, 0.26);
+      background: rgba(126, 34, 206, 0.28);
       border: 1px solid var(--border-purple);
       color: var(--purple);
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
-    .hero-title {
-      font-size: clamp(30px, 5vw, 52px);
+    h1 {
+      font-size: clamp(30px, 5vw, 48px);
       font-weight: 900;
-      line-height: 1.18;
-      margin-bottom: 18px;
-      background: linear-gradient(125deg, #ffffff 8%, var(--purple) 48%, var(--gold) 92%);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      background: linear-gradient(125deg, #ffffff 10%, var(--purple) 52%, var(--gold) 92%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-subtitle {
-      max-width: 840px;
-      margin: 0 auto 26px;
-      color: var(--text-secondary);
-      font-size: 16px;
+    .hero-desc {
+      max-width: 820px;
+      margin: 0 auto 24px;
+      color: var(--text-sub);
+      font-size: 15.5px;
     }
 
-    .hero-cta-group {
+    .cta-row {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 34px;
+      margin-bottom: 30px;
     }
 
-    /* KPI Strip */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #d97706, #fbbf24);
+      color: #070b1a;
+    }
+
+    .btn-purple {
+      background: linear-gradient(135deg, #9333ea, #2563eb);
+      color: #ffffff;
+    }
+
+    .btn-cyan {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #041024;
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 56, 0.8);
+      color: var(--text-main);
+      border-color: var(--border-purple);
+    }
+
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 16px;
-      margin-bottom: 18px;
     }
 
     .kpi-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 16px;
+      padding: 18px;
       text-align: left;
-      box-shadow: var(--shadow-card);
-      transition: border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .kpi-card:hover {
-      border-color: var(--border-gold);
-      transform: translateY(-2px);
     }
 
     .kpi-label {
       font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 6px;
     }
 
-    .kpi-value {
-      font-size: 24px;
+    .kpi-val {
+      font-size: 23px;
       font-weight: 900;
       color: var(--gold);
+      margin-top: 4px;
     }
 
     .kpi-sub {
@@ -289,764 +236,568 @@
       margin-top: 4px;
     }
 
-    /* Sections */
-    .page-section {
-      padding: 38px 0;
+    section {
+      padding: 36px 0;
     }
 
-    .section-header {
-      margin-bottom: 20px;
-    }
-
-    .section-kicker {
+    .sec-kicker {
       font-size: 12px;
       font-weight: 800;
-      letter-spacing: 1.1px;
-      text-transform: uppercase;
       color: var(--gold);
+      letter-spacing: 0.8px;
     }
 
-    .section-heading {
-      font-size: clamp(22px, 3.2vw, 30px);
+    .sec-title {
+      font-size: 26px;
       font-weight: 900;
-      margin-top: 4px;
       color: #ffffff;
+      margin-top: 4px;
     }
 
-    .section-lead {
-      font-size: 14px;
+    .sec-desc {
+      font-size: 13.5px;
       color: var(--text-muted);
-      margin-top: 6px;
+      margin-top: 4px;
+      margin-bottom: 18px;
     }
 
-    /* Cards & Grids */
     .cards-3 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
-    .panel-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow-card);
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border-purple);
+      border-radius: 16px;
+      padding: 20px;
     }
 
-    .panel-card.featured-gold {
+    .card.gold {
       border-color: var(--border-gold);
-      box-shadow: var(--shadow-glow-gold);
     }
 
-    .panel-card.featured-purple {
-      border-color: var(--border-purple);
-      box-shadow: var(--shadow-glow-purple);
-    }
-
-    .chip {
-      display: inline-block;
-      font-size: 11px;
+    .card h3 {
+      font-size: 18px;
       font-weight: 800;
-      padding: 3px 10px;
-      border-radius: 999px;
-      background: rgba(251, 191, 36, 0.16);
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .chip.cyan {
-      background: rgba(56, 189, 248, 0.16);
-      color: var(--cyan);
-    }
-
-    .chip.purple {
-      background: rgba(192, 132, 252, 0.18);
-      color: var(--purple);
-    }
-
-    .panel-card h3 {
-      font-size: 19px;
-      font-weight: 800;
-      margin-bottom: 10px;
       color: #ffffff;
+      margin-bottom: 8px;
     }
 
-    .panel-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
+    .card p {
+      font-size: 13.5px;
+      color: var(--text-sub);
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .tag-pill {
-      font-size: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.34);
-      color: var(--cyan);
-    }
-
-    /* Rate Simulator */
-    .simulator-shell {
-      background: linear-gradient(150deg, rgba(22, 15, 54, 0.94), rgba(10, 21, 52, 0.94));
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-xl);
-      padding: 26px;
-      box-shadow: var(--shadow-card);
-    }
-
-    .tier-selector-grid {
+    .dash-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .tier-option {
-      background: rgba(6, 11, 28, 0.82);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .tier-option:hover,
-    .tier-option.is-active {
-      border-color: var(--gold);
-      background: rgba(24, 18, 52, 0.95);
-      box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
-    }
-
-    .tier-name {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--purple);
-    }
-
-    .tier-percent {
-      font-size: 24px;
-      font-weight: 900;
-      color: var(--gold);
-      margin: 5px 0;
-    }
-
-    .tier-note {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .input-matrix {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
       margin-bottom: 18px;
     }
 
-    .input-group label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .input-group input,
-    .input-group select {
-      width: 100%;
-      padding: 11px 14px;
-      border-radius: var(--radius-sm);
+    .dash-stat {
+      background: rgba(6, 11, 28, 0.85);
       border: 1px solid var(--border-purple);
-      background: rgba(5, 9, 24, 0.88);
-      color: #ffffff;
-      font-size: 14px;
+      border-radius: 12px;
+      padding: 16px;
     }
 
-    .sim-output-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 14px;
-      margin-top: 16px;
-      padding: 18px;
-      border-radius: var(--radius-md);
-      background: rgba(5, 9, 24, 0.78);
-      border: 1px solid rgba(192, 132, 252, 0.28);
-    }
-
-    .sim-metric-label {
+    .dash-stat-label {
       font-size: 12px;
       color: var(--text-muted);
     }
 
-    .sim-metric-val {
+    .dash-stat-val {
       font-size: 21px;
       font-weight: 900;
-      color: var(--emerald);
+      color: var(--cyan);
       margin-top: 4px;
     }
 
-    /* Search & Lists */
-    .list-toolbar {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .search-field {
-      flex: 1;
-      min-width: 240px;
-      padding: 12px 15px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-purple);
-      background: rgba(6, 11, 28, 0.9);
-      color: #ffffff;
-      font-size: 14px;
-    }
-
-    .scrollable-grid {
+    .div10-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 12px;
-      max-height: 540px;
-      overflow-y: auto;
-      padding-right: 6px;
     }
 
-    .entry-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      transition: border-color 0.18s ease;
+    .div10-card {
+      background: rgba(6, 11, 28, 0.85);
+      border: 1px solid rgba(192, 132, 252, 0.32);
+      border-radius: 12px;
+      padding: 14px;
     }
 
-    .entry-card:hover {
-      border-color: var(--border-purple);
-    }
-
-    .entry-code {
+    .div10-num {
       font-size: 11.5px;
       font-weight: 800;
       color: var(--gold);
       margin-bottom: 4px;
     }
 
-    .entry-code.cyan-text {
+    .div10-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .div10-desc {
+      font-size: 12.5px;
+      color: var(--text-sub);
+    }
+
+    .sim-box {
+      background: var(--surface);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .tier-btn {
+      background: rgba(6, 11, 28, 0.85);
+      border: 1px solid var(--border-purple);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: left;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .tier-btn.active,
+    .tier-btn:hover {
+      border-color: var(--gold);
+      background: rgba(251, 191, 36, 0.12);
+    }
+
+    .tier-rate {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gold);
+      margin: 4px 0;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 8px;
+      border: 1px solid var(--border-purple);
+      background: rgba(4, 7, 18, 0.9);
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(4, 7, 18, 0.82);
+      border: 1px solid var(--border-purple);
+    }
+
+    .res-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .res-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--emerald);
+      margin-top: 4px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--border-purple);
+      background: rgba(4, 7, 18, 0.9);
+      color: #ffffff;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .wp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      max-height: 540px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .wp-card {
+      background: var(--surface);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .wp-num {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .wp-num.cyan {
       color: var(--cyan);
     }
 
-    .entry-title {
+    .wp-title {
       font-size: 14px;
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 5px;
     }
 
-    .entry-desc {
+    .wp-desc {
       font-size: 12.5px;
-      color: var(--text-secondary);
+      color: var(--text-sub);
     }
 
-    /* FAQ Accordion */
-    .faq-stack {
+    .faq-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: 560px;
+      max-height: 540px;
       overflow-y: auto;
       padding-right: 6px;
     }
 
-    .faq-box {
-      background: var(--surface-1);
-      border: 1px solid var(--border-soft);
-      border-radius: var(--radius-md);
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 12px;
       overflow: hidden;
     }
 
-    .faq-trigger {
+    .faq-btn {
       width: 100%;
-      background: transparent;
+      background: none;
       border: none;
       color: #ffffff;
-      padding: 15px 18px;
+      padding: 14px 16px;
+      text-align: left;
       font-size: 14px;
       font-weight: 700;
-      text-align: left;
       cursor: pointer;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .faq-trigger:hover {
-      background: rgba(192, 132, 252, 0.06);
-    }
-
-    .faq-body {
+    .faq-ans {
       display: none;
-      padding: 12px 18px 16px;
-      font-size: 13.5px;
-      color: var(--text-secondary);
-      border-top: 1px solid rgba(148, 163, 184, 0.14);
+      padding: 12px 16px 15px;
+      font-size: 13px;
+      color: var(--text-sub);
+      border-top: 1px solid rgba(148, 163, 184, 0.16);
     }
 
-    .faq-box.is-open .faq-body {
+    .faq-item.open .faq-ans {
       display: block;
     }
 
-    /* Toast */
-    .toast-banner {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      z-index: 300;
-      background: linear-gradient(135deg, #059669, #10b981);
-      color: #ffffff;
-      padding: 12px 18px;
-      border-radius: var(--radius-md);
-      font-size: 13px;
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.24s ease, transform 0.24s ease;
-      pointer-events: none;
-    }
-
-    .toast-banner.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Footer */
-    .site-footer {
-      margin-top: 44px;
-      padding: 34px 0 48px;
-      border-top: 1px solid var(--border-soft);
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.22);
+      padding: 32px 0 44px;
+      margin-top: 36px;
       color: var(--text-muted);
       font-size: 13px;
-    }
-
-    .footer-layout {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 768px) {
-      .main-nav {
-        gap: 8px;
-      }
-      .simulator-shell,
-      .panel-card {
-        padding: 18px;
-      }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#top" class="brand-link">
-        <div class="brand-logo">HK</div>
+  <header>
+    <div class="container nav-wrap">
+      <a href="#top" class="brand">
+        <div class="logo">HK</div>
         <div>
-          <div class="brand-name">HKWB · HK WorldBank</div>
-          <div class="brand-tagline">파이 개척자 전용 웹3 디지털 은행 &amp; 무점포 인터넷 은행 · hkwb.world</div>
+          <div class="brand-title">HKWB · HK WorldBank</div>
+          <div class="brand-sub">웹3 디지털 은행 &amp; 무점포 인터넷 은행 · hkwb.world</div>
         </div>
       </a>
-
-      <nav class="main-nav" aria-label="주요 섹션 이동">
-        <a href="#structure">은행 구조</a>
+      <nav>
+        <a href="#web3-dash">웹3 자산·10대 분산</a>
         <a href="#rates">변동금리</a>
-        <a href="#ai-assistants">삔이·삔·피니투</a>
-        <a href="#web3-wp-100">웹3 백서 100선</a>
-        <a href="#web3-faq-20">웹3 FAQ 20선</a>
-        <a href="#internet-wp-50">인터넷 백서 50선</a>
-        <a href="#internet-faq-20">인터넷 FAQ 20선</a>
-        <a href="#social-hq">사회환원·165층</a>
+        <a href="#web3-wp">웹3 백서 100선</a>
+        <a href="#web3-faq">웹3 FAQ 20선</a>
+        <a href="#int-wp">인터넷 백서 50선</a>
+        <a href="#int-faq">인터넷 FAQ 20선</a>
+        <a href="#hq">사회환원·165층</a>
       </nav>
     </div>
   </header>
 
   <main id="top" class="container">
-    <!-- Hero -->
-    <section class="hero-section">
-      <div class="hero-badge">⚡ 파이 개척자(Pi Pioneer) 전용 · 2026.11.30 앱 완공 &amp; KYB·메인넷 준비</div>
-      <h1 class="hero-title">
-        HKWB 웹3 디지털 은행 &amp;<br />
-        무점포 인터넷 은행 통합 플랫폼
-      </h1>
-      <p class="hero-subtitle">
-        HKWB는 파이 개척자만을 위한 디지털 금융 생태계입니다. 부모 플랫폼 HKWB 아래 웹3 디지털 은행과
-        무점포 인터넷 은행(HK-BANK)을 두고, 6개월(8~12%)·1년(12~18%)·2년(16~24%) AGI·ASI 변동 금리 및
-        순수익 최대 60% 사회환원·리워드 체계를 운영합니다.
+    <section class="hero">
+      <div class="badge">파이 개척자 전용 · 2026.11.30 앱 완공 및 KYB·메인넷 준비</div>
+      <h1>HKWB 웹3 디지털 은행 &amp;<br />무점포 인터넷 은행</h1>
+      <p class="hero-desc">
+        HKWB는 파이 개척자만을 위한 디지털 금융 플랫폼입니다. 부모 구조 HKWB 아래 웹3 디지털 은행과
+        무점포 인터넷 은행(HK-BANK)을 운영하며, 개인 자산 대시보드·10대 분산, 웹3 백서 100선·웹3 FAQ 20선,
+        무점포 인터넷 은행 백서 50선·무점포 인터넷 은행 FAQ 20선, 6개월(8~12%)·1년(12~18%)·2년(16~24%)
+        AGI·ASI 변동 금리 및 순수익 최대 60% 사회환원·리워드 기준을 적용합니다.
       </p>
-
-      <div class="hero-cta-group">
-        <a href="#rates" class="btn btn-gold">📊 변동금리 시뮬레이터</a>
-        <a href="#web3-wp-100" class="btn btn-primary">📘 웹3 백서 100선</a>
-        <a href="#web3-faq-20" class="btn btn-ghost">❓ 웹3 FAQ 20선</a>
-        <a href="#internet-wp-50" class="btn btn-cyan">📗 인터넷 백서 50선</a>
-        <a href="#internet-faq-20" class="btn btn-ghost">❔ 인터넷 FAQ 20선</a>
+      <div class="cta-row">
+        <a href="#web3-dash" class="btn btn-purple">웹3 개인 자산·10대 분산</a>
+        <a href="#rates" class="btn btn-gold">변동금리 시뮬레이터</a>
+        <a href="#web3-wp" class="btn btn-purple">웹3 백서 100선</a>
+        <a href="#web3-faq" class="btn btn-ghost">웹3 FAQ 20선</a>
+        <a href="#int-wp" class="btn btn-cyan">인터넷 백서 50선</a>
+        <a href="#int-faq" class="btn btn-ghost">인터넷 FAQ 20선</a>
       </div>
-
       <div class="kpi-grid">
         <div class="kpi-card">
           <div class="kpi-label">AGI·ASI 기본 변동 금리</div>
-          <div class="kpi-value">8% ~ 24%</div>
+          <div class="kpi-val">8% ~ 24%</div>
           <div class="kpi-sub">6개월 8~12% · 1년 12~18% · 2년 16~24%</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">순수익 사회환원 및 리워드</div>
-          <div class="kpi-value">최대 60%</div>
-          <div class="kpi-sub">개척자 리워드 &amp; 3대 구호단체 연계</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">앱 완공 목표 &amp; 승인 단계</div>
-          <div class="kpi-value">2026.11.30</div>
-          <div class="kpi-sub">파이 코어팀 KYB 및 메인넷 승인 추진</div>
+          <div class="kpi-val">최대 60%</div>
+          <div class="kpi-sub">개척자 리워드 &amp; 3대 구호단체 후원</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">공식 도메인·코드·이메일</div>
-          <div class="kpi-value" style="font-size: 19px;">hkwb.world</div>
+          <div class="kpi-val" style="font-size: 19px;">hkwb.world</div>
           <div class="kpi-sub">코드 ljw2358 · support@hkwb.world</div>
         </div>
       </div>
     </section>
 
-    <!-- Structure -->
-    <section id="structure" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">PARENT &amp; CHILD BANKING STRUCTURE</div>
-        <h2 class="section-heading">HKWB 부모 플랫폼 &amp; 2대 디지털 은행 계열</h2>
-        <p class="section-lead">HKWB를 중심으로 웹3 디지털 은행과 무점포 인터넷 은행이 명확히 분리·연계됩니다.</p>
-      </div>
-
-      <div class="cards-3">
-        <div class="panel-card featured-gold">
-          <div class="chip">PARENT · HKWB</div>
-          <h3>HKWB (HK WorldBank)</h3>
-          <p>
-            웹3 디지털 은행과 무점포 인터넷 은행을 아우르는 모체 플랫폼입니다. 순수익 최대 60%
-            사회환원·리워드 원칙과 AGI·ASI 변동 금리 거버넌스를 총괄합니다.
-          </p>
-          <div class="tag-row">
-            <span class="tag-pill">hkwb.world</span>
-            <span class="tag-pill">ljw2358</span>
-            <span class="tag-pill">Pi Pioneer Only</span>
+    <section id="web3-dash">
+      <div class="sec-kicker">WEB3 PERSONAL ASSET DASHBOARD &amp; 10-WAY DIVERSIFICATION</div>
+      <h2 class="sec-title">웹3 디지털 은행 개인 자산 대시보드 &amp; 10대 분산</h2>
+      <p class="sec-desc">개척자 계좌(ljw2358) 기준 웹3 개인 자산 현황과 10가지 분산 운용 항목을 한눈에 확인합니다.</p>
+      <div class="sim-box">
+        <div class="dash-grid">
+          <div class="dash-stat">
+            <div class="dash-stat-label">총 웹3 운용 자산</div>
+            <div class="dash-stat-val">100,000 Pi</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">분산 카테고리 수</div>
+            <div class="dash-stat-val">10대 분산</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">순수익 사회환원·리워드 상한</div>
+            <div class="dash-stat-val">최대 60%</div>
+          </div>
+          <div class="dash-stat">
+            <div class="dash-stat-label">담당 AI 어시스턴트</div>
+            <div class="dash-stat-val">삔이·삔·피니투</div>
           </div>
         </div>
-
-        <div class="panel-card featured-purple">
-          <div class="chip purple">CHILD 01 · WEB3</div>
-          <h3>웹3 디지털 은행</h3>
-          <p>
-            Pi 테스트넷·메인넷 지갑 연동, 수동 지갑 주소 입력 검증, 변동금리 예치 및 온체인
-            리워드 기능을 제공하는 웹3 금융 모듈입니다.
-          </p>
-          <div class="tag-row">
-            <span class="tag-pill">Pi 메인넷·테스트넷</span>
-            <span class="tag-pill">온체인 리워드</span>
-            <span class="tag-pill">변동금리 예치</span>
-          </div>
-        </div>
-
-        <div class="panel-card">
-          <div class="chip cyan">CHILD 02 · 무점포 인터넷 은행</div>
-          <h3>무점포 인터넷 은행 (HK-BANK)</h3>
-          <p>
-            지점 없는 비대면 모바일 뱅킹 모듈로 입출금, 송금, 예·적금, 대출과 6자리 PIN·패턴
-            잠금(줄 그리기)·생체인증을 제공합니다.
-          </p>
-          <div class="tag-row">
-            <span class="tag-pill">무점포 인터넷 은행</span>
-            <span class="tag-pill">입출금·송금·예적금·대출</span>
-            <span class="tag-pill">6자리 PIN·패턴</span>
-          </div>
-        </div>
+        <div id="div10Grid" class="div10-grid"></div>
       </div>
     </section>
 
-    <!-- Rate Simulator -->
-    <section id="rates" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">AGI &amp; ASI VARIABLE INTEREST ENGINE</div>
-        <h2 class="section-heading">HKWB 변동 금리 기준 &amp; 시뮬레이터</h2>
-        <p class="section-lead">
-          고정 금리가 아닌 AGI·ASI 산출 변동 금리 기준(6개월 8~12%, 1년 12~18%, 2년 16~24%)을 반영합니다.
-        </p>
-      </div>
-
-      <div class="simulator-shell">
-        <div class="tier-selector-grid">
-          <div class="tier-option is-active" data-label="6개월" data-months="6" data-min="8" data-max="12" onclick="chooseRateTier(this)">
-            <div class="tier-name">6개월 변동 금리 구간</div>
-            <div class="tier-percent">8% ~ 12%</div>
-            <div class="tier-note">단기 변동 금리 · AGI·ASI 유동성 지수 반영</div>
-          </div>
-          <div class="tier-option" data-label="1년" data-months="12" data-min="12" data-max="18" onclick="chooseRateTier(this)">
-            <div class="tier-name">1년 변동 금리 구간</div>
-            <div class="tier-percent">12% ~ 18%</div>
-            <div class="tier-note">중기 변동 금리 · 생태계 성장률 반영</div>
-          </div>
-          <div class="tier-option" data-label="2년" data-months="24" data-min="16" data-max="24" onclick="chooseRateTier(this)">
-            <div class="tier-name">2년 변동 금리 구간</div>
-            <div class="tier-percent">16% ~ 24%</div>
-            <div class="tier-note">장기 변동 금리 · 개척자 우대 구간 반영</div>
-          </div>
+    <section id="rates">
+      <div class="sec-kicker">AGI &amp; ASI VARIABLE RATE</div>
+      <h2 class="sec-title">변동 금리 시뮬레이터</h2>
+      <p class="sec-desc">6개월(8~12%), 1년(12~18%), 2년(16~24%) 변동 금리 구간을 선택해 예상 수령액을 계산합니다.</p>
+      <div class="sim-box">
+        <div class="tier-grid">
+          <button type="button" class="tier-btn active" data-label="6개월" data-months="6" data-min="8" data-max="12" onclick="pickTier(this)">
+            <div style="font-size: 12px; color: var(--purple); font-weight: 700;">6개월 변동 금리</div>
+            <div class="tier-rate">8% ~ 12%</div>
+            <div style="font-size: 12px; color: var(--text-muted);">단기 변동 구간</div>
+          </button>
+          <button type="button" class="tier-btn" data-label="1년" data-months="12" data-min="12" data-max="18" onclick="pickTier(this)">
+            <div style="font-size: 12px; color: var(--purple); font-weight: 700;">1년 변동 금리</div>
+            <div class="tier-rate">12% ~ 18%</div>
+            <div style="font-size: 12px; color: var(--text-muted);">중기 변동 구간</div>
+          </button>
+          <button type="button" class="tier-btn" data-label="2년" data-months="24" data-min="16" data-max="24" onclick="pickTier(this)">
+            <div style="font-size: 12px; color: var(--purple); font-weight: 700;">2년 변동 금리</div>
+            <div class="tier-rate">16% ~ 24%</div>
+            <div style="font-size: 12px; color: var(--text-muted);">장기 변동 구간</div>
+          </button>
         </div>
 
-        <div class="input-matrix">
-          <div class="input-group">
-            <label for="simPrincipal">예치 원금 (기준 단위)</label>
-            <input id="simPrincipal" type="number" value="1000" min="1" step="10" oninput="recalcRate()" />
+        <div class="input-grid">
+          <div class="field">
+            <label for="principal">예치 원금</label>
+            <input id="principal" type="number" value="1000" min="0" step="10" oninput="calcSim()" />
           </div>
-          <div class="input-group">
-            <label for="simScenario">AGI · ASI 산출 시나리오</label>
-            <select id="simScenario" onchange="recalcRate()">
-              <option value="0.5">균형 구간 (범위 중간값)</option>
-              <option value="0.2">보수 구간 (하단 근접)</option>
-              <option value="0.85">성장 구간 (상단 근접)</option>
+          <div class="field">
+            <label for="scenario">AGI·ASI 산출 구간</label>
+            <select id="scenario" onchange="calcSim()">
+              <option value="0.5">중간 구간</option>
+              <option value="0.2">하단 근접 구간</option>
+              <option value="0.85">상단 근접 구간</option>
             </select>
           </div>
-          <div class="input-group">
-            <label for="simBonus">리워드 연계 가산 (%p)</label>
-            <input id="simBonus" type="number" value="0" min="0" max="10" step="0.5" oninput="recalcRate()" />
+          <div class="field">
+            <label for="bonus">리워드 가산 (%p)</label>
+            <input id="bonus" type="number" value="0" min="0" max="10" step="0.5" oninput="calcSim()" />
           </div>
         </div>
 
-        <button type="button" class="btn btn-gold" onclick="sampleAiRate()">
-          🤖 삔이·삔·피니투 실시간 변동금리 샘플링
-        </button>
-
-        <div class="sim-output-grid">
+        <div class="result-grid">
           <div>
-            <div class="sim-metric-label">선택 예치 기간</div>
-            <div class="sim-metric-val" id="outTerm">6개월</div>
+            <div class="res-label">선택 기간</div>
+            <div class="res-val" id="resTerm">6개월</div>
           </div>
           <div>
-            <div class="sim-metric-label">적용 변동 금리</div>
-            <div class="sim-metric-val" id="outRate">10.00%</div>
+            <div class="res-label">적용 변동 금리</div>
+            <div class="res-val" id="resRate">10.00%</div>
           </div>
           <div>
-            <div class="sim-metric-label">예상 이자·리워드</div>
-            <div class="sim-metric-val" id="outReward">+50.00</div>
+            <div class="res-label">예상 이자·리워드</div>
+            <div class="res-val" id="resReward">+50.00</div>
           </div>
           <div>
-            <div class="sim-metric-label">예상 만기 수령액</div>
-            <div class="sim-metric-val" id="outTotal">1,050.00</div>
+            <div class="res-label">예상 만기 수령액</div>
+            <div class="res-val" id="resTotal">1,050.00</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AI Assistants -->
-    <section id="ai-assistants" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">INTELLIGENT OPERATIONS</div>
-        <h2 class="section-heading">AGI · ASI 지능형 비서 (삔이 · 삔 · 피니투)</h2>
-        <p class="section-lead">변동 금리 산출, 개척자 안내, 무점포·웹3 뱅킹 점검을 함께 수행합니다.</p>
-      </div>
+    <section id="web3-wp">
+      <div class="sec-kicker">WEB3 WHITEPAPER (100)</div>
+      <h2 class="sec-title">웹3 디지털 은행 백서 100선</h2>
+      <p class="sec-desc">파이 개척자 전용 웹3 디지털 은행 운영, 개인 자산 대시보드·10대 분산, 변동 금리, 지갑 연동 및 사회환원 100선입니다.</p>
+      <input id="searchWeb3" class="search-box" type="text" placeholder="웹3 백서 100선 검색..." oninput="renderLists()" />
+      <div id="gridWeb3" class="wp-grid"></div>
+    </section>
 
+    <section id="web3-faq">
+      <div class="sec-kicker">WEB3 FAQ (20)</div>
+      <h2 class="sec-title">웹3 디지털 은행 FAQ 20선</h2>
+      <p class="sec-desc">웹3 디지털 은행 이용, 개인 자산 대시보드·10대 분산, 변동 금리 및 리워드 정책에 관한 20가지 질문과 답변입니다.</p>
+      <div id="faqWeb3" class="faq-list"></div>
+    </section>
+
+    <section id="int-wp">
+      <div class="sec-kicker">INTERNET BANK WHITEPAPER (50)</div>
+      <h2 class="sec-title">무점포 인터넷 은행 백서 50선</h2>
+      <p class="sec-desc">지점 없는 무점포 인터넷 은행(HK-BANK)의 입출금·송금·예적금·대출 및 인증 기준 50선입니다.</p>
+      <input id="searchInt" class="search-box" type="text" placeholder="무점포 인터넷 은행 백서 50선 검색..." oninput="renderLists()" />
+      <div id="gridInt" class="wp-grid"></div>
+    </section>
+
+    <section id="int-faq">
+      <div class="sec-kicker">INTERNET BANK FAQ (20)</div>
+      <h2 class="sec-title">무점포 인터넷 은행 FAQ 20선</h2>
+      <p class="sec-desc">무점포 인터넷 은행 계좌, 인증 방식, 변동 금리 및 문의 절차에 관한 20가지 질문과 답변입니다.</p>
+      <div id="faqInt" class="faq-list"></div>
+    </section>
+
+    <section id="hq">
+      <div class="sec-kicker">SOCIAL CONTRIBUTION &amp; 165F HQ</div>
+      <h2 class="sec-title">순수익 최대 60% 사회환원 &amp; 3대 구호단체 165층 우선 입주</h2>
+      <p class="sec-desc">국경없는 의사회, 세이브드 칠드런, 유엔 난민기구를 후원하며 165층 본사 입주 우선권을 부여합니다.</p>
       <div class="cards-3">
-        <div class="panel-card featured-purple">
-          <div class="chip purple">AI ASSISTANT · 삔이</div>
-          <h3>삔이</h3>
-          <p>
-            파이 개척자 안내 및 변동 금리 기준 설명을 담당하며, 웹3·무점포 은행 서비스의 핵심
-            흐름을 명확하게 전달합니다.
-          </p>
-        </div>
-
-        <div class="panel-card featured-gold">
-          <div class="chip">AI ASSISTANT · 삔</div>
-          <h3>삔</h3>
-          <p>
-            입출금·송금·예적금·리워드 정산 구조와 인증 절차(6자리 PIN·패턴·생체인증)의
-            사용성을 점검합니다.
-          </p>
-        </div>
-
-        <div class="panel-card">
-          <div class="chip cyan">AI ASSISTANT · 피니투</div>
-          <h3>피니투</h3>
-          <p>
-            AGI·ASI 변동 금리 모델링과 기간별(6개월 8~12%, 1년 12~18%, 2년 16~24%) 시뮬레이션
-            분석을 지원합니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Web3 Whitepaper 100 -->
-    <section id="web3-wp-100" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">WEB3 DIGITAL BANK WHITEPAPER (100)</div>
-        <h2 class="section-heading">웹3 디지털 은행 백서 100선</h2>
-        <p class="section-lead">
-          웹3 아키텍처, 파이 개척자 전용 운영, 6개월(8~12%)·1년(12~18%)·2년(16~24%) 변동금리,
-          순수익 최대 60% 사회환원·리워드 및 KYB·메인넷 준비 100선입니다.
-        </p>
-      </div>
-      <div class="list-toolbar">
-        <input id="filterWeb3Wp" class="search-field" type="text" placeholder="웹3 백서 100선 검색 (예: 변동금리, 60%, 지갑, 삔이, KYB)..." oninput="renderAllLists()" />
-      </div>
-      <div id="gridWeb3Wp" class="scrollable-grid"></div>
-    </section>
-
-    <!-- Web3 FAQ 20 -->
-    <section id="web3-faq-20" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">WEB3 DIGITAL BANK FAQ (20)</div>
-        <h2 class="section-heading">웹3 디지털 은행 FAQ 20선</h2>
-        <p class="section-lead">웹3 디지털 은행 이용, 변동 금리, 리워드 및 메인넷 연동 관련 20가지 질문과 답변입니다.</p>
-      </div>
-      <div id="listWeb3Faq" class="faq-stack"></div>
-    </section>
-
-    <!-- Internet Bank Whitepaper 50 -->
-    <section id="internet-wp-50" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">BRANCHLESS INTERNET BANK WHITEPAPER (50)</div>
-        <h2 class="section-heading">무점포 인터넷 은행 백서 50선</h2>
-        <p class="section-lead">
-          지점 없는 무점포 인터넷 은행(HK-BANK)의 입출금·송금·예적금·대출, 6자리 PIN·패턴·생체인증 및
-          순수익 최대 60% 사회환원·리워드 50선입니다.
-        </p>
-      </div>
-      <div class="list-toolbar">
-        <input id="filterInternetWp" class="search-field" type="text" placeholder="무점포 인터넷 은행 백서 50선 검색 (예: 무점포, PIN, 패턴, 송금)..." oninput="renderAllLists()" />
-      </div>
-      <div id="gridInternetWp" class="scrollable-grid"></div>
-    </section>
-
-    <!-- Internet Bank FAQ 20 -->
-    <section id="internet-faq-20" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">BRANCHLESS INTERNET BANK FAQ (20)</div>
-        <h2 class="section-heading">무점포 인터넷 은행 FAQ 20선</h2>
-        <p class="section-lead">무점포 인터넷 은행 계좌, 이체, 변동금리 예치 및 고객 지원 관련 20가지 질문과 답변입니다.</p>
-      </div>
-      <div id="listInternetFaq" class="faq-stack"></div>
-    </section>
-
-    <!-- Social Impact & 165-Story HQ -->
-    <section id="social-hq" class="page-section">
-      <div class="section-header">
-        <div class="section-kicker">SOCIAL CONTRIBUTION &amp; 165F HQ</div>
-        <h2 class="section-heading">순수익 최대 60% 사회환원 &amp; 3대 구호단체 165층 우선 입주</h2>
-        <p class="section-lead">
-          국경없는 의사회, 세이브드 칠드런, 유엔 난민기구를 후원하며 165층 본사 건물 입주 시 우선권을 부여합니다.
-        </p>
-      </div>
-
-      <div class="cards-3">
-        <div class="panel-card featured-gold">
-          <div class="chip">우선 입주 01</div>
+        <div class="card gold">
           <h3>국경없는 의사회</h3>
-          <p>긴급 의료 구호 활동 후원 연계 및 165층 본사 건물 입주 우선권 부여 기관입니다.</p>
+          <p>긴급 의료 구호 활동 후원 연계 및 165층 본사 입주 우선권 부여 대상입니다.</p>
         </div>
-        <div class="panel-card featured-gold">
-          <div class="chip">우선 입주 02</div>
+        <div class="card gold">
           <h3>세이브드 칠드런</h3>
-          <p>아동 보호·구호 활동 후원 연계 및 165층 본사 건물 입주 우선권 부여 기관입니다.</p>
+          <p>아동 보호 및 구호 활동 후원 연계 및 165층 본사 입주 우선권 부여 대상입니다.</p>
         </div>
-        <div class="panel-card featured-gold">
-          <div class="chip">우선 입주 03</div>
+        <div class="card gold">
           <h3>유엔 난민기구</h3>
-          <p>난민 보호·인도적 지원 연계 및 165층 본사 건물 입주 우선권 부여 기관입니다.</p>
+          <p>난민 보호 및 인도적 지원 연계 및 165층 본사 입주 우선권 부여 대상입니다.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-layout">
-      <div>
-        <strong style="color: #ffffff;">HKWB (HK WorldBank)</strong> · 웹3 디지털 은행 &amp; 무점포 인터넷 은행<br />
-        도메인: hkwb.world · 코드: ljw2358 · 문의: support@hkwb.world
-      </div>
-      <div>
-        변동금리(6개월 8~12%, 1년 12~18%, 2년 16~24%) · 순수익 최대 60% 사회환원·리워드
-      </div>
+  <footer>
+    <div class="container">
+      <div><strong>HKWB (HK WorldBank)</strong> · 웹3 디지털 은행 &amp; 무점포 인터넷 은행</div>
+      <div style="margin-top: 4px;">도메인: hkwb.world · 코드: ljw2358 · 문의: support@hkwb.world · AI 비서: 삔이·삔·피니투</div>
     </div>
   </footer>
 
-  <div id="toastBanner" class="toast-banner" role="status" aria-live="polite"></div>
-
   <script>
-    let activeTier = {
-      label: '6개월',
-      months: 6,
-      min: 8,
-      max: 12
-    };
+    let tier = { label: '6개월', months: 6, min: 8, max: 12 };
 
-    function chooseRateTier(cardEl) {
-      document.querySelectorAll('.tier-option').forEach(el => el.classList.remove('is-active'));
-      cardEl.classList.add('is-active');
-      activeTier = {
-        label: cardEl.dataset.label,
-        months: parseInt(cardEl.dataset.months, 10),
-        min: parseFloat(cardEl.dataset.min),
-        max: parseFloat(cardEl.dataset.max)
+    const div10List = [
+      { n: 1, title: '6개월 변동 예치 (8~12%)', ratio: '10%', desc: '단기 유동성 운용 및 변동 금리 수익' },
+      { n: 2, title: '1년 변동 예치 (12~18%)', ratio: '15%', desc: '중기 생태계 성장 연동 변동 금리' },
+      { n: 3, title: '2년 변동 예치 (16~24%)', ratio: '15%', desc: '장기 개척자 우대 변동 금리 구간' },
+      { n: 4, title: '개척자 리워드 풀', ratio: '10%', desc: '생태계 참여 및 활동 보상 적립' },
+      { n: 5, title: '사회환원 연계 기금', ratio: '10%', desc: '순수익 최대 60% 환원 정책 연동' },
+      { n: 6, title: '메인넷 유동성 준비금', ratio: '10%', desc: '온체인 결제 및 정산 안정성 확보' },
+      { n: 7, title: '무점포 인터넷 은행 연동', ratio: '10%', desc: 'HK-BANK 비대면 계좌 연계 자산' },
+      { n: 8, title: 'AGI·ASI 전략 버퍼', ratio: '8%', desc: '변동 금리 시나리오 대응 완충 자산' },
+      { n: 9, title: '보안·KYB 컴플라이언스', ratio: '7%', desc: '지갑 주소 검증 및 승인 절차 지원' },
+      { n: 10, title: '미래 인프라·165층 비전', ratio: '5%', desc: '본사 및 구호단체 상생 인프라 연계' }
+    ];
+
+    function renderDiv10() {
+      document.getElementById('div10Grid').innerHTML = div10List.map(item => `
+        <div class="div10-card">
+          <div class="div10-num">분산 #${item.n} · 비중 ${item.ratio}</div>
+          <div class="div10-title">${item.title}</div>
+          <div class="div10-desc">${item.desc}</div>
+        </div>
+      `).join('');
+    }
+
+    function pickTier(btn) {
+      document.querySelectorAll('.tier-btn').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
+      tier = {
+        label: btn.dataset.label,
+        months: parseInt(btn.dataset.months, 10),
+        min: parseFloat(btn.dataset.min),
+        max: parseFloat(btn.dataset.max)
       };
-      recalcRate();
+      calcSim();
     }
 
-    function recalcRate() {
-      const principal = Math.max(0, parseFloat(document.getElementById('simPrincipal').value) || 0);
-      const ratio = parseFloat(document.getElementById('simScenario').value) || 0.5;
-      const bonus = Math.max(0, parseFloat(document.getElementById('simBonus').value) || 0);
-      const appliedRate = activeTier.min + (activeTier.max - activeTier.min) * ratio + bonus;
-      const reward = principal * (appliedRate / 100) * (activeTier.months / 12);
+    function calcSim() {
+      const principal = Math.max(0, parseFloat(document.getElementById('principal').value) || 0);
+      const ratio = parseFloat(document.getElementById('scenario').value) || 0.5;
+      const bonus = Math.max(0, parseFloat(document.getElementById('bonus').value) || 0);
+      const rate = tier.min + (tier.max - tier.min) * ratio + bonus;
+      const reward = principal * (rate / 100) * (tier.months / 12);
       const total = principal + reward;
 
-      document.getElementById('outTerm').textContent = activeTier.label;
-      document.getElementById('outRate').textContent = `${appliedRate.toFixed(2)}%`;
-      document.getElementById('outReward').textContent = `+${reward.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-      document.getElementById('outTotal').textContent = total.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById('resTerm').textContent = tier.label;
+      document.getElementById('resRate').textContent = `${rate.toFixed(2)}%`;
+      document.getElementById('resReward').textContent = `+${reward.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('resTotal').textContent = total.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    function sampleAiRate() {
-      const randRatio = Math.random();
-      const bonus = Math.max(0, parseFloat(document.getElementById('simBonus').value) || 0);
-      const principal = Math.max(0, parseFloat(document.getElementById('simPrincipal').value) || 0);
-      const appliedRate = activeTier.min + (activeTier.max - activeTier.min) * randRatio + bonus;
-      const reward = principal * (appliedRate / 100) * (activeTier.months / 12);
-      const total = principal + reward;
-
-      document.getElementById('outTerm').textContent = activeTier.label;
-      document.getElementById('outRate').textContent = `${appliedRate.toFixed(2)}%`;
-      document.getElementById('outReward').textContent = `+${reward.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-      document.getElementById('outTotal').textContent = total.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      showToast(`삔이·삔·피니투 산출 변동금리: ${appliedRate.toFixed(2)}%`);
-    }
-
-    function showToast(message) {
-      const banner = document.getElementById('toastBanner');
-      banner.textContent = message;
-      banner.classList.add('is-visible');
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => {
-        banner.classList.remove('is-visible');
-      }, 2500);
-    }
-
-    const web3Themes = [
+    const web3Topics = [
       '파이 개척자 전용 웹3 계좌 구조',
+      '개인 자산 대시보드 및 10대 분산 운용',
       '6개월(8~12%) AGI·ASI 변동금리 운용',
       '1년(12~18%) AGI·ASI 변동금리 운용',
       '2년(16~24%) AGI·ASI 변동금리 운용',
@@ -1054,29 +805,21 @@
       'Pi 테스트넷·메인넷 지갑 연동 기준',
       '수동 지갑 주소 입력 검증 및 보호',
       '삔이·삔·피니투 AI 비서 협업 체계',
-      '2026년 11월 30일 앱 완공 및 KYB 추진',
-      '국경없는 의사회·세이브드 칠드런·유엔 난민기구 및 165층 우선 입주'
+      '2026년 11월 30일 앱 완공 및 KYB·165층 우선 입주'
     ];
 
-    const web3WhitepaperData = Array.from({ length: 100 }, (_, idx) => {
-      const num = idx + 1;
-      const theme = web3Themes[idx % web3Themes.length];
-      return {
-        num,
-        title: `웹3 백서 제${num}선 · ${theme}`,
-        desc: `HKWB(hkwb.world, ljw2358) 웹3 디지털 은행의 제${num}선 조항으로, ${theme} 원칙과 순수익 최대 60% 사회환원·리워드 기준을 반영합니다.`
-      };
-    });
+    const web3Wp = Array.from({ length: 100 }, (_, i) => ({
+      num: i + 1,
+      title: `웹3 백서 제${i + 1}선 · ${web3Topics[i % web3Topics.length]}`,
+      desc: `HKWB(hkwb.world, ljw2358) 웹3 디지털 은행의 제${i + 1}선 조항으로, 개인 자산 대시보드·10대 분산, 6개월(8~12%)·1년(12~18%)·2년(16~24%) 변동금리 및 순수익 최대 60% 사회환원·리워드 원칙을 규정합니다.`
+    }));
 
-    const web3FaqData = Array.from({ length: 20 }, (_, idx) => {
-      const num = idx + 1;
-      return {
-        q: `웹3 FAQ Q${num}. 웹3 디지털 은행의 변동금리(6개월 8~12%, 1년 12~18%, 2년 16~24%) 및 개척자 정책은 어떻게 되나요? (항목 ${num})`,
-        a: `HKWB 웹3 디지털 은행(hkwb.world, 코드 ljw2358, 문의 support@hkwb.world)은 파이 개척자 전용으로 운영되며, 6개월 8~12%, 1년 12~18%, 2년 16~24% 변동금리와 순수익 최대 60% 사회환원·리워드를 적용합니다. 삔이·삔·피니투가 분석과 안내를 돕습니다.`
-      };
-    });
+    const web3Faq = Array.from({ length: 20 }, (_, i) => ({
+      q: `웹3 FAQ Q${i + 1}. 웹3 디지털 은행의 개인 자산 대시보드·10대 분산·변동금리·리워드는 어떻게 되나요?`,
+      a: `HKWB 웹3 디지털 은행(hkwb.world, 코드 ljw2358, 문의 support@hkwb.world)은 파이 개척자 전용으로 개인 자산 대시보드와 10대 분산, 6개월 8~12%, 1년 12~18%, 2년 16~24% 변동금리, 순수익 최대 60% 사회환원·리워드를 적용합니다.`
+    }));
 
-    const internetThemes = [
+    const intTopics = [
       '무점포 비대면 모바일 뱅킹 운영 원칙',
       '입출금·송금·예적금·대출 기능 구성',
       '6자리 PIN·패턴 잠금(줄 그리기)·생체인증',
@@ -1084,80 +827,69 @@
       '순수익 최대 60% 사회환원 및 개척자 리워드'
     ];
 
-    const internetWhitepaperData = Array.from({ length: 50 }, (_, idx) => {
-      const num = idx + 1;
-      const theme = internetThemes[idx % internetThemes.length];
-      return {
-        num,
-        title: `무점포 백서 제${num}선 · ${theme}`,
-        desc: `HKWB 산하 무점포 인터넷 은행(hkwb.world, ljw2358)의 제${num}선 조항으로, ${theme} 기준과 투명한 디지털 금융 절차를 규정합니다.`
-      };
-    });
+    const intWp = Array.from({ length: 50 }, (_, i) => ({
+      num: i + 1,
+      title: `무점포 백서 제${i + 1}선 · ${intTopics[i % intTopics.length]}`,
+      desc: `HKWB 산하 무점포 인터넷 은행(hkwb.world, ljw2358)의 제${i + 1}선 조항으로, 지점 없는 비대면 금융 서비스와 순수익 최대 60% 사회환원·리워드 기준을 규정합니다.`
+    }));
 
-    const internetFaqData = Array.from({ length: 20 }, (_, idx) => {
-      const num = idx + 1;
-      return {
-        q: `인터넷 FAQ Q${num}. 무점포 인터넷 은행의 계좌·이체·인증 및 변동금리·환원 기준은 무엇인가요? (항목 ${num})`,
-        a: `HKWB 무점포 인터넷 은행(hkwb.world, 코드 ljw2358, 문의 support@hkwb.world)은 오프라인 지점 없이 비대면으로 운영되며, 6자리 PIN·패턴 잠금·생체인증, 변동금리(6개월 8~12%, 1년 12~18%, 2년 16~24%), 순수익 최대 60% 사회환원·리워드를 지원합니다.`
-      };
-    });
+    const intFaq = Array.from({ length: 20 }, (_, i) => ({
+      q: `인터넷 FAQ Q${i + 1}. 무점포 인터넷 은행의 인증·이체 및 금리·환원 정책은 무엇인가요?`,
+      a: `HKWB 무점포 인터넷 은행(hkwb.world, 코드 ljw2358, 문의 support@hkwb.world)은 6자리 PIN·패턴·생체인증을 지원하며, 6개월 8~12%, 1년 12~18%, 2년 16~24% 변동금리 및 순수익 최대 60% 사회환원·리워드를 따릅니다.`
+    }));
 
-    function renderAllLists() {
-      const qWeb3 = (document.getElementById('filterWeb3Wp').value || '').trim().toLowerCase();
-      const qInt = (document.getElementById('filterInternetWp').value || '').trim().toLowerCase();
+    function renderLists() {
+      const q3 = (document.getElementById('searchWeb3').value || '').trim().toLowerCase();
+      const qI = (document.getElementById('searchInt').value || '').trim().toLowerCase();
 
-      const filteredWeb3 = web3WhitepaperData.filter(
-        item => item.title.toLowerCase().includes(qWeb3) || item.desc.toLowerCase().includes(qWeb3)
-      );
-      document.getElementById('gridWeb3Wp').innerHTML = filteredWeb3.map(item => `
-        <div class="entry-card">
-          <div class="entry-code">WEB3 WP #${item.num} / 100</div>
-          <div class="entry-title">${item.title}</div>
-          <div class="entry-desc">${item.desc}</div>
+      const f3 = web3Wp.filter(x => x.title.toLowerCase().includes(q3) || x.desc.toLowerCase().includes(q3));
+      document.getElementById('gridWeb3').innerHTML = f3.map(x => `
+        <div class="wp-card">
+          <div class="wp-num">WEB3 WP #${x.num} / 100</div>
+          <div class="wp-title">${x.title}</div>
+          <div class="wp-desc">${x.desc}</div>
         </div>
       `).join('');
 
-      document.getElementById('listWeb3Faq').innerHTML = web3FaqData.map((item, idx) => `
-        <div class="faq-box ${idx === 0 ? 'is-open' : ''}">
-          <button type="button" class="faq-trigger" onclick="toggleFaqBox(this)">
-            <span>${item.q}</span>
+      document.getElementById('faqWeb3').innerHTML = web3Faq.map((x, idx) => `
+        <div class="faq-item ${idx === 0 ? 'open' : ''}">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span>${x.q}</span>
             <span>${idx === 0 ? '－' : '＋'}</span>
           </button>
-          <div class="faq-body">${item.a}</div>
+          <div class="faq-ans">${x.a}</div>
         </div>
       `).join('');
 
-      const filteredInt = internetWhitepaperData.filter(
-        item => item.title.toLowerCase().includes(qInt) || item.desc.toLowerCase().includes(qInt)
-      );
-      document.getElementById('gridInternetWp').innerHTML = filteredInt.map(item => `
-        <div class="entry-card">
-          <div class="entry-code cyan-text">INTERNET WP #${item.num} / 50</div>
-          <div class="entry-title">${item.title}</div>
-          <div class="entry-desc">${item.desc}</div>
+      const fI = intWp.filter(x => x.title.toLowerCase().includes(qI) || x.desc.toLowerCase().includes(qI));
+      document.getElementById('gridInt').innerHTML = fI.map(x => `
+        <div class="wp-card">
+          <div class="wp-num cyan">INTERNET WP #${x.num} / 50</div>
+          <div class="wp-title">${x.title}</div>
+          <div class="wp-desc">${x.desc}</div>
         </div>
       `).join('');
 
-      document.getElementById('listInternetFaq').innerHTML = internetFaqData.map((item, idx) => `
-        <div class="faq-box ${idx === 0 ? 'is-open' : ''}">
-          <button type="button" class="faq-trigger" onclick="toggleFaqBox(this)">
-            <span>${item.q}</span>
+      document.getElementById('faqInt').innerHTML = intFaq.map((x, idx) => `
+        <div class="faq-item ${idx === 0 ? 'open' : ''}">
+          <button type="button" class="faq-btn" onclick="toggleFaq(this)">
+            <span>${x.q}</span>
             <span>${idx === 0 ? '－' : '＋'}</span>
           </button>
-          <div class="faq-body">${item.a}</div>
+          <div class="faq-ans">${x.a}</div>
         </div>
       `).join('');
     }
 
-    function toggleFaqBox(btnEl) {
-      const box = btnEl.closest('.faq-box');
-      box.classList.toggle('is-open');
-      const icon = btnEl.querySelector('span:last-child');
-      icon.textContent = box.classList.contains('is-open') ? '－' : '＋';
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+      btn.querySelector('span:last-child').textContent = item.classList.contains('open') ? '－' : '＋';
     }
 
-    recalcRate();
-    renderAllLists();
+    renderDiv10();
+    calcSim();
+    renderLists();
   </script>
 </body>
 </html>
