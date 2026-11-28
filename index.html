@@ -1,346 +1,782 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKWB - 디지털 금융 혁신</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HKWB</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: #0d0b21;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    html, body {
+      min-height: 100vh;
+      width: 100%;
+      background: radial-gradient(circle at top, #17153b 0%, #090b1e 55%, #050612 100%);
+      color: #f3f4f6;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 20px 84px;
+    }
 
-        /* 상단 헤더: 좌측 HKWB 3배 확대 로고 / 우측 1/3로 축소된 60개국어 선택 메뉴 */
-        header {
-            width: 100%;
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            background-color: #0d0b21;
-            z-index: 1000;
-        }
+    .page-wrapper {
+      width: 68vw;
+      min-width: 640px;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        /* HKWB 로고 3배 확대 (48px) & 노란색 네온 텍스트 */
-        .brand-logo {
-            font-size: 48px;
-            font-weight: 900;
-            color: #fbbf24;
-            letter-spacing: 2px;
-            cursor: pointer;
-            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-            line-height: 1;
-        }
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+    }
 
-        /* 드롭다운 메뉴 폭 1/3 수준으로 축소 (슬림형) */
-        .lang-select {
-            background: #1a173b;
-            color: #fbbf24;
-            border: 1.5px solid #f59e0b;
-            padding: 6px 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            cursor: pointer;
-            outline: none;
-            width: 110px;
-            text-align: center;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .lang-btn {
+      background: #141936;
+      color: #facc15;
+      border: 1.5px solid rgba(250, 204, 21, 0.65);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      transition: all 0.15s ease;
+    }
 
-        .lang-select option {
-            background: #0d0b21;
-            color: #ffffff;
-        }
+    .lang-btn:hover {
+      background: #1c234b;
+      border-color: #fde047;
+      color: #fde047;
+    }
 
-        /* 메인 컨텐츠 영역 (중앙 정렬) */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: 44px;
+      right: 0;
+      width: 260px;
+      max-height: 310px;
+      overflow-y: auto;
+      background: #0d1229;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 10px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
+      z-index: 9999;
+      padding: 6px;
+    }
 
-        /* 타이틀: 황금색/골드 그라데이션 및 웅장한 타이포그래피 */
-        .main-title {
-            font-size: 44px;
-            font-weight: 800;
-            line-height: 1.35;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, #fffbeb 0%, #fbbf24 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            word-break: keep-all;
-            text-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
-        }
+    .lang-dropdown.open {
+      display: block;
+    }
 
-        /* 버튼 그룹 디자인 개편 */
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            width: 100%;
-        }
+    .lang-search {
+      width: 100%;
+      padding: 7px 10px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #f9fafb;
+      background: #161d3f;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 6px;
+      outline: none;
+    }
 
-        .btn {
-            padding: 18px 36px;
-            border-radius: 14px;
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            flex: 1;
-            min-width: 260px;
-        }
+    .lang-search:focus {
+      border-color: #facc15;
+    }
 
-        /* Web3 디지털 은행 진입하기 (골드 네온 버튼) */
-        .btn-primary {
-            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-            color: #0d0b21;
-            box-shadow: 0 4px 25px rgba(245, 158, 11, 0.5);
-        }
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: #e5e7eb;
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(245, 158, 11, 0.7);
-        }
+    .lang-option:hover,
+    .lang-option.active {
+      background: rgba(99, 102, 241, 0.28);
+      color: #fde047;
+      font-weight: 700;
+    }
 
-        /* 인터넷 은행 진입하기 (딥 퍼플/골드 아웃라인 버튼) */
-        .btn-secondary {
-            background: #1a173b;
-            color: #fbbf24;
-            border: 2px solid #fbbf24;
-            box-shadow: 0 4px 20px rgba(26, 23, 59, 0.6);
-        }
+    .gateway-card {
+      width: 100%;
+      background: rgba(15, 20, 46, 0.9);
+      border: 1.5px solid rgba(129, 140, 248, 0.35);
+      border-radius: 18px;
+      padding: 36px 32px;
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
 
-        .btn-secondary:hover {
-            background: #2d2659;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(251, 191, 36, 0.3);
-        }
+    .brand-title {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #facc15;
+      margin-bottom: 8px;
+    }
 
-        @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-            }
-            .brand-logo {
-                font-size: 34px;
-            }
-            .lang-select {
-                width: 105px;
-                font-size: 12px;
-                padding: 5px 6px;
-            }
-            .main-title {
-                font-size: 28px;
-                margin-bottom: 36px;
-            }
-            .btn-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            .btn {
-                width: 100%;
-                min-width: unset;
-                padding: 16px 20px;
-                font-size: 16px;
-            }
-        }
-    </style>
+    .brand-tagline {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #93c5fd 0%, #c084fc 50%, #facc15 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 28px;
+    }
+
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    .bank-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .bank-box {
+      background: rgba(10, 14, 34, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      border-radius: 14px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .bank-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .bank-desc {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #cbd5e1;
+      word-break: keep-all;
+    }
+
+    .btn-web3 {
+      width: 100%;
+      background: #facc15;
+      color: #111827;
+      border: none;
+      border-radius: 9px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.15s ease;
+    }
+
+    .btn-web3:hover {
+      background: #fde047;
+      transform: translateY(-1px);
+    }
+
+    .btn-internet {
+      width: 100%;
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      border-radius: 9px;
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.15s ease;
+    }
+
+    .btn-internet:hover {
+      background: #3b82f6;
+      transform: translateY(-1px);
+    }
+
+    /* 서브 화면(백서 / 자산 / 전체) 카드 스타일 */
+    .sub-box {
+      background: rgba(10, 14, 34, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: left;
+    }
+
+    .sub-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #facc15;
+      margin-bottom: 12px;
+    }
+
+    .sub-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .sub-item {
+      background: rgba(20, 25, 54, 0.85);
+      border: 1px solid rgba(129, 140, 248, 0.22);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .sub-item-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .sub-item-desc {
+      font-size: 12.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .footer-info {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #94a3b8;
+      padding: 0 6px;
+    }
+
+    .footer-info span {
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+
+    /* 하단 4개 탭 내비게이션 (홈 · 백서 · 자산 · 전체) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(9, 12, 30, 0.96);
+      border-top: 1px solid rgba(129, 140, 248, 0.35);
+      backdrop-filter: blur(10px);
+      z-index: 9990;
+      display: flex;
+      justify-content: center;
+    }
+
+    .bottom-nav-inner {
+      width: 68vw;
+      min-width: 640px;
+      max-width: 1120px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .nav-tab {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 12px 8px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border-top: 2.5px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .nav-tab:hover {
+      color: #f3f4f6;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-tab.active {
+      color: #facc15;
+      border-top-color: #facc15;
+      background: rgba(250, 204, 21, 0.07);
+    }
+
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-gadget-icon,
+    .VIpgJd-ZVi9od-ORHb-OEVmcd,
+    .VIpgJd-ZVi9od-l4eHX-hSRGPd {
+      display: none !important;
+    }
+
+    body {
+      top: 0 !important;
+      position: static !important;
+    }
+
+    #google_translate_element {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      .page-wrapper,
+      .bottom-nav-inner {
+        width: 94vw;
+        min-width: 0;
+      }
+      .gateway-card {
+        padding: 24px 18px;
+      }
+      .brand-title {
+        font-size: 30px;
+      }
+      .brand-tagline {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .bank-grid,
+      .sub-list {
+        grid-template-columns: 1fr;
+      }
+      .nav-tab {
+        font-size: 12.5px;
+        padding: 11px 4px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="google_translate_element"></div>
 
-    <!-- 상단 헤더: 좌측 HKWB 3배 확대 로고, 우측 1/3 슬림 60개국어 선택 -->
-    <header>
-        <div class="brand-logo" onclick="navigateWeb3()">HKWB</div>
-        <select class="lang-select" id="languageSelect" aria-label="언어 선택" onchange="updateLanguage(this.value)">
-            <option value="ko">한국어 (KR)</option>
-            <option value="en">English (US)</option>
-            <option value="zh">中文 (CN)</option>
-            <option value="ja">日本語 (JP)</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="ru">Русский</option>
-            <option value="pt">Português</option>
-            <option value="ar">العربية</option>
-            <option value="hi">हिन्दी</option>
-            <option value="bn">বাংলা</option>
-            <option value="id">Bahasa ID</option>
-            <option value="vi">Tiếng Việt</option>
-            <option value="th">ไทย</option>
-            <option value="tr">Türkçe</option>
-            <option value="it">Italiano</option>
-            <option value="nl">Nederlands</option>
-            <option value="pl">Polski</option>
-            <option value="uk">Українська</option>
-            <option value="fa">فارسی</option>
-            <option value="ur">اردو</option>
-            <option value="ms">Bahasa MY</option>
-            <option value="fil">Filipino</option>
-            <option value="el">Ελληνικά</option>
-            <option value="cs">Čeština</option>
-            <option value="hu">Magyar</option>
-            <option value="ro">Română</option>
-            <option value="sv">Svenska</option>
-            <option value="da">Dansk</option>
-            <option value="fi">Suomi</option>
-            <option value="no">Norsk</option>
-            <option value="he">עברית</option>
-            <option value="sw">Kiswahili</option>
-            <option value="ha">Hausa</option>
-            <option value="yo">Yorùbá</option>
-            <option value="ig">Igbo</option>
-            <option value="am">አማርኛ</option>
-            <option value="zu">IsiZulu</option>
-            <option value="af">Afrikaans</option>
-            <option value="km">ភាសាខ្មែរ</option>
-            <option value="my">မြန်မာ</option>
-            <option value="lo">ພາສາລາວ</option>
-            <option value="ne">नेपाली</option>
-            <option value="si">සිංහල</option>
-            <option value="ta">தமிழ்</option>
-            <option value="te">తెలుగు</option>
-            <option value="kn">ಕನ್ನಡ</option>
-            <option value="ml">മലയാളം</option>
-            <option value="mr">मराठी</option>
-            <option value="gu">ગુજરાતી</option>
-            <option value="pa">ਪੰਜਾਬੀ</option>
-            <option value="kk">Қазақша</option>
-            <option value="uz">Oʻzbekcha</option>
-            <option value="az">Azərbaycan</option>
-            <option value="ka">ქართული</option>
-            <option value="hy">Հայերեն</option>
-            <option value="mn">Монгол</option>
-            <option value="sr">Српски</option>
-            <option value="hr">Hrvatski</option>
-        </select>
-    </header>
+  <div class="page-wrapper">
+    <div class="top-bar">
+      <button type="button" class="lang-btn" id="langToggleBtn" aria-expanded="false">
+        <span id="currentLangLabel">한국어</span>
+        <span>▼</span>
+      </button>
 
-    <!-- 중앙 메인 영역 -->
-    <main>
-        <h1 class="main-title" id="txt-title">
-            인류와 기술이 공존하는<br>
-            차세대 디지털 금융 혁신
-        </h1>
+      <div class="lang-dropdown" id="langDropdown" role="listbox" aria-label="언어 선택">
+        <input type="text" class="lang-search" id="langSearch" placeholder="언어 검색..." />
+        <div id="langList"></div>
+      </div>
+    </div>
 
-        <div class="btn-group">
-            <button class="btn btn-primary" id="btn-web3" onclick="navigateWeb3()">
-                Web3 디지털 은행 진입하기
+    <main class="gateway-card">
+      <h1 class="brand-title" translate="no">HKWB</h1>
+      <p class="brand-tagline" data-i18n="tagline">인류와 기술이 공존하는 차세대 디지털 금융 혁신</p>
+
+      <!-- 1. 홈 화면 -->
+      <section class="view-panel active" id="view-home">
+        <div class="bank-grid">
+          <div class="bank-box">
+            <div>
+              <div class="bank-name" data-i18n="web3Title">웹3 디지털 은행</div>
+              <p class="bank-desc" data-i18n="web3Desc">
+                지갑연결 · 송금 · 결재 · 예치 · 보상 · 기본소득 · 스왑 · DEX스왑 · LP스테이킹 · PI수량
+              </p>
+            </div>
+            <button type="button" class="btn-web3" id="enterWeb3Btn" data-i18n="web3Btn">
+              웹3 디지털 은행 진입하기
             </button>
-            <button class="btn btn-secondary" id="btn-internet" onclick="navigateInternet()">
-                인터넷 은행 진입하기
+          </div>
+
+          <div class="bank-box">
+            <div>
+              <div class="bank-name" data-i18n="internetTitle">인터넷 은행</div>
+              <p class="bank-desc" data-i18n="internetDesc">
+                계좌 개설 · 입출금 · 즉시이체 · 예금 · 적금 · 대출 · 무료 신용점수 조회
+              </p>
+            </div>
+            <button type="button" class="btn-internet" id="enterInternetBtn" data-i18n="internetBtn">
+              인터넷 은행 진입하기
             </button>
+          </div>
         </div>
+      </section>
+
+      <!-- 2. 백서 화면 -->
+      <section class="view-panel" id="view-whitepaper">
+        <div class="sub-box">
+          <div class="sub-title" data-i18n="wpTitle">HKWB 백서 & 정책 아카이브</div>
+          <div class="sub-list">
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="wpItem1Title">백서 100선 & FAQ 20선</div>
+              <div class="sub-item-desc" data-i18n="wpItem1Desc">웹3 디지털 금융 아키텍처, 거버넌스, 주요 질의응답 안내</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="wpItem2Title">3대 POLICIES & 컴플라이언스</div>
+              <div class="sub-item-desc" data-i18n="wpItem2Desc">21개국 디지털 자산법 및 FATF 트래블 룰 준수 기준</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. 자산 화면 -->
+      <section class="view-panel" id="view-assets">
+        <div class="sub-box">
+          <div class="sub-title" data-i18n="assetTitle">통합 자산 & 예치 현황</div>
+          <div class="sub-list">
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="assetItem1Title">디지털 자산 · PI · 스테이킹</div>
+              <div class="sub-item-desc" data-i18n="assetItem1Desc">지갑연결 · 스왑 · DEX스왑 · LP스테이킹 · PI수량 관리</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="assetItem2Title">예금 · 적금 · 신용점수</div>
+              <div class="sub-item-desc" data-i18n="assetItem2Desc">6개월(8~12%) · 1년(12~18%) · 2년(16~24%) · 3년(20~31.4%)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 전체 화면 -->
+      <section class="view-panel" id="view-all">
+        <div class="sub-box">
+          <div class="sub-title" data-i18n="allTitle">HKWB 전체 메뉴</div>
+          <div class="sub-list">
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="web3Title">웹3 디지털 은행</div>
+              <div class="sub-item-desc" data-i18n="web3Desc">지갑연결 · 송금 · 결재 · 예치 · 보상 · 기본소득 · 스왑 · DEX스왑 · LP스테이킹 · PI수량</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="internetTitle">인터넷 은행</div>
+              <div class="sub-item-desc" data-i18n="internetDesc">계좌 개설 · 입출금 · 즉시이체 · 예금 · 적금 · 대출 · 무료 신용점수 조회</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="wpItem1Title">백서 100선 & FAQ 20선</div>
+              <div class="sub-item-desc" data-i18n="wpItem2Desc">21개국 디지털 자산법 및 FATF 트래블 룰 준수 기준</div>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-title" data-i18n="assetTitle">통합 자산 & 예치 현황</div>
+              <div class="sub-item-desc" data-i18n="assetItem2Desc">6개월(8~12%) · 1년(12~18%) · 2년(16~24%) · 3년(20~31.4%)</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <script>
-        // 60개국어 다국어 데이터베이스 (선택 시 텍스트 전체 실시간 변환)
-        const i18nData = {
-            ko: { title: "인류와 기술이 공존하는<br>차세대 디지털 금융 혁신", web3Btn: "Web3 디지털 은행 진입하기", internetBtn: "인터넷 은행 진입하기" },
-            en: { title: "Coexistence of Humanity & Technology<br>Next-Gen Digital Financial Innovation", web3Btn: "Enter Web3 Digital Bank", internetBtn: "Enter Internet Bank" },
-            zh: { title: "人类与科技共存<br>下一代数字金融创新", web3Btn: "进入 Web3 数字银行", internetBtn: "进入互联网银行" },
-            ja: { title: "人類と技術が共存する<br>次世代デジタル金融革新", web3Btn: "Web3デジタル銀行に入る", internetBtn: "インターネット銀行に入る" },
-            es: { title: "Coexistencia de Humanidad y Tecnología<br>Innovación Financiera Digital de Próxima Generación", web3Btn: "Entrar al Banco Digital Web3", internetBtn: "Entrar al Banco por Internet" },
-            fr: { title: "Coexistence de l'Humanité et de la Technologie<br>Innovation Financière Numérique de Nouvelle Génération", web3Btn: "Accéder à la Banque Web3", internetBtn: "Accéder à la Banque en Ligne" },
-            de: { title: "Koexistenz von Menschheit und Technologie<br>Digitale Finanzinnovation der nächsten Generation", web3Btn: "Web3 Digitalbank betreten", internetBtn: "Internetbank betreten" },
-            ru: { title: "Сосуществование Человечества и Технологий<br>Цифровые Финансовые Инновации Нового Поколения", web3Btn: "Войти в Web3 Цифровой Банк", internetBtn: "Войти в Интернет-Банк" },
-            pt: { title: "Coexistência de Humanidade e Tecnologia<br>Inovação Financeira Digital de Próxima Geração", web3Btn: "Entrar no Banco Digital Web3", internetBtn: "Entrar no Banco de Internet" },
-            ar: { title: "التعايش بين البشرية والتكنولوجيا<br>ابتكار مالي رقمي من الجيل القادم", web3Btn: "الدخول إلى بنك Web3 الرقمي", internetBtn: "الدخول إلى بنك الإنترنت" },
-            hi: { title: "मानवता और प्रौद्योगिकी का सह-अस्तित्व<br>अगली पीढ़ी का डिजिटल वित्तीय नवाचार", web3Btn: "Web3 डिजिटल बैंक में प्रवेश करें", internetBtn: "इंटरनेट बैंक में प्रवेश करें" },
-            bn: { title: "মানবতা ও প্রযুক্তির সহাবস্থান<br>পরবর্তী প্রজন্মের ডিজিটাল আর্থিক উদ্ভাবন", web3Btn: "Web3 ডিজিটাল ব্যাংকে প্রবেশ করুন", internetBtn: "ইন্টারনেট ব্যাংকে প্রবেশ করুন" },
-            id: { title: "Koeksistensi Manusia & Teknologi<br>Inovasi Keuangan Digital Generasi Baru", web3Btn: "Masuk ke Bank Digital Web3", internetBtn: "Masuk ke Bank Internet" },
-            vi: { title: "Con Người & Công Nghệ Cùng Tồn Tại<br>Đổi Mới Tài Chính Số Thế Hệ Mới", web3Btn: "Vào Ngân Hàng Số Web3", internetBtn: "Vào Ngân Hàng Internet" },
-            th: { title: "การอยู่ร่วมกันของมนุษยชาติและเทคโนโลยี<br>นวัตกรรมทางการเงินดิจิทัลแห่งอนาคต", web3Btn: "เข้าสู่ธนาคารดิจิทัล Web3", internetBtn: "เข้าสู่ธนาคารอินเทอร์เน็ต" },
-            tr: { title: "İnsanlık ve Teknolojinin Bir Arada Var Oluşu<br>Yeni Nesil Dijital Finansal İnovasyon", web3Btn: "Web3 Dijital Bankaya Girin", internetBtn: "İnternet Bankasına Girin" },
-            it: { title: "Coesistenziale di Umanità e Tecnologia<br>Innovazione Finanziaria Digitale di Nuova Generazione", web3Btn: "Entra nella Banca Digitale Web3", internetBtn: "Entra nella Banca Online" },
-            nl: { title: "Coëxistentie van Mensheid en Technologie<br>Volgende Generatie Digitale Financiële Innovatie", web3Btn: "Ga naar Web3 Digitale Bank", internetBtn: "Ga naar Internetbank" },
-            pl: { title: "Współistnienie Ludzkości i Technologii<br>Innowacje Finansowe Nowej Generacji", web3Btn: "Wejdź do Banku Cyfrowego Web3", internetBtn: "Wejdź do Banku Internetowego" },
-            uk: { title: "Співіснування Людства та Технологій<br>Цифрові Фінансові Інновації Нового Покоління", web3Btn: "Увійти до Цифрового Банку Web3", internetBtn: "Увійти до Інтернет-Банку" },
-            fa: { title: "همزیستی بشریت و فناوری<br>نوآوری مالی دیجیتال نسل بعدی", web3Btn: "ورود به بانک دیجیتال Web3", internetBtn: "ورود به اینترنت بانک" },
-            ur: { title: "انسانیت اور ٹیکنالوجی کا باہمی وجود<br>اگلی نسل کی ڈیجیٹل مالیاتی جدت", web3Btn: "Web3 ڈیجیٹل بینک میں داخل ہوں", internetBtn: "انٹرنیٹ بینک میں داخل ہوں" },
-            ms: { title: "Kehadiran Bersama Kemanusiaan & Teknologi<br>Inovasi Kewangan Digital Generasi Baru", web3Btn: "Masuk Bank Digital Web3", internetBtn: "Masuk Bank Internet" },
-            fil: { title: "Pagkakasundo ng Tao at Teknolohiya<br>Susunod na Henerasyon ng Digital Financial Innovation", web3Btn: "Pumasok sa Web3 Digital Bank", internetBtn: "Pumasok sa Internet Bank" },
-            el: { title: "Συνύπαρξη Ανθρωπότητας & Τεχνολογίας<br>Ψηφιακή Χρηματοπιστωτική Καινοτομία Νέας Γενιάς", web3Btn: "Είσοδος στη Ψηφιακή Τράπεζα Web3", internetBtn: "Είσοδος στη διαδικτυακή τράπεζα" },
-            cs: { title: "Koexistence Lidstva a Technologií<br>Digitální Finanční Inovace Nové Generace", web3Btn: "Vstoupit do Web3 Digitální Banky", internetBtn: "Vstoupit do Internetového Bankovnictví" },
-            hu: { title: "Emberiség és Technológia Együttélése<br>Új Generációs Digitális Pénzügyi Innováció", web3Btn: "Belépés a Web3 Digitális Bankba", internetBtn: "Belépés az Internet Bankba" },
-            ro: { title: "Coexistența Omenirii și Tehnologiei<br>Inovație Financiară Digitală de Generație Viitoare", web3Btn: "Intră în Banca Digitală Web3", internetBtn: "Intră în Banca pe Internet" },
-            sv: { title: "Samexistens av Mänsklighet och Teknik<br>Nästa Generationens Digitala Finansiella Innovation", web3Btn: "Gå till Web3 Digital Bank", internetBtn: "Gå till Internetbanken" },
-            da: { title: "Sameksistens af Menneskehed og Teknologi<br>Næste Generations Digitale Finansielle Innovation", web3Btn: "Gå til Web3 Digital Bank", internetBtn: "Gå til Internetbank" },
-            fi: { title: "Ihmisyyden ja Teknologian Yhteiselo<br>Seuraavan Sukupolven Digitaalinen Rahoitusinnovaatio", web3Btn: "Siirry Web3 Digipankkiin", internetBtn: "Siirry Internet-pankkiin" },
-            no: { title: "Sameksistens av Menneskelighet og Teknologi<br>Neste Generasjons Digitale Finansielle Innovasjon", web3Btn: "Gå til Web3 Digital Bank", internetBtn: "Gå til Nettbank" },
-            he: { title: "דו-קיום של אנושות וטכנולוגיה<br>חדשנות פיננסית דיגיטלית של הדור הבא", web3Btn: "כניסה לבנק דיגיטלי Web3", internetBtn: "כניסה לבנק באינטרנט" },
-            sw: { title: "Ushirikiano wa Binadamu na Teknolojia<br>Ubunifu wa Kifedha wa Dijitali wa Kizazi Kipya", web3Btn: "Ingia Benki ya Dijitali ya Web3", internetBtn: "Ingia Benki ya Mtandao" },
-            ha: { title: "Zaman Tare da Dan Adam da Fasaha<br>Sabon Zamani na Sabuntwar Kudade na Digital", web3Btn: "Shiga Bankin Digital na Web3", internetBtn: "Shiga Bankin Intanet" },
-            yo: { title: "Ìṣọ̀kan Ènìyàn àti Ìmọ̀-Ẹ̀rọ<br>Ìṣẹ̀dá Ìnáwó Dijítà Ìran Tókàn", web3Btn: "Wọlé sí Báǹkì Dijítà Web3", internetBtn: "Wọlé sí Báǹkì Íńtánẹ́ẹ̀tì" },
-            ig: { title: "Mmekọrịta Mmadụ na Teknụzụ<br>Ọhụrụ Ego Digital nke Ọgbọ Ọhụrụ", web3Btn: "Banye Banki Digital Web3", internetBtn: "Banye Banki Intanet" },
-            am: { title: "የሰው ልጅ እና ቴክኖሎጂ አብሮ መኖር<br>የቀጣዩ ትውልድ ዲጂታል የፋይናንስ ፈጠራ", web3Btn: "ወደ Web3 ዲጂታል ባንክ ይግቡ", internetBtn: "ወደ ኢንተርኔት ባንክ ይግቡ" },
-            zu: { title: "Ukubukana koLuntu neThekhnoloji<br>Inqubo Entsha Yezezimali Ze-Digital ZeziNgxenye Ezayo", web3Btn: "Ngena ku-Web3 Digital Bank", internetBtn: "Ngena ku-Internet Bank" },
-            af: { title: "Saambestaan van Mensdom en Tegnologie<br>Volgende Generasie Digitale Finansiële Innovasie", web3Btn: "Gaan na Web3 Digitale Bank", internetBtn: "Gaan na Internetbank" },
-            km: { title: "ការរស់នៅរួមគ្នានៃមនុស្សជាតិនិងបច្ចេកវិទ្យា<br>នវានុវត្តន៍ហិរញ្ញវត្ថុឌីជីថលជំនាន់ក្រោយ", web3Btn: "ចូលទៅកាន់ធនាគារឌីជីថល Web3", internetBtn: "ចូលទៅកាន់ធនាគារអ៊ីនធឺណិត" },
-            my: { title: "လူသားမျိုးနွယ်နှင့် နည်းပညာ ပူးတွဲတည်ရှိမှု<br>နောက်မျိုးဆက် ဒစ်ဂျစ်တယ် ဘဏ္ဍာရေး ဆန်းသစ်တီထွင်မှု", web3Btn: "Web3 ဒစ်ဂျစ်တယ်ဘဏ်သို့ ဝင်မည်", internetBtn: "အင်တာနက်ဘဏ်သို့ ဝင်မည်" },
-            lo: { title: "ການຢູ່ຮ່ວມກັນຂອງມະນຸດແລະເທັກໂນໂລຢີ<br>ນະວັດຕະກໍາທາງການເງິນດິຈິຕອນແຫ່ງອນາຄົດ", web3Btn: "ເຂົ້າສູ່ທະນາຄານດິຈິຕອນ Web3", internetBtn: "ເຂົ້າສູ່ທະນາຄານອິນເຕີເນັດ" },
-            ne: { title: "मानवता र प्रविधिको सह-अस्तित्व<br>अर्को पुस्ताको डिजिटल वित्तीय नवीनता", web3Btn: "Web3 डिजिटल बैंक प्रवेश गर्नुहोस्", internetBtn: "इन्टरनेट बैंक प्रवेश गर्नुहोस्" },
-            si: { title: "මානව වර්ගයා සහ තාක්ෂණයේ සහජීවනය<br>ඊළඟ පරම්පරාවේ ඩිජිටල් මූල් ය නවෝත්පාදනය", web3Btn: "Web3 ඩිජිටල් බැංකුවට පිවිසෙන්න", internetBtn: "ඉන්ටර්නෙට් බැංකුවට පිවිසෙන්න" },
-            ta: { title: "மனிதகுலம் மற்றும் தொழில்நுட்பத்தின் இணைவு<br>அடுத்த தலைமுறை டிஜிட்டல் நிதி புதுமை", web3Btn: "Web3 டிஜிட்டல் வங்கியில் நுழைக", internetBtn: "இணைய வங்கியில் நுழைக" },
-            te: { title: "మానవత్వం & సాంకేతికత సహజీవనం<br>తరువాతి తరం డిజిటల్ ఆర్థిక ఆవిష్కరణ", web3Btn: "Web3 డిజిటల్ బ్యాంక్ లోకి ప్రవేశించండి", internetBtn: "ఇంటర్నెట్ బ్యాంక్ లోకి ప్రవేశించండి" },
-            kn: { title: "ಮಾನವೀಯತೆ ಮತ್ತು ತಂತ್ರಜ್ಞಾನದ ಸಹಬಾಳ್ವೆ<br>ಮುಂದಿನ ಪီಳಿಗೆಯ ಡಿಜಿಟಲ್ ಹಣಕಾಸು ಆವಿಷ್ಕಾರ", web3Btn: "Web3 ಡಿಜಿಟಲ್ ಬ್ಯಾಂಕ್ ಪ್ರವೇಶಿಸಿ", internetBtn: "ಇಂಟರ್ನೆಟ್ ಬ್ಯಾಂಕ್ ಪ್ರವೇಶಿಸಿ" },
-            ml: { title: "മനുഷ്യത്വത്തിന്റെയും സാങ്കേതികവിദ്യയുടെയും സഹവർത്തിത്വം<br>അടുത്ത തലമുറ ഡിജിറ്റൽ സാമ്പത്തിക നവീകരണം", web3Btn: "Web3 ഡിജിറ്റൽ ബാങ്കിൽ പ്രവേശിക്കുക", internetBtn: "ഇന്റർനെറ്റ് ബാങ്കിൽ പ്രവേശിക്കുക" },
-            mr: { title: "मानवता आणि तंत्रज्ञानाचे सहअस्तित्व<br>पुढील पिढीचे डिजिटल आर्थिक नवोपक्रम", web3Btn: "Web3 डिजिटल बँकेत प्रवेश करा", internetBtn: "इंटरनेट बँकेत प्रवेश करा" },
-            gu: { title: "માનવતા અને ટેકનોલોજીનું સહ-અસ્તિત્વ<br>આગામી પેઢીની ડિજિટલ નાણાકીય નવીનતા", web3Btn: "Web3 ડિજિટલ બેંકમાં પ્રવેશ કરો", internetBtn: "ઈન્ટરનેટ બેંકમાં પ્રવેશ કરો" },
-            pa: { title: "ਮਨੁੱਖਤਾ ਅਤੇ ਤਕਨਾਲੋਜੀ ਦਾ ਸਹਿ-ਹੋਂਦ<br>ਅਗਲੀ ਪੀੜ੍ਹੀ ਦੀ ਡਿਜੀਟਲ ਵਿੱਤੀ ਨਵੀਨਤਾ", web3Btn: "Web3 ਡਿਜੀਟਲ ਬੈਂਕ ਵਿੱਚ ਦਾਖਲ ਹੋਵੋ", internetBtn: "ਇੰਟਰਨੈੱਟ ਬੈਂਕ ਵਿੱਚ ਦਾਖਲ ਹੋਵੋ" },
-            kk: { title: "Адамзат пен Технологияның Қатар өмір сүруі<br>Жаңа Ұрпақтың Цифрлық Қаржылық Инновациясы", web3Btn: "Web3 Цифрлық Банкіне Кіру", internetBtn: "Интернет Банкіне Кіру" },
-            uz: { title: "Insoniyat va Texnologiyaning Birga Yashashi<br>Keyingi Avlod Raqamli Moliyaviy Innovatsiyasi", web3Btn: "Web3 Raqamli Bankiga Kirish", internetBtn: "Internet Bankiga Kirish" },
-            az: { title: "Bəşəriyyət və Texnologiyanın Birgə Yaşaması<br>Gələcək Nəsil Rəqəmsal Maliyyə İnnovasiyası", web3Btn: "Web3 Rəqəmsal Bankına Daxil Olun", internetBtn: "İnternet Bankına Daxil Olun" },
-            ka: { title: "კაცობრიობისა და ტექნოლოგიების თანაარსებობა<br>მომავალი თაობის ციფრული ფინანსური ინოვაცია", web3Btn: "Web3 ციფრულ ბანკში შესვლა", internetBtn: "ინტერნეტ ბანკში შესვლა" },
-            hy: { title: "Մարդկության և Տեխնոլոգիայի Համատեղ Գոյությունը<br>Հաջորդ Սերնդի Թվային Ֆինանսական Նորարարություն", web3Btn: "Մուտք գործել Web3 Թվային Բանկ", internetBtn: "Մուտք գործել Ինտերնետ Բանկ" },
-            mn: { title: "Хүн төрөлхтөн ба Технологийн хамтын оршин тогтнол<br>Дараа үеийн дижитал санхүүгийн инноваци", web3Btn: "Web3 Дижитал Банк руу орох", internetBtn: "Интернет Банк руу орох" },
-            sr: { title: "Коегзистенција Човечанства и Технологије<br>Дигитална Финансијска Иновација Следеће Генерације", web3Btn: "Уђите у Web3 Дигиталну Банку", internetBtn: "Уђите у Интернет Банку" },
-            hr: { title: "Koegzistencija Čovječanstva i Tehnologije<br>Digitalna Financijska Inovacija Sljedeće Generacije", web3Btn: "Uđite u Web3 Digitalnu Banku", internetBtn: "Uđite u Internet Banku" }
-        };
+    <footer class="footer-info">
+      <div><span data-i18n="footerRole">체어맨 이재완</span> · <span data-i18n="footerRefLabel">추천인</span>: <span translate="no">ljw2358</span></div>
+      <div><span data-i18n="footerSupportLabel">문의</span>: <span translate="no">support@hkwb.world</span></div>
+    </footer>
+  </div>
 
-        function updateLanguage(lang) {
-            const data = i18nData[lang] || i18nData['en'];
-            document.documentElement.lang = lang;
-            document.getElementById('txt-title').innerHTML = data.title;
-            document.getElementById('btn-web3').innerText = data.web3Btn;
-            document.getElementById('btn-internet').innerText = data.internetBtn;
+  <nav class="bottom-nav" aria-label="하단 메인 메뉴">
+    <div class="bottom-nav-inner">
+      <button type="button" class="nav-tab active" data-target="view-home" data-i18n="tabHome">홈</button>
+      <button type="button" class="nav-tab" data-target="view-whitepaper" data-i18n="tabWhitepaper">백서</button>
+      <button type="button" class="nav-tab" data-target="view-assets" data-i18n="tabAssets">자산</button>
+      <button type="button" class="nav-tab" data-target="view-all" data-i18n="tabAll">전체</button>
+    </div>
+  </nav>
 
-            if (['ar', 'fa', 'ur', 'he'].includes(lang)) {
-                document.body.style.direction = 'rtl';
-            } else {
-                document.body.style.direction = 'ltr';
-            }
+  <script>
+    const LANGUAGES_60 = [
+      { code: "ko", name: "한국어", native: "한국어" },
+      { code: "en", name: "영어", native: "English" },
+      { code: "ja", name: "일본어", native: "日本語" },
+      { code: "zh-CN", name: "중국어(간체)", native: "简体中文" },
+      { code: "zh-TW", name: "중국어(번체)", native: "繁體中文" },
+      { code: "es", name: "스페인어", native: "Español" },
+      { code: "fr", name: "프랑스어", native: "Français" },
+      { code: "de", name: "독일어", native: "Deutsch" },
+      { code: "it", name: "이탈리아어", native: "Italiano" },
+      { code: "pt", name: "포르투갈어", native: "Português" },
+      { code: "ru", name: "러시아어", native: "Русский" },
+      { code: "ar", name: "아랍어", native: "العربية" },
+      { code: "hi", name: "힌디어", native: "हिन्दी" },
+      { code: "vi", name: "베트남어", native: "Tiếng Việt" },
+      { code: "th", name: "태국어", native: "ไทย" },
+      { code: "id", name: "인도네시아어", native: "Bahasa Indonesia" },
+      { code: "ms", name: "말레이어", native: "Bahasa Melayu" },
+      { code: "tl", name: "타갈로그어", native: "Tagalog" },
+      { code: "tr", name: "튀르키예어", native: "Türkçe" },
+      { code: "nl", name: "네덜란드어", native: "Nederlands" },
+      { code: "pl", name: "폴란드어", native: "Polski" },
+      { code: "sv", name: "스웨덴어", native: "Svenska" },
+      { code: "no", name: "노르웨이어", native: "Norsk" },
+      { code: "da", name: "덴마크어", native: "Dansk" },
+      { code: "fi", name: "핀란드어", native: "Suomi" },
+      { code: "el", name: "그리스어", native: "Ελληνικά" },
+      { code: "cs", name: "체코어", native: "Čeština" },
+      { code: "hu", name: "헝가리어", native: "Magyar" },
+      { code: "ro", name: "루마니아어", native: "Română" },
+      { code: "uk", name: "우크라이나어", native: "Українська" },
+      { code: "he", name: "히브리어", native: "עברית" },
+      { code: "fa", name: "페르시아어", native: "فارسی" },
+      { code: "ur", name: "우르두어", native: "اردو" },
+      { code: "bn", name: "벵골어", native: "বাংলা" },
+      { code: "ta", name: "타밀어", native: "தமிழ்" },
+      { code: "te", name: "텔루구어", native: "తెలుగు" },
+      { code: "mr", name: "마라티어", native: "मराठी" },
+      { code: "gu", name: "구자라트어", native: "ગુજરાતી" },
+      { code: "kn", name: "칸나다어", native: "ಕನ್ನಡ" },
+      { code: "ml", name: "말라얄람어", native: "മലയാളം" },
+      { code: "pa", name: "펀자브어", native: "ਪੰਜਾਬੀ" },
+      { code: "sw", name: "스와힐리어", native: "Kiswahili" },
+      { code: "af", name: "아프리칸스어", native: "Afrikaans" },
+      { code: "am", name: "암하라어", native: "አማርኛ" },
+      { code: "my", name: "미얀마어", native: "မြန်မာ" },
+      { code: "km", name: "크메르어", native: "ខ្មែរ" },
+      { code: "lo", name: "라오스어", native: "ລາວ" },
+      { code: "ne", name: "네팔어", native: "नेपाली" },
+      { code: "si", name: "싱할라어", native: "සිංහල" },
+      { code: "mn", name: "몽골어", native: "Монгол" },
+      { code: "kk", name: "카자흐어", native: "Қазақ" },
+      { code: "uz", name: "우즈베크어", native: "Oʻzbek" },
+      { code: "az", name: "아제르바이잔어", native: "Azərbaycan" },
+      { code: "ka", name: "조지아어", native: "ქართული" },
+      { code: "hy", name: "아르메니아어", native: "Հայերեն" },
+      { code: "bg", name: "불가리아어", native: "Български" },
+      { code: "hr", name: "크로아티아어", native: "Hrvatski" },
+      { code: "sr", name: "세르비아어", native: "Српски" },
+      { code: "sk", name: "슬로바키아어", native: "Slovenčina" },
+      { code: "et", name: "에스토니아어", native: "Eesti" }
+    ];
+
+    const UI_TEXT = {
+      ko: {
+        tagline: "인류와 기술이 공존하는 차세대 디지털 금융 혁신",
+        web3Title: "웹3 디지털 은행",
+        web3Desc: "지갑연결 · 송금 · 결재 · 예치 · 보상 · 기본소득 · 스왑 · DEX스왑 · LP스테이킹 · PI수량",
+        web3Btn: "웹3 디지털 은행 진입하기",
+        internetTitle: "인터넷 은행",
+        internetDesc: "계좌 개설 · 입출금 · 즉시이체 · 예금 · 적금 · 대출 · 무료 신용점수 조회",
+        internetBtn: "인터넷 은행 진입하기",
+        wpTitle: "HKWB 백서 & 정책 아카이브",
+        wpItem1Title: "백서 100선 & FAQ 20선",
+        wpItem1Desc: "웹3 디지털 금융 아키텍처, 거버넌스, 주요 질의응답 안내",
+        wpItem2Title: "3대 POLICIES & 컴플라이언스",
+        wpItem2Desc: "21개국 디지털 자산법 및 FATF 트래블 룰 준수 기준",
+        assetTitle: "통합 자산 & 예치 현황",
+        assetItem1Title: "디지털 자산 · PI · 스테이킹",
+        assetItem1Desc: "지갑연결 · 스왑 · DEX스왑 · LP스테이킹 · PI수량 관리",
+        assetItem2Title: "예금 · 적금 · 신용점수",
+        assetItem2Desc: "6개월(8~12%) · 1년(12~18%) · 2년(16~24%) · 3년(20~31.4%)",
+        allTitle: "HKWB 전체 메뉴",
+        tabHome: "홈",
+        tabWhitepaper: "백서",
+        tabAssets: "자산",
+        tabAll: "전체",
+        footerRole: "체어맨 이재완",
+        footerRefLabel: "추천인",
+        footerSupportLabel: "문의"
+      },
+      en: {
+        tagline: "Next-Generation Digital Financial Innovation Where Humanity and Technology Coexist",
+        web3Title: "Web3 Digital Bank",
+        web3Desc: "Wallet Connect · Transfer · Pay · Deposit · Reward · UBI · Swap · DEX Swap · LP Staking · PI Balance",
+        web3Btn: "Enter Web3 Digital Bank",
+        internetTitle: "Internet Bank",
+        internetDesc: "Open Account · Deposit/Withdraw · Instant Transfer · Savings · Time Deposit · Loan · Free Credit Score",
+        internetBtn: "Enter Internet Bank",
+        wpTitle: "HKWB Whitepaper & Policy Archive",
+        wpItem1Title: "100 Whitepapers & 20 FAQs",
+        wpItem1Desc: "Web3 digital banking architecture, governance, and key FAQs",
+        wpItem2Title: "3 Core Policies & Compliance",
+        wpItem2Desc: "Digital asset laws across 21 jurisdictions and FATF Travel Rule standards",
+        assetTitle: "Unified Assets & Yield Overview",
+        assetItem1Title: "Digital Assets · PI · Staking",
+        assetItem1Desc: "Wallet Connect · Swap · DEX Swap · LP Staking · PI Balance",
+        assetItem2Title: "Deposits · Savings · Credit Score",
+        assetItem2Desc: "6M (8–12%) · 1Y (12–18%) · 2Y (16–24%) · 3Y (20–31.4%)",
+        allTitle: "HKWB All Menus",
+        tabHome: "Home",
+        tabWhitepaper: "Whitepaper",
+        tabAssets: "Assets",
+        tabAll: "All",
+        footerRole: "Chairman Lee Jae-wan",
+        footerRefLabel: "Referral",
+        footerSupportLabel: "Support"
+      },
+      ja: {
+        tagline: "人類と技術が共存する次世代デジタル金融イノベーション",
+        web3Title: "Web3デジタルバンク",
+        web3Desc: "ウォレット接続 · 送金 · 決済 · 預け入れ · 報酬 · ベーシックインカム · スワップ · DEXスワップ · LPステーキング · PI残高",
+        web3Btn: "Web3デジタルバンクへ進む",
+        internetTitle: "インターネットバンク",
+        internetDesc: "口座開設 · 入出金 · 即時振込 · 定期預金 · 積立 · 融資 · 無料信用スコア照会",
+        internetBtn: "インターネットバンクへ進む",
+        wpTitle: "HKWB ホワイトペーパー＆ポリシー",
+        wpItem1Title: "ホワイトペーパー100選＆FAQ20選",
+        wpItem1Desc: "Web3デジタル金融アーキテクチャと主要FAQのご案内",
+        wpItem2Title: "3大ポリシー＆コンプライアンス",
+        wpItem2Desc: "21カ国のデジタル資産法およびFATFトラベルルール対応",
+        assetTitle: "統合資産＆預金金利一覧",
+        assetItem1Title: "デジタル資産 · PI · ステーキング",
+        assetItem1Desc: "ウォレット接続 · スワップ · DEXスワップ · LPステーキング · PI残高",
+        assetItem2Title: "預金 · 積立 · 信用スコア",
+        assetItem2Desc: "6カ月(8〜12%) · 1年(12〜18%) · 2年(16〜24%) · 3年(20〜31.4%)",
+        allTitle: "HKWB 全メニュー",
+        tabHome: "ホーム",
+        tabWhitepaper: "白書",
+        tabAssets: "資産",
+        tabAll: "全体",
+        footerRole: "チェアマン 李載完",
+        footerRefLabel: "紹介コード",
+        footerSupportLabel: "お問い合わせ"
+      }
+    };
+
+    const langToggleBtn = document.getElementById("langToggleBtn");
+    const langDropdown = document.getElementById("langDropdown");
+    const langSearch = document.getElementById("langSearch");
+    const langList = document.getElementById("langList");
+    const currentLangLabel = document.getElementById("currentLangLabel");
+
+    let activeLang = LANGUAGES_60[0];
+
+    function renderLanguageList(filterText = "") {
+      const q = filterText.trim().toLowerCase();
+      langList.innerHTML = "";
+
+      const filtered = LANGUAGES_60.filter(
+        (item) =>
+          item.name.toLowerCase().includes(q) ||
+          item.native.toLowerCase().includes(q) ||
+          item.code.toLowerCase().includes(q)
+      );
+
+      filtered.forEach((lang) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "lang-option" + (lang.code === activeLang.code ? " active" : "");
+        btn.innerHTML = `<span>${lang.native}</span><span style="opacity:0.7;font-size:11px;">${lang.name}</span>`;
+        btn.addEventListener("click", () => selectLanguage(lang));
+        langList.appendChild(btn);
+      });
+    }
+
+    function applyBaseTexts(lang) {
+      const dict = UI_TEXT[lang.code] || (lang.code === "ko" ? UI_TEXT.ko : UI_TEXT.en);
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.textContent = dict[key];
         }
+      });
+      currentLangLabel.textContent = lang.native;
+      document.documentElement.lang = lang.code;
+    }
 
-        function navigateWeb3() {
-            window.location.href = "https://ljw2358.github.io/HKWB/";
-        }
+    function setGoogleTranslateCookie(langCode) {
+      const value = `/ko/${langCode}`;
+      document.cookie = `googtrans=${value}; path=/`;
+      if (window.location.hostname) {
+        document.cookie = `googtrans=${value}; path=/; domain=${window.location.hostname}`;
+      }
+    }
 
-        function navigateInternet() {
-            window.location.href = "https://ljw2358.github.io/bank/";
-        }
-    </script>
+    function triggerGoogleTranslate(langCode, retry = 0) {
+      setGoogleTranslateCookie(langCode);
+      const selectEl = document.querySelector("select.goog-te-combo");
+      if (selectEl) {
+        selectEl.value = langCode;
+        selectEl.dispatchEvent(new Event("change"));
+      } else if (retry < 10) {
+        setTimeout(() => triggerGoogleTranslate(langCode, retry + 1), 250);
+      }
+    }
+
+    function selectLanguage(lang) {
+      activeLang = lang;
+      applyBaseTexts(lang);
+      renderLanguageList(langSearch.value);
+      triggerGoogleTranslate(lang.code);
+      langDropdown.classList.remove("open");
+      langToggleBtn.setAttribute("aria-expanded", "false");
+    }
+
+    langToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = langDropdown.classList.toggle("open");
+      langToggleBtn.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) {
+        langSearch.value = "";
+        renderLanguageList("");
+        langSearch.focus();
+      }
+    });
+
+    langSearch.addEventListener("input", (e) => {
+      renderLanguageList(e.target.value);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!langDropdown.contains(e.target) && e.target !== langToggleBtn) {
+        langDropdown.classList.remove("open");
+        langToggleBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        {
+          pageLanguage: "ko",
+          includedLanguages: LANGUAGES_60.map((l) => l.code).join(","),
+          autoDisplay: false
+        },
+        "google_translate_element"
+      );
+    }
+
+    // 하단 4탭 전환 로직
+    const navTabs = document.querySelectorAll(".nav-tab");
+    const viewPanels = document.querySelectorAll(".view-panel");
+
+    navTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const targetId = tab.getAttribute("data-target");
+        navTabs.forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        viewPanels.forEach((panel) => {
+          panel.classList.toggle("active", panel.id === targetId);
+        });
+      });
+    });
+
+    document.getElementById("enterWeb3Btn").addEventListener("click", () => {
+      alert("웹3 디지털 은행 포털로 진입합니다.");
+    });
+
+    document.getElementById("enterInternetBtn").addEventListener("click", () => {
+      alert("인터넷 은행 포털로 진입합니다.");
+    });
+
+    applyBaseTexts(activeLang);
+    renderLanguageList("");
+  </script>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
